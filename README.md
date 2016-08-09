@@ -33,13 +33,13 @@ import SlackFeedback from 'react-slack-feedback';
 ```
 
 ### Props
-| Prop Name     | Required      | Description |
-| ------------- |:-------------:|-------------|
-| channel       | required      | The Slack channel to send messages |
-| webhook       | required      | The Slack Webhook URL for the integration |
-| user          |               | The logged in user's name (if applicable) |
-| emoji         |               | The emoji that will show in place of the users avatar on Slack |
-| buttonText    |               | The text for the trigger button |
+| Prop Name     | Type   | Required      | Description |
+| ------------- | ------ |:-------------:|-------------|
+| channel       | string | required      | The Slack channel to send messages |
+| webhook       | string | required      | The Slack Webhook URL for the integration |
+| user          | string |               | The logged in user's name (if applicable) |
+| emoji         | string |               | The emoji that will show in place of the users avatar on Slack |
+| buttonText    | string |               | The text for the trigger button |
 
 
 ### Missing Features

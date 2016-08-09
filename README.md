@@ -1,7 +1,7 @@
 React Slack Feedback
 =====================
 
-A React component for sending
+React component for sending feedback from your app directly to Slack.
 
 ### Usage
 
@@ -23,15 +23,16 @@ import SlackFeedback from 'react-slack-feedback';
 
 ```javascript
 <SlackFeedback
-  user="Some User"
+  webhook={webhookURL} // required
+  channel="#general" // required
+  user="Username"
   emoji=":bug:"
-  webhook={webhookURL}
 />
 ```
 
 ### Props
 | Prop Name     | Required      | Description |
-| ------------- |:-------------:|:-----------:|
+| ------------- |:-------------:|-------------|
 | channel       | required      | The Slack channel to send messages |
 | webhook       | required      | The Slack Webhook URL for the integration |
 | user          |               | The logged in user's name (if applicable) |

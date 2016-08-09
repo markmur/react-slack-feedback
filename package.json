@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "build": " NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "build": " NODE_ENV=production webpack -p --progress --config webpack.config.prod.js",
     "lint": "eslint src"
   },
   "repository": {

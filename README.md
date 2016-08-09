@@ -3,6 +3,8 @@ React Slack Feedback
 
 React component for sending feedback from your app directly to Slack.
 
+> NOTE Currently in pre-release phase
+
 ### Usage
 
 Install via NPM:

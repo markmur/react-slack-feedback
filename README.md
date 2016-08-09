@@ -51,6 +51,5 @@ This project is currently in alpha stages and many more features are expected to
 * React
 * ReactDOM
 * [classnames](https://github.com/jedwatson/classnames)
-* [react-select](https://github.com/jedwatson/react-select)
 * [whatwg-fetch](https://github.com/github/whatwg-fetch)
 * [es6-promise](https://github.com/stefanpenner/es6-promise)

@@ -50,7 +50,6 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "es6-promise": "^3.2.1",
-    "react-select": "^1.0.0-beta14",
     "whatwg-fetch": "^1.0.0"
   },
   "peerDependencies": {

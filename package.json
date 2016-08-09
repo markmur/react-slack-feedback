@@ -1,0 +1,60 @@
+{
+  "name": "react-slack-feedback",
+  "version": "1.0.0-alpha1",
+  "description": "React component for sending feedback from your app directly to Slack",
+  "main": "lib/SlackFeedback.js",
+  "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server",
+    "build": " NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markmur/react-slack-feedback.git"
+  },
+  "keywords": [
+    "react",
+    "slack",
+    "feedback"
+  ],
+  "bugs": {
+    "url": "https://github.com/markmur/react-slack-feedback/issues"
+  },
+  "homepage": "https://github.com/markmur/react-slack-feedback",
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "css-loader": "^0.23.1",
+    "cssnano": "^3.7.3",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.6.2",
+    "file-loader": "^0.9.0",
+    "node-sass": "^3.8.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "react-hot-loader": "^1.3.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "es6-promise": "^3.2.1",
+    "react-select": "^1.0.0-beta14",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14 || ^15.0.0-rc || ^15.0",
+    "react-dom": "^0.14 || ^15.0.0-rc || ^15.0"
+  }
+}

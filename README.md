@@ -13,12 +13,8 @@ Install via NPM:
 npm install react-slack-feedback
 ```
 
-If you're using ES5, import the component with require:
-```javascript
-const SlackFeedback = require('react-slack-feedback');
-```
+To use the component, simply import it and render in your app's global component (if you want it on every page).
 
-If you're using ES6, import the component:
 ```javascript
 import SlackFeedback from 'react-slack-feedback';
 ```
@@ -35,7 +31,7 @@ import SlackFeedback from 'react-slack-feedback';
 ### Props
 | Prop Name     | Type   | Required      | Description |
 | ------------- | ------ |:-------------:|-------------|
-| channel       | string | required      | The Slack channel to send messages |
+| channel       | string | required      | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
 | webhook       | string | required      | The Slack Webhook URL for the integration |
 | user          | string |               | The logged in user's name (if applicable) |
 | emoji         | string |               | The emoji that will show in place of the users avatar on Slack |
@@ -48,8 +44,6 @@ This project is currently in alpha stages and many more features are expected to
 
 ### Dependencies
 
-* React
-* ReactDOM
 * [classnames](https://github.com/jedwatson/classnames)
 * [whatwg-fetch](https://github.com/github/whatwg-fetch)
 * [es6-promise](https://github.com/stefanpenner/es6-promise)

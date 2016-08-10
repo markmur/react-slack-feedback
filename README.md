@@ -1,7 +1,7 @@
 React Slack Feedback
 =====================
 
-React component for sending feedback from your app directly to Slack.
+React component for gathering user feedback to send to slack.
 
 ### Usage
 

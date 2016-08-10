@@ -1,2 +1,2 @@
 frontend: node webpackDevServer
-backend: nodemon server
+backend: nodemon ./server.js

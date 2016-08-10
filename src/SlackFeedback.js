@@ -41,6 +41,14 @@ class SlackFeedback extends Component {
     };
   }
 
+  toggle() {
+    if (this.state.active) {
+      this.close();
+    } else {
+      this.activate();
+    }
+  }
+
   activate() {
     this.setState({
       active: !this.state.active
@@ -56,7 +64,10 @@ class SlackFeedback extends Component {
   }
 
   close() {
-    this.setState({ active: false });
+    this.setState({
+      active: false
+    });
+
     document.removeEventListener('click', this.handleClickOutside.bind(this));
   }
 
@@ -136,7 +147,7 @@ class SlackFeedback extends Component {
 
     return (
       <div ref="SlackFeedback" id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
-        <div class="SlackFeedback--container fadeInUp">
+        <div ref="container" class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
             <SlackIcon /> Send Feedback to Slack
             <div class="close" onClick={::this.close}>close</div>
@@ -177,7 +188,7 @@ class SlackFeedback extends Component {
 
         </div>
 
-        <div class={classNames('SlackFeedback--trigger', { active })} onClick={::this.activate}>
+        <div class={classNames('SlackFeedback--trigger', { active })} onClick={::this.toggle}>
           <SlackIcon /> {this.props.buttonText}
         </div>
       </div>

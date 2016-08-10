@@ -1,6 +1,6 @@
 {
   "name": "react-slack-feedback",
-  "version": "1.0.0-alpha1.8",
+  "version": "1.0.0-alpha1.9",
   "description": "React component for gathering user feedback to send to slack.",
   "main": "lib/SlackFeedback.js",
   "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",

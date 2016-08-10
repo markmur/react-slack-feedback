@@ -193,8 +193,15 @@ $text: #858ba0;
   }
 
   .SlackFeedback--checkbox {
+    appearance: checkbox!important;
+    position: static!important;
     font-size: 1.1em!important;
     margin-right: 5px!important;
+
+    &::before,
+    &::after {
+      content: none!important;
+    }
   }
 
   .SlackFeedback--checkbox-label {

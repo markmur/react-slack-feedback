@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
+console.log(React, Component);
+
 // classnames
 import classNames from 'classnames';
 
@@ -37,6 +39,8 @@ class SlackFeedback extends Component {
     this.state = {
       active: false,
       sendURL: true,
+      sent: false,
+      error: false,
       selectedType: 'Bug'
     };
   }
@@ -79,6 +83,19 @@ class SlackFeedback extends Component {
     this.setState({ selectedType: e.target.innerText });
   }
 
+  error(err) {
+    console.warn(err);
+
+    this.setState({
+      sending: false,
+      error: true
+    }, () => {
+      setTimeout(() => {
+        this.setState({ error: false })
+      }, 3 * 1000);
+    });
+  }
+
   sent() {
     this.setState({
       sending: false,
@@ -92,8 +109,9 @@ class SlackFeedback extends Component {
 
   send() {
     var { selectedType, sendURL } = this.state;
-    var level;
+
     var message = this.refs.message.value;
+    var level;
 
     this.setState({ sending: true });
 
@@ -136,6 +154,7 @@ class SlackFeedback extends Component {
       active,
       sending,
       sent,
+      error,
       sendURL,
       selectedType
     } = this.state;
@@ -144,6 +163,7 @@ class SlackFeedback extends Component {
 
     if (sent) submitText = 'Sent!';
     if (sending && !sent) submitText = 'Sending Feedback...';
+    if (error) submitText = 'Error!';
 
     return (
       <div ref="SlackFeedback" id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
@@ -180,7 +200,7 @@ class SlackFeedback extends Component {
             </div>
 
             <button
-              class={classNames('submit', { sent })}
+              class={classNames('submit', { sent, error })}
               onClick={::this.send}>
               {submitText}
             </button>
@@ -188,7 +208,9 @@ class SlackFeedback extends Component {
 
         </div>
 
-        <div class={classNames('SlackFeedback--trigger', { active })} onClick={::this.toggle}>
+        <div
+          class={classNames('SlackFeedback--trigger', { active })}
+          onClick={::this.toggle}>
           <SlackIcon /> {this.props.buttonText}
         </div>
       </div>

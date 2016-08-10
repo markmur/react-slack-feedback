@@ -1,6 +1,7 @@
 $border: #d0d8e1;
 $blue: #0088ff;
 $green: #3dc86f;
+$red: #ec3c3c;
 $background: #f4f4f7;
 $navy: #222c4f;
 $text: #858ba0;
@@ -250,6 +251,11 @@ $text: #858ba0;
 
     &.sent {
       background: $green!important;
+      pointer-events: none;
+    }
+
+    &.error {
+      background: $red!important;
       pointer-events: none;
     }
 

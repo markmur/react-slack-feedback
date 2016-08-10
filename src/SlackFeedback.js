@@ -128,11 +128,11 @@ class SlackFeedback extends Component {
 
           <div class="SlackFeedback--content">
 
-            <label>Channel</label>
-            <input class="input" value={this.props.channel} disabled />
+            <label class="SlackFeedback--label">Channel</label>
+            <input class="SlackFeedback--input" value={this.props.channel} disabled />
 
-            <label>Feedback Type</label>
-            <ul class="tabs">
+            <label class="SlackFeedback--label">Feedback Type</label>
+            <ul class="SlackFeedback--tabs">
               <li onClick={::this.selectType} class={classNames({
                   selected: selectedType === 'Bug'
                 })}>Bug</li>
@@ -144,12 +144,12 @@ class SlackFeedback extends Component {
                 })}>Improvement</li>
             </ul>
 
-            <label>Your Message</label>
-            <textarea ref="message" class="message" placeholder="Message..." />
+            <label class="SlackFeedback--label">Your Message</label>
+            <textarea ref="message" class="SlackFeedback--textarea" placeholder="Message..." />
 
             <div style={{ padding: '0.5em 0 1em' }}>
-              <input id="sendURL" type="checkbox" checked={sendURL} onChange={::this.toggleSendURL} />
-              <label for="sendURL" class="checkbox">Send URL with Feedback</label>
+              <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={::this.toggleSendURL} />
+              <label for="sendURL" class="SlackFeedback--checkbox-label">Send URL with Feedback</label>
             </div>
 
             <button

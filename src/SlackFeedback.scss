@@ -2,9 +2,13 @@ $border: #d0d8e1;
 $blue: #0088ff;
 $background: #f4f4f7;
 $navy: #222c4f;
+$text: #858ba0;
 
-*, *::before, *::after {
-  box-sizing: border-box;
+input {
+  color: red;
+  border: 1px solid green;
+  box-shadow: 3px 4px 5px green;
+  margin: 4em;
 }
 
 #SlackFeedback {
@@ -48,11 +52,11 @@ $navy: #222c4f;
     align-items: center;
     color: white;
 
-    img {
+    > img {
       margin-right: 0.5em;
     }
 
-    .close {
+    > .close {
       cursor: pointer;
       opacity: 0.7;
       margin-left: auto;
@@ -70,19 +74,20 @@ $navy: #222c4f;
 
   .SlackFeedback--trigger {
     display: flex;
+    box-sizing: border-box;
     position: absolute;
     right: 0;
     bottom: 0;
     align-items: center;
     background: white;
-    color: #858ba0!important;
+    color: $text;
     border: 1px solid $border;
     width: 150px;
     padding: 12px 1.25em;
     border-radius: 30px;
     cursor: pointer;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     box-shadow: 0 6px 12px rgba($navy, 0.05);
     transition: box-shadow 0.3s, transform 0.2s ease-in, color 0.2s;
 
@@ -98,14 +103,14 @@ $navy: #222c4f;
     }
   }
 
-  ul.tabs {
+  ul.SlackFeedback--tabs {
     display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
     margin-bottom: 1em;
 
-    li {
+    > li {
       flex: 1;
       background: rgba(white, 0.6);
       color: #5d606c;
@@ -140,12 +145,28 @@ $navy: #222c4f;
     }
   }
 
-  input.input {
+  .SlackFeedback--input {
     margin-bottom: 0.75em;
+    color: $text;
   }
 
-  textarea, input.input {
+  .resets {
+    box-shadow: none;
+    color: inherit;
+    margin: inherit;
+    padding: inherit;
+  }
+
+  .SlackFeedback--textarea,
+  .SlackFeedback--checkbox,
+  .SlackFeedback--input {
+    @extend .resets;
+  }
+
+  .SlackFeedback--textarea,
+  .SlackFeedback--input {
     width: 100%;
+    color: #444;
     border: 1px solid $border;
     border-radius: 3px;
     padding: 0.5em;
@@ -153,6 +174,7 @@ $navy: #222c4f;
     font-size: 14px;
     box-sizing: border-box;
     background: white;
+    margin-bottom: 0.5em;
 
     &:focus {
       border: 1px solid $blue;
@@ -162,39 +184,34 @@ $navy: #222c4f;
     &[disabled] {
       background: transparent;
     }
-
-    &.message {
-      min-height: 150px;
-
-    }
   }
 
-  input[type="file"] {
-    margin-bottom: 1em;
+  .SlackFeedback--textarea {
+    min-height: 150px;
   }
 
-  label {
+  .SlackFeedback--label {
     color: $blue;
     display: block;
     font-size: 11px;
     margin: 5px 0;
-
-    &.checkbox {
-      display: inline-block!important;
-      color: inherit;
-      font-size: 13px;
-      color: #858ba0;
-      cursor: pointer;
-
-      &:hover {
-        color: darken(#858ba0, 5%);
-      }
-    }
   }
 
-  input[type="checkbox"] {
+  .SlackFeedback--checkbox {
     font-size: 1.1em!important;
     margin-right: 5px!important;
+  }
+
+  .SlackFeedback--checkbox-label {
+    display: inline-block!important;
+    color: inherit;
+    font-size: 13px;
+    color: #858ba0;
+    cursor: pointer;
+
+    &:hover {
+      color: darken(#858ba0, 5%);
+    }
   }
 
   .Select {

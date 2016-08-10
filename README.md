@@ -3,8 +3,6 @@ React Slack Feedback
 
 React component for sending feedback from your app directly to Slack.
 
-> NOTE Currently in pre-release phase
-
 ### Usage
 
 Install via NPM:
@@ -41,10 +39,3 @@ render() {
 | user          | string |               | The logged in user's name (if applicable) |
 | emoji         | string |               | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string |               | The text for the trigger button |
-
-
-### Dependencies
-
-* [classnames](https://github.com/jedwatson/classnames)
-* [whatwg-fetch](https://github.com/github/whatwg-fetch)
-* [es6-promise](https://github.com/stefanpenner/es6-promise)

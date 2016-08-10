@@ -42,10 +42,13 @@ function sendToSlack(payload) {
 }
 
 <SlackFeedback
-  channel="#general" // required
+  // required
+  channel="#general"
+  // Important: Not `sendToSlack.bind(this)` or `payload => sendToSlack(payload)`
+  // otherwise the `sent` method will not be available.
   onSubmit={sendToSlack}
   user="Users Name"
-  emoji=":bug:"
+  emoji=":bug:" // default = :speaking_head_in_silhouette:
 />
 ```
 
@@ -53,7 +56,7 @@ function sendToSlack(payload) {
 | Prop Name     | Type   | Required      | Description |
 | ------------- | ------ |:-------------:|-------------|
 | channel       | string | required      | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
-| onSubmit | function |       | A JSON payload object will be returned when the user submits the form. |
+| onSubmit | function | required | A JSON payload object will be returned when the user submits the form. |
 | user          | string |               | The logged in user's name (if applicable) |
 | emoji         | string |               | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string |               | The text for the trigger button |
@@ -74,11 +77,20 @@ git clone https://github.com/markmur/react-slack-feedback.git
 npm install
 ```
 
-3. Run the `Procfile` with `foreman`:
+3. Create an ENV file with your `WEBHOOK_URL`
+
+`./env.js`
+```
+module.exports = {
+  WEBHOOK_URL: 'YOUR_SLACK_WEBHOOK_URL'
+};
+```
+
+4. Run the `Procfile` with `foreman`:
 
 ```bash
 nf start
 ```
 
-This will start the `webpack-dev-server` and the express backend server.
+This will start the `webpack-dev-server` and an `express` backend server.
 The component will be available at http://localhost:3000

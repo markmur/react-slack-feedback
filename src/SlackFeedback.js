@@ -21,8 +21,7 @@ const defaultProps = {
   sending: false,
   user: 'Unknown User',
   emoji: ':speaking_head_in_silhouette:',
-  buttonText: 'Slack Feedback',
-  onSubmit: () => {}
+  buttonText: 'Slack Feedback'
 };
 
 const types = [

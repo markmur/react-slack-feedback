@@ -1,5 +1,6 @@
 $border: #d0d8e1;
 $blue: #0088ff;
+$green: #3dc86f;
 $background: #f4f4f7;
 $navy: #222c4f;
 $text: #858ba0;
@@ -181,8 +182,9 @@ input {
       box-shadow: 0 0 8px rgba($blue, 0.3);
     }
 
-    &[disabled] {
-      background: transparent;
+    &[disabled], &.disabled {
+      pointer-events: none;
+      color: darken($text, 10%);
     }
   }
 
@@ -244,6 +246,11 @@ input {
       opacity: 0.6!important;
     }
 
+    &.sent {
+      background: $green!important;
+      pointer-events: none;
+    }
+
     &:hover {
       background: lighten($blue, 7%);
       box-shadow: 0 2px 8px 2px rgba($blue, 0.2);
@@ -265,5 +272,22 @@ input {
 
 .fadeInUp {
   animation: fadeInUp 0.4s ease;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -10%, 0);
+  }
+}
+
+.fadeOutDown {
+  animation: fadeOutDown 0.4s ease;
   animation-fill-mode: both;
 }

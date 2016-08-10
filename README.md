@@ -11,24 +11,42 @@ Install via NPM:
 npm install react-slack-feedback
 ```
 
-To use the component, simply import it and render in your app's global component (if you want it on every page).
+To use the component, import it and render in your app's global component,
+or individual components (if you don't want it on every page).
+
+> NOTE
+Your Slack Webhook URL should _never_ be available on the front end.
+For this reason you must have a server which sends the request to slack.
+This component will produce the JSON object to send to Slack but it won't send
+the request for you.
 
 ```js
 import SlackFeedback from 'react-slack-feedback';
 
-render() {
-  return (
-    <div>
-      <SlackFeedback
-        channel="#general" // required
-        sending={false}
-        onSubmit={payload => sendToSlack(payload)}
-        user="Username"
-        emoji=":bug:"
-      />
-    </div>
-  );
+/**
+ * Send the Slack message to your server
+ * @param  {Object} payload
+ * @return {null}
+ */
+function sendToSlack(payload) {
+  $.post('/api/slack', {
+    data: payload
+  }).then(res => {
+
+    // The `onSubmit` prop function is called with the SlackFeedback component
+    // context (this.props.onSubmit.call(this, payload)), meaning the component
+    // methods are available from this function. You should call the `sent`
+    // method if the request was successfully sent to Slack.
+    this.sent();
+  });
 }
+
+<SlackFeedback
+  channel="#general" // required
+  onSubmit={sendToSlack}
+  user="Users Name"
+  emoji=":bug:"
+/>
 ```
 
 ### Props

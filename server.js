@@ -1,16 +1,26 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
-  noInfo: true
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
+const fetch = require('isomorphic-fetch');
+const config = require('./env');
 
-  console.log('Listening at http://localhost:3000/');
+app.use(bodyParser.json());
+
+app.post('/slack', function(req, res) {
+  fetch(config.WEBHOOK_URL, {
+    method: 'POST',
+    body: JSON.stringify(req.body)
+  })
+  .catch(err => {
+    console.error(err);
+    return res.status(500).send(err);
+  })
+  .then(response => {
+    return res.status(200).send(response);
+  });
+});
+
+app.listen(3001, function () {
+  console.log('EXPRESS LISTENING ON PORT 3001');
 });

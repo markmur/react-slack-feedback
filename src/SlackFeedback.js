@@ -10,7 +10,6 @@ import './SlackFeedback.scss';
 
 const propTypes = {
   channel: PropTypes.string.isRequired,
-  webhook: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   sending: PropTypes.bool,
   user: PropTypes.string,
@@ -47,10 +46,19 @@ class SlackFeedback extends Component {
     this.setState({
       active: !this.state.active
     });
+
+    document.addEventListener('click', this.handleClickOutside.bind(this));
+  }
+
+  handleClickOutside(e) {
+    if (!this.refs.SlackFeedback.contains(e.target)) {
+      this.close();
+    }
   }
 
   close() {
     this.setState({ active: false });
+    document.removeEventListener('click', this.handleClickOutside.bind(this));
   }
 
   toggleSendURL() {
@@ -59,6 +67,17 @@ class SlackFeedback extends Component {
 
   selectType(e) {
     this.setState({ selectedType: e.target.innerText });
+  }
+
+  sent() {
+    this.setState({
+      sending: false,
+      sent: true
+    }, () => {
+      setTimeout(() => {
+        this.setState({ sent: false })
+      }, 3 * 1000);
+    });
   }
 
   send() {
@@ -82,7 +101,7 @@ class SlackFeedback extends Component {
         break;
     }
 
-    var body = JSON.stringify({
+    var body = {
       channel: this.props.channel,
       username: this.props.user,
       icon_emoji: this.props.emoji,
@@ -90,28 +109,34 @@ class SlackFeedback extends Component {
         {
           fallback: `Feedback (${selectedType})`,
           color: level,
-          title: `Feedback (${selectedType})`,
+          title: selectedType,
           title_link: document.location.href,
           text: message,
           footer: 'React Slack Feedback',
-          ts: Date.now()
+          // ts: new Date().getTime()
         }
       ]
-    });
+    };
 
-    this.props.onSubmit(body);
+    this.props.onSubmit.call(this, body);
   }
 
   render() {
     var {
       active,
       sending,
+      sent,
       sendURL,
       selectedType
     } = this.state;
 
+    var submitText = 'Send Feedback';
+
+    if (sent) submitText = 'Sent!';
+    if (sending && !sent) submitText = 'Sending Feedback...';
+
     return (
-      <div id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
+      <div ref="SlackFeedback" id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
         <div class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
             <SlackIcon /> Send Feedback to Slack
@@ -145,9 +170,9 @@ class SlackFeedback extends Component {
             </div>
 
             <button
-              class={classNames('submit', { disabled: sending })}
+              class={classNames('submit', { sent })}
               onClick={::this.send}>
-              {sending ? 'Sending Feedback...' : 'Send Feedback'}
+              {submitText}
             </button>
           </div>
 

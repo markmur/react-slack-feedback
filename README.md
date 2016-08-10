@@ -57,3 +57,28 @@ function sendToSlack(payload) {
 | user          | string |               | The logged in user's name (if applicable) |
 | emoji         | string |               | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string |               | The text for the trigger button |
+
+### Running Locally
+
+To run this module locally:
+
+1. Clone the repo:
+
+```bash
+git clone https://github.com/markmur/react-slack-feedback.git
+```
+
+2. Install the node modules
+
+```bash
+npm install
+```
+
+3. Run the `Procfile` with `foreman`:
+
+```bash
+nf start
+```
+
+This will start the `webpack-dev-server` and the express backend server.
+The component will be available at http://localhost:3000

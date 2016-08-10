@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-console.log(React, Component);
-
 // classnames
 import classNames from 'classnames';
 

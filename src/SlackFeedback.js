@@ -4,28 +4,26 @@ import ReactDOM from 'react-dom';
 // classnames
 import classNames from 'classnames';
 
-// Promises polyfill
-require('es6-promise').polyfill();
-
-// Fetch
-import 'whatwg-fetch';
-
 // Images
 import SlackIcon from './SlackIcon';
 import './SlackFeedback.scss';
 
 const propTypes = {
-  user: PropTypes.string,
   channel: PropTypes.string.isRequired,
   webhook: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  sending: PropTypes.bool,
+  user: PropTypes.string,
   emoji: PropTypes.string,
   buttonText: PropTypes.string
 };
 
 const defaultProps = {
+  sending: false,
   user: 'Unknown User',
   emoji: ':speaking_head_in_silhouette:',
-  buttonText: 'Slack Feedback'
+  buttonText: 'Slack Feedback',
+  onSubmit: () => {}
 };
 
 const types = [
@@ -40,7 +38,6 @@ class SlackFeedback extends Component {
 
     this.state = {
       active: false,
-      sending: false,
       sendURL: true,
       selectedType: 'Bug'
     };
@@ -102,12 +99,7 @@ class SlackFeedback extends Component {
       ]
     });
 
-    fetch(this.props.webhook, {
-      method: 'POST',
-      body
-    }).then(() => {
-      this.setState({ sending: false });
-    });
+    this.props.onSubmit(body);
   }
 
   render() {

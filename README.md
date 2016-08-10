@@ -15,32 +15,33 @@ npm install react-slack-feedback
 
 To use the component, simply import it and render in your app's global component (if you want it on every page).
 
-```javascript
+```js
 import SlackFeedback from 'react-slack-feedback';
-```
 
-```javascript
-<SlackFeedback
-  webhook={webhookURL} // required
-  channel="#general" // required
-  user="Username"
-  emoji=":bug:"
-/>
+render() {
+  return (
+    <div>
+      <SlackFeedback
+        channel="#general" // required
+        sending={false}
+        onSubmit={payload => sendToSlack(payload)}
+        user="Username"
+        emoji=":bug:"
+      />
+    </div>
+  );
+}
 ```
 
 ### Props
 | Prop Name     | Type   | Required      | Description |
 | ------------- | ------ |:-------------:|-------------|
 | channel       | string | required      | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
-| webhook       | string | required      | The Slack Webhook URL for the integration |
+| onSubmit | function |       | A JSON payload object will be returned when the user submits the form. |
 | user          | string |               | The logged in user's name (if applicable) |
 | emoji         | string |               | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string |               | The text for the trigger button |
 
-
-### Missing Features
-
-This project is currently in alpha stages and many more features are expected to be released soon. That being said, feel free to create an [issue](https://github.com/markmur/react-slack-feedback/issues) and tag it as a "Feature".
 
 ### Dependencies
 

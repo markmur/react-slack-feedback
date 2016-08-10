@@ -90,7 +90,7 @@ class SlackFeedback extends Component {
     }, () => {
       setTimeout(() => {
         this.setState({ error: false })
-      }, 3 * 1000);
+      }, 5 * 1000);
     });
   }
 
@@ -101,7 +101,7 @@ class SlackFeedback extends Component {
     }, () => {
       setTimeout(() => {
         this.setState({ sent: false })
-      }, 3 * 1000);
+      }, 5 * 1000);
     });
   }
 
@@ -198,7 +198,7 @@ class SlackFeedback extends Component {
             </div>
 
             <button
-              class={classNames('submit', { sent, error })}
+              class={classNames('submit', { sent, error, disabled: sending })}
               onClick={::this.send}>
               {submitText}
             </button>

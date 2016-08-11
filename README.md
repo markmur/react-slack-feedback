@@ -54,12 +54,12 @@ function sendToSlack(payload) {
 
 ### Props
 | Prop     | Type   | Default      | Required      | Description |
-| ------------- | ------ |:-------------:|:-------------:|-------------|
+| ------------- | ------ |-------------|:-------------:|-------------|
 | channel       | string |   | required      | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
 | onSubmit | function |    | required | A JSON payload object will be returned when the user submits the form. |
-| user          | string | Unknown User |               | The logged in user's name (if applicable) |
+| user          | string | "Unknown User" |               | The logged in user's name (if applicable) |
 | emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
-| buttonText    | string | Slack Feedback |          | The text for the trigger button |
+| buttonText    | string | "Slack Feedback" |          | The text for the trigger button |
 
 ### Running Locally
 

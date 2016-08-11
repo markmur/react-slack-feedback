@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import Dropzone from 'react-dropzone';
 
 // classnames
 import classNames from 'classnames';
@@ -147,6 +148,12 @@ class SlackFeedback extends Component {
     this.props.onSubmit.call(this, body);
   }
 
+  previewImage(files) {
+    this.setState({
+      preview: files[0].preview
+    });
+  }
+
   render() {
     var {
       active,
@@ -192,10 +199,17 @@ class SlackFeedback extends Component {
             <label class="SlackFeedback--label">Your Message</label>
             <textarea ref="message" class="SlackFeedback--textarea" placeholder="Message..." />
 
+            <label class="SlackFeedback--label">Upload Image</label>
+            <Dropzone onDrop={files => this.previewImage(files)}>
+              Drop image or click to select
+            </Dropzone>
+
             <div style={{ padding: '0.5em 0 1em' }}>
               <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={::this.toggleSendURL} />
               <label for="sendURL" class="SlackFeedback--checkbox-label">Send URL with Feedback</label>
             </div>
+
+            <img src={this.state.preview} />
 
             <button
               class={classNames('submit', { sent, error, disabled: sending })}

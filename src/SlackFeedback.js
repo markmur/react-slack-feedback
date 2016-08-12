@@ -14,14 +14,16 @@ const propTypes = {
   sending: PropTypes.bool,
   user: PropTypes.string,
   emoji: PropTypes.string,
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  disableImageUpload: PropTypes.bool
 };
 
 const defaultProps = {
   sending: false,
   user: 'Unknown User',
   emoji: ':speaking_head_in_silhouette:',
-  buttonText: 'Slack Feedback'
+  buttonText: 'Slack Feedback',
+  disableImageUpload: false
 };
 
 const types = [

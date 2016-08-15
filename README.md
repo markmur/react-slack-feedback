@@ -90,6 +90,9 @@ function uploadImage(image) {
 | emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string | "Slack Feedback" |          | The text for the trigger button |
 
+### What does it look like?
+![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)
+
 ### Running Locally
 
 To run this module locally:

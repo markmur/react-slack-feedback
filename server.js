@@ -24,7 +24,12 @@ app.post('/slack', jsonParser, (req, res) => {
     body: JSON.stringify(req.body)
   })
   .then(response => {
-    return res.status(response.status).send(response);
+    // NOTE not sending the full response back to the client because it contains
+    // the slack webhook url
+    return res.status(response.status).send({
+      status: response.status,
+      statusText: response.statusText
+    });
   });
 });
 

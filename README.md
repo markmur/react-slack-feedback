@@ -68,7 +68,11 @@ function uploadImage(image) {
   $.post('/api/upload', { data: form })
     .then(
       // It is important that you call the `imageUploaded` method or
-      // the component will load indefinitely
+      // the component will load indefinitely.
+      //
+      // If you've called the `uploadImage` function with `image => uploadImage(image)`,
+      // you'll have to use a ref on the SlackFeedback component to access the
+      // 'imageUploaded' and 'error' methods
       res => this.imageUploaded(),
       err => this.error(err)
     );
@@ -81,6 +85,7 @@ function uploadImage(image) {
 | ------------- | ------ |-------------|:-------------:|-------------|
 | channel       | string |   | required      | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
 | onSubmit | function |    | required | A JSON payload object will be returned when the user submits the form. |
+| onImageUpload | function |    |  | Method that will be called with a file argument |
 | user          | string | "Unknown User" |               | The logged in user's name (if applicable) |
 | emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string | "Slack Feedback" |          | The text for the trigger button |

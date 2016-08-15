@@ -8,7 +8,7 @@ React component for gathering user feedback to send to slack.
 Install via NPM:
 
 ```
-npm install react-slack-feedback
+npm install react-slack-feedback --save
 ```
 
 To use the component, import it and render in your app's global component,
@@ -27,7 +27,7 @@ import SlackFeedback from 'react-slack-feedback';
   // required
   channel="#general"
   // NOTE: The `onSubmit` method is called with the SlackFeedback context which
-  // allows you to call `this.sent()` in the sendToSlack method. If you use
+  // allows you to call `this.sent()` in the sendToSlack function. If you use
   // `payload => sendToSlack(payload)` or `sendToSlack.bind(this)` then you must
   // use a ref to call the sent method. i.e `this.refs.SlackFeedback.sent();`
   onSubmit={sendToSlack}

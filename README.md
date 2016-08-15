@@ -23,6 +23,20 @@ the request for you.
 ```js
 import SlackFeedback from 'react-slack-feedback';
 
+<SlackFeedback
+  // required
+  channel="#general"
+  // NOTE: The `onSubmit` method is called with the SlackFeedback context which
+  // allows you to call `this.sent()` in the sendToSlack method. If you use
+  // `payload => sendToSlack(payload)` or `sendToSlack.bind(this)` then you must
+  // use a ref to call the sent method. i.e `this.refs.SlackFeedback.sent();`
+  onSubmit={sendToSlack}
+  onImageUpload={uploadImage}
+  disabled={true} // completely disable the component (default = false)
+  user="Users Name" // The logged in user (default = "Unknown User")
+  emoji=":bug:" // default = :speaking_head_in_silhouette:
+/>
+
 /**
  * Send the Slack message to your server
  * @param  {Object} payload
@@ -38,18 +52,28 @@ function sendToSlack(payload) {
     // methods are available from this function. You should call the `sent`
     // method if the request was successfully sent to Slack.
     this.sent();
-  });
+  }, this.error);
 }
 
-<SlackFeedback
-  // required
-  channel="#general"
-  // Important: Not `sendToSlack.bind(this)` or `payload => sendToSlack(payload)`
-  // otherwise the `sent` method will not be available.
-  onSubmit={sendToSlack}
-  user="Users Name"
-  emoji=":bug:" // default = :speaking_head_in_silhouette:
-/>
+/**
+ * Upload image to server
+ * @method uploadImage
+ * @param  {File} image
+ * @return {null}
+ */
+function uploadImage(image) {
+  var form = new FormData();
+  form.append('image', image);
+
+  $.post('/api/upload', { data: form })
+    .then(
+      // It is important that you call the `imageUploaded` method or
+      // the component will load indefinitely
+      res => this.imageUploaded(),
+      err => this.error(err)
+    );
+}
+
 ```
 
 ### Props

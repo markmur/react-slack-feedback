@@ -34,6 +34,7 @@
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.0.15",
     "body-parser": "^1.15.2",
+    "cloudinary": "^1.4.1",
     "css-loader": "^0.23.1",
     "cssnano": "^3.7.3",
     "eslint": "^1.10.3",
@@ -54,6 +55,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "es6-promise": "^3.2.1",
+    "multer": "^1.2.0",
+    "react-addons-update": "^15.3.0",
     "react-dropzone": "^3.5.3",
     "whatwg-fetch": "^1.0.0"
   },

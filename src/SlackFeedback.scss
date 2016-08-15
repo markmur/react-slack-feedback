@@ -6,6 +6,10 @@ $background: #f4f4f7;
 $navy: #222c4f;
 $text: #858ba0;
 
+$loader-color: white;
+$loader-size: 4em;
+$loader-width: 7px;
+
 #SlackFeedback {
   position: fixed;
   font-family: 'Proxima Nova', sans-serif;
@@ -23,6 +27,37 @@ $text: #858ba0;
 
   #SlackIcon {
     margin-right: 0.5em;
+  }
+
+  .SlackFeedback--loader {
+    margin: 50px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: $loader-width solid rgba(white, 0.2);
+    border-right: $loader-width solid rgba(white, 0.2);
+    border-bottom: $loader-width solid rgba(white, 0.2);
+    border-left: $loader-width solid $loader-color;
+    transform: translateZ(0);
+    animation: SlackFeedback-loader 0.5s infinite linear;
+    border-radius: 50%;
+    width: $loader-size;
+    height: $loader-size;
+
+    &:after {
+      border-radius: 50%;
+      width: $loader-size;
+      height: $loader-size;
+    }
+  }
+
+  @keyframes SlackFeedback-loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .SlackFeedback--container {
@@ -70,7 +105,6 @@ $text: #858ba0;
 
   .SlackFeedback--trigger {
     display: flex;
-    box-sizing: border-box;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -86,6 +120,7 @@ $text: #858ba0;
     font-weight: 500;
     box-shadow: 0 3px 12px 1px rgba($navy, 0.1);
     transition: box-shadow 0.3s, transform 0.2s ease-in, color 0.2s;
+    @extend .border-box;
 
     &:hover, &.active {
       box-shadow: 0 6px 16px 2px rgba(black, 0.2);
@@ -141,9 +176,41 @@ $text: #858ba0;
     }
   }
 
+  .SlackFeedback-image-upload {
+
+    .SlackFeedback-image-upload-button {
+      border: 1px solid $border;
+      padding: 0.75em 3em;
+      text-align: center;
+      font-size: 13px;
+      margin: auto;
+      width: 100%;
+      display: table;
+      color: darken($text, 5%);
+      background: white;
+      cursor: pointer;
+      border-radius: 4px;
+      @extend .border-box;
+
+      &:hover {
+        border: 1px solid darken($border, 7%);
+        background: rgba(white, 0.6);
+        color: darken($text, 5%);
+      }
+    }
+
+    > input {
+      display: none;
+    }
+  }
+
   .SlackFeedback--input {
     margin-bottom: 0.75em;
     color: $text;
+  }
+
+  .border-box {
+    box-sizing: border-box;
   }
 
   .resets {
@@ -168,9 +235,9 @@ $text: #858ba0;
     padding: 0.5em;
     outline: none;
     font-size: 14px;
-    box-sizing: border-box;
     background: white!important;
     margin-bottom: 0.5em;
+    @extend .border-box;
 
     &:focus {
       border: 1px solid $blue!important;
@@ -219,6 +286,53 @@ $text: #858ba0;
     }
   }
 
+  .SlackFeedback--image-preview {
+    @extend .border-box;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    width: 100%;
+    height: 140px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    border: 1px solid $border;
+
+    &:hover {
+      .SlackFeedback--preview-overlay {
+        opacity: 1;
+      }
+    }
+
+    .SlackFeedback--preview-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background: rgba($navy, 0.4);
+      opacity: 0;
+
+      span {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1em 3em;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        background: rgba($navy, 0.6);
+        transition: background 0.15s;
+
+        &:hover {
+          background: $blue;
+        }
+      }
+    }
+  }
+
   .Select {
     margin-bottom: 0.5em;
 
@@ -246,7 +360,7 @@ $text: #858ba0;
 
     &[disabled], &.disabled {
       pointer-events: none!important;
-      opacity: 0.8!important;
+      opacity: 0.4!important;
     }
 
     &.sent {

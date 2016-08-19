@@ -36,8 +36,6 @@ app.post('/slack', jsonParser, (req, res) => {
 // Upload image to Cloudinary
 app.post('/upload', upload.single('image'), (req, res) => {
 
-  return res.status(500).send(JSON.stringify('NOT GOOD'));
-
   var stream = cloudinary.uploader.upload_stream(result => {
     fs.unlink(req.file.path);
     return res.status(200).send(JSON.stringify(result.url));

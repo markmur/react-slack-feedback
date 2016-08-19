@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import update from 'react-addons-update';
-import Dropzone from 'react-dropzone';
 
 // classnames
 import classNames from 'classnames';
@@ -244,25 +241,27 @@ class SlackFeedback extends Component {
   }
 
   renderImageUpload() {
-    if (this.state.image.preview) return null;
+    if (this.state.image.preview) {
+      return (
+        <div>
+          {this.renderImagePreview()}
+        </div>
+      );
+    }
 
     return (
-      <div>
-        <div class="SlackFeedback-image-upload">
-          <label class="SlackFeedback-image-upload-button" for="imageUpload">
-            {this.props.imageUploadText}
-          </label>
+      <div class="SlackFeedback-image-upload">
+        <label class="SlackFeedback-image-upload-button" for="imageUpload">
+          {this.props.imageUploadText}
+        </label>
 
-          <input
-            id="imageUpload"
-            type="file"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={event => this.attachImage(event)}
-          />
-        </div>
-
-        {this.renderImagePreview()}
+        <input
+          id="imageUpload"
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={event => this.attachImage(event)}
+        />
       </div>
     );
   }
@@ -278,11 +277,12 @@ class SlackFeedback extends Component {
 
   renderImagePreview() {
     var { image, uploadingImage } = this.state;
+
     if (!image.preview) return null;
 
     return (
       <div class="SlackFeedback--image-preview" style={{
-          backgroundImage: `url(${this.state.image.preview})`
+          backgroundImage: `url(${image.preview})`
         }}>
         {uploadingImage ?
           <div class="SlackFeedback--loader"></div> :

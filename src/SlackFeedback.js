@@ -16,16 +16,16 @@ const propTypes = {
   onImageUpload: PropTypes.func,
   sending: PropTypes.bool,
   user: PropTypes.string,
-  avatar: PropTypes.string,
+  disabled: PropTypes.bool,
   emoji: PropTypes.string,
   buttonText: PropTypes.string,
-  disableImageUpload: PropTypes.bool,
   imageUploadText: PropTypes.string,
 };
 
 const defaultProps = {
   sending: false,
   user: 'Unknown User',
+  disabled: false,
   emoji: ':speaking_head_in_silhouette:',
   buttonText: 'Slack Feedback',
   disableImageUpload: false,
@@ -243,23 +243,26 @@ class SlackFeedback extends Component {
     });
   }
 
-  renderDropzone() {
-    if (this.props.disableImageUpload) return null;
+  renderImageUpload() {
     if (this.state.image.preview) return null;
 
     return (
-      <div class="SlackFeedback-image-upload">
-        <label class="SlackFeedback-image-upload-button" for="imageUpload">
-          {this.props.imageUploadText}
-        </label>
+      <div>
+        <div class="SlackFeedback-image-upload">
+          <label class="SlackFeedback-image-upload-button" for="imageUpload">
+            {this.props.imageUploadText}
+          </label>
 
-        <input
-          id="imageUpload"
-          type="file"
-          accept="image/*"
-          style={{ display: 'none' }}
-          onChange={event => this.attachImage(event)}
-        />
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={event => this.attachImage(event)}
+          />
+        </div>
+
+        {this.renderImagePreview()}
       </div>
     );
   }
@@ -309,6 +312,9 @@ class SlackFeedback extends Component {
     if (sending && !sent) submitText = 'Sending Feedback...';
     if (error) submitText = error;
 
+    // Return nothing if the component has been disabled
+    if (this.props.disabled) return null;
+
     return (
       <div ref="SlackFeedback" id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
         <div ref="container" class="SlackFeedback--container fadeInUp">
@@ -338,8 +344,8 @@ class SlackFeedback extends Component {
             <label class="SlackFeedback--label">Your Message</label>
             <textarea ref="message" class="SlackFeedback--textarea" placeholder="Message..." />
 
-            {this.renderDropzone()}
-            {this.renderImagePreview()}
+            {/* Only render the image upload if there's callback available  */}
+            {this.props.onImageUpload ? this.renderImageUpload() : null}
 
             <div style={{ padding: '0.5em 0 1em' }}>
               <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={this.toggleSendURL} />

@@ -92,10 +92,10 @@ function uploadImage(image) {
 
 ### Callback Functions
 | Function  | Arguments | Description |
-| sent()  |  |  |
-| error()  | (String) error (String) |  |
-| imageUploaded  | (String) url |  |
-| uploadError | (String) error |  |
+| sent()  |  | Should be called when the payload has been successfully sent to your sever. The submit button will display a `Sent!` message and reset the loading state. |
+| error()  | (String) error (String) | Should be called if there's an error sending the slack payload to your server. Pass the `statusText` of the response to update the submit button. |
+| imageUploaded  | (String) url | Should be called if an image is successfully uploaded to your server. This adds the image url to the payload JSON and resets the loading state of the component. |
+| uploadError | (String) error | Should be called if there's an error uploading an image. |
 
 ___
 

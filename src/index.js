@@ -10,7 +10,9 @@ ReactDOM.render(
     user="Mark Murray"
     emoji=":bug:"
     channel="#yab-feedback"
-  />, document.getElementById('root'));
+  />,
+  document.getElementById('root')
+);
 
 /**
  * Send payload to server
@@ -48,9 +50,14 @@ function uploadImage(file) {
     method: 'POST',
     body: form
   })
-  .then(res => res.json())
-  .then(url => {
-    console.debug(url);
-    this.imageUploaded(url);
-  });
+  .then(res => {
+    console.log(res.status, res.statusText);
+    if (res.status < 200 || res.status >= 300) {
+      this.uploadError(res.statusText);
+    }
+
+    return res.json();
+  })
+  .then(url => this.imageUploaded(url));
+
 }

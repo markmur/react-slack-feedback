@@ -52,8 +52,14 @@ class SlackFeedback extends Component {
       image: {}
     };
 
+    // Bind event handlers once to avoid performance issues with re-binding
+    // on every render
     this.removeImage = this.removeImage.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.send = this.send.bind(this);
+    this.toggleSendURL = this.toggleSendURL.bind(this);
+    this.selectType = this.selectType.bind(this);
+    this.close = this.close.bind(this);
   }
 
   toggle() {
@@ -101,32 +107,6 @@ class SlackFeedback extends Component {
     });
   }
 
-  determineErrorType(err) {
-    if (!err) return 'ERROR!';
-
-    switch(err.status) {
-      case 400: return 'Bad Request!';
-      case 403: return 'Forbidden!';
-      case 404: return 'Channel Not Found!';
-      case 410: return 'Channel is Archived!';
-      case 500: return 'Server Error!';
-      default: return 'ERROR!';
-    }
-  }
-
-  error(err) {
-    console.warn(err);
-
-    this.setState({
-      sending: false,
-      error: this.determineErrorType(err)
-    }, () => {
-      setTimeout(() => {
-        this.setState({ error: null })
-      }, 8 * 1000);
-    });
-  }
-
   sent() {
     this.setState({
       sending: false,
@@ -139,6 +119,31 @@ class SlackFeedback extends Component {
         this.setState({ sent: false });
       }, 5 * 1000);
     });
+  }
+
+  error(err) {
+    this.setState({
+      sending: false,
+      error: this.determineErrorType(err)
+    }, () => {
+
+      setTimeout(() => {
+        this.setState({ error: null })
+      }, 8 * 1000);
+    });
+  }
+
+  determineErrorType(err) {
+    if (!err) return 'ERROR!';
+
+    switch(err.status) {
+      case 400: return 'Bad Request!';
+      case 403: return 'Forbidden!';
+      case 404: return 'Channel Not Found!';
+      case 410: return 'Channel is Archived!';
+      case 500: return 'Server Error!';
+      default: return 'Unexpected Error!';
+    }
   }
 
   send() {
@@ -202,6 +207,21 @@ class SlackFeedback extends Component {
       uploadingImage: true
     }, () => {
       this.props.onImageUpload.call(this, file);
+    });
+  }
+
+  uploadError(err) {
+
+    this.setState({
+      uploading: false,
+      error: 'Error Uploading Image!'
+    }, () => {
+
+      this.removeImage();
+
+      setTimeout(() => {
+        this.setState({ error: null });
+      }, 6 * 1000);
     });
   }
 
@@ -294,7 +314,7 @@ class SlackFeedback extends Component {
         <div ref="container" class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
             <SlackIcon /> Send Feedback to Slack
-            <div class="close" onClick={::this.close}>close</div>
+            <div class="close" onClick={this.close}>close</div>
           </div>
 
           <div class="SlackFeedback--content">
@@ -304,13 +324,13 @@ class SlackFeedback extends Component {
 
             <label class="SlackFeedback--label">Feedback Type</label>
             <ul class="SlackFeedback--tabs">
-              <li onClick={::this.selectType} class={classNames({
+              <li onClick={this.selectType} class={classNames({
                   selected: selectedType === 'Bug'
                 })}>Bug</li>
-              <li onClick={::this.selectType} class={classNames({
+              <li onClick={this.selectType} class={classNames({
                   selected: selectedType === 'Feature'
                 })}>Feature</li>
-              <li onClick={::this.selectType} class={classNames({
+              <li onClick={this.selectType} class={classNames({
                   selected: selectedType === 'Improvement'
                 })}>Improvement</li>
             </ul>
@@ -322,13 +342,13 @@ class SlackFeedback extends Component {
             {this.renderImagePreview()}
 
             <div style={{ padding: '0.5em 0 1em' }}>
-              <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={::this.toggleSendURL} />
+              <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={this.toggleSendURL} />
               <label for="sendURL" class="SlackFeedback--checkbox-label">Send URL with Feedback</label>
             </div>
 
             <button
               class={classNames('submit', { sent, error, disabled: sending || uploadingImage })}
-              onClick={::this.send}>
+              onClick={this.send}>
               {submitText}
             </button>
           </div>

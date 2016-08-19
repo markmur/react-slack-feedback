@@ -90,6 +90,15 @@ function uploadImage(image) {
 | emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string | "Slack Feedback" |          | The text for the trigger button |
 
+### Callback Functions
+| Function  | Arguments | Description |
+| sent()  |  |  |
+| error()  | (String) error (String) |  |
+| imageUploaded  | (String) url |  |
+| uploadError | (String) error |  |
+
+___
+
 ### Running Locally
 
 To run this module locally:

@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import update from 'react-addons-update';
-import Dropzone from 'react-dropzone';
 
 // classnames
 import classNames from 'classnames';
@@ -16,16 +13,16 @@ const propTypes = {
   onImageUpload: PropTypes.func,
   sending: PropTypes.bool,
   user: PropTypes.string,
-  avatar: PropTypes.string,
+  disabled: PropTypes.bool,
   emoji: PropTypes.string,
   buttonText: PropTypes.string,
-  disableImageUpload: PropTypes.bool,
   imageUploadText: PropTypes.string,
 };
 
 const defaultProps = {
   sending: false,
   user: 'Unknown User',
+  disabled: false,
   emoji: ':speaking_head_in_silhouette:',
   buttonText: 'Slack Feedback',
   disableImageUpload: false,
@@ -52,8 +49,14 @@ class SlackFeedback extends Component {
       image: {}
     };
 
+    // Bind event handlers once to avoid performance issues with re-binding
+    // on every render
     this.removeImage = this.removeImage.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.send = this.send.bind(this);
+    this.toggleSendURL = this.toggleSendURL.bind(this);
+    this.selectType = this.selectType.bind(this);
+    this.close = this.close.bind(this);
   }
 
   toggle() {
@@ -101,32 +104,6 @@ class SlackFeedback extends Component {
     });
   }
 
-  determineErrorType(err) {
-    if (!err) return 'ERROR!';
-
-    switch(err.status) {
-      case 400: return 'Bad Request!';
-      case 403: return 'Forbidden!';
-      case 404: return 'Channel Not Found!';
-      case 410: return 'Channel is Archived!';
-      case 500: return 'Server Error!';
-      default: return 'ERROR!';
-    }
-  }
-
-  error(err) {
-    console.warn(err);
-
-    this.setState({
-      sending: false,
-      error: this.determineErrorType(err)
-    }, () => {
-      setTimeout(() => {
-        this.setState({ error: null })
-      }, 8 * 1000);
-    });
-  }
-
   sent() {
     this.setState({
       sending: false,
@@ -139,6 +116,31 @@ class SlackFeedback extends Component {
         this.setState({ sent: false });
       }, 5 * 1000);
     });
+  }
+
+  error(err) {
+    this.setState({
+      sending: false,
+      error: this.determineErrorType(err)
+    }, () => {
+
+      setTimeout(() => {
+        this.setState({ error: null })
+      }, 8 * 1000);
+    });
+  }
+
+  determineErrorType(err) {
+    if (!err || typeof err !== 'string') return 'Unexpected Error!';
+
+    switch(err.status) {
+      case 400: return 'Bad Request!';
+      case 403: return 'Forbidden!';
+      case 404: return 'Channel Not Found!';
+      case 410: return 'Channel is Archived!';
+      case 500: return 'Server Error!';
+      default: return 'Unexpected Error!';
+    }
   }
 
   send() {
@@ -205,6 +207,21 @@ class SlackFeedback extends Component {
     });
   }
 
+  uploadError(err) {
+
+    this.setState({
+      uploading: false,
+      error: 'Error Uploading Image!'
+    }, () => {
+
+      this.removeImage();
+
+      setTimeout(() => {
+        this.setState({ error: null });
+      }, 6 * 1000);
+    });
+  }
+
   imageUploaded(url) {
     if (typeof url !== 'string') {
       console.error('[SlackFeedback] `url` argument in `imageUploaded` method must be a string');
@@ -223,9 +240,10 @@ class SlackFeedback extends Component {
     });
   }
 
-  renderDropzone() {
-    if (this.props.disableImageUpload) return null;
-    if (this.state.image.preview) return null;
+  renderImageUpload() {
+    if (this.state.image.preview) {
+      return this.renderImagePreview();
+    }
 
     return (
       <div class="SlackFeedback-image-upload">
@@ -255,11 +273,12 @@ class SlackFeedback extends Component {
 
   renderImagePreview() {
     var { image, uploadingImage } = this.state;
+
     if (!image.preview) return null;
 
     return (
       <div class="SlackFeedback--image-preview" style={{
-          backgroundImage: `url(${this.state.image.preview})`
+          backgroundImage: `url(${image.preview})`
         }}>
         {uploadingImage ?
           <div class="SlackFeedback--loader"></div> :
@@ -289,12 +308,15 @@ class SlackFeedback extends Component {
     if (sending && !sent) submitText = 'Sending Feedback...';
     if (error) submitText = error;
 
+    // Return nothing if the component has been disabled
+    if (this.props.disabled) return null;
+
     return (
       <div ref="SlackFeedback" id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
         <div ref="container" class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
             <SlackIcon /> Send Feedback to Slack
-            <div class="close" onClick={::this.close}>close</div>
+            <div class="close" onClick={this.close}>close</div>
           </div>
 
           <div class="SlackFeedback--content">
@@ -304,13 +326,13 @@ class SlackFeedback extends Component {
 
             <label class="SlackFeedback--label">Feedback Type</label>
             <ul class="SlackFeedback--tabs">
-              <li onClick={::this.selectType} class={classNames({
+              <li onClick={this.selectType} class={classNames({
                   selected: selectedType === 'Bug'
                 })}>Bug</li>
-              <li onClick={::this.selectType} class={classNames({
+              <li onClick={this.selectType} class={classNames({
                   selected: selectedType === 'Feature'
                 })}>Feature</li>
-              <li onClick={::this.selectType} class={classNames({
+              <li onClick={this.selectType} class={classNames({
                   selected: selectedType === 'Improvement'
                 })}>Improvement</li>
             </ul>
@@ -318,17 +340,17 @@ class SlackFeedback extends Component {
             <label class="SlackFeedback--label">Your Message</label>
             <textarea ref="message" class="SlackFeedback--textarea" placeholder="Message..." />
 
-            {this.renderDropzone()}
-            {this.renderImagePreview()}
+            {/* Only render the image upload if there's callback available  */}
+            {this.props.onImageUpload ? this.renderImageUpload() : null}
 
             <div style={{ padding: '0.5em 0 1em' }}>
-              <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={::this.toggleSendURL} />
+              <input id="sendURL" class="SlackFeedback--checkbox" type="checkbox" checked={sendURL} onChange={this.toggleSendURL} />
               <label for="sendURL" class="SlackFeedback--checkbox-label">Send URL with Feedback</label>
             </div>
 
             <button
               class={classNames('submit', { sent, error, disabled: sending || uploadingImage })}
-              onClick={::this.send}>
+              onClick={this.send}>
               {submitText}
             </button>
           </div>

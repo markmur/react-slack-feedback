@@ -52,7 +52,9 @@ function sendToSlack(payload) {
     // methods are available from this function. You should call the `sent`
     // method if the request was successfully sent to Slack.
     this.sent();
-  }, this.error);
+  }, error => {
+    this.error(error.statusText);
+  });
 }
 
 /**
@@ -73,7 +75,7 @@ function uploadImage(image) {
       // If you've called the `uploadImage` function with `image => uploadImage(image)`,
       // you'll have to use a ref on the SlackFeedback component to access the
       // 'imageUploaded' and 'error' methods
-      res => this.imageUploaded(),
+      url => this.imageUploaded(url),
       err => this.error(err)
     );
 }
@@ -82,13 +84,24 @@ function uploadImage(image) {
 
 ### Props
 | Prop     | Type   | Default      | Required      | Description |
-| ------------- | ------ |-------------|:-------------:|-------------|
-| channel       | string |   | required      | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
+|----------|--------|--------------|:-------------:|-------------|
+| channel       | string |   | required | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
 | onSubmit | function |    | required | A JSON payload object will be returned when the user submits the form. |
 | onImageUpload | function |    |  | Method that will be called with a file argument |
 | user          | string | "Unknown User" |               | The logged in user's name (if applicable) |
 | emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string | "Slack Feedback" |          | The text for the trigger button |
+| disabled    | boolean | false |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
+
+### Callback Functions
+| Function  | Arguments | Description |
+|-----------|-----------|-------------|
+| sent()  |  | Should be called when the payload has been successfully sent to your sever. The submit button will display a `Sent!` message and reset the loading state. |
+| error()  | error (string) | Should be called if there's an error sending the slack payload to your server. Pass the `statusText` of the response to update the submit button. |
+| imageUploaded()  | url (string) | Should be called if an image is successfully uploaded to your server. This adds the image url to the payload JSON and resets the loading state of the component. |
+| uploadError() | error (string) | Should be called if there's an error uploading an image. |
+
+___
 
 ### What does it look like?
 ![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)

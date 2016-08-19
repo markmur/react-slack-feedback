@@ -242,11 +242,7 @@ class SlackFeedback extends Component {
 
   renderImageUpload() {
     if (this.state.image.preview) {
-      return (
-        <div>
-          {this.renderImagePreview()}
-        </div>
-      );
+      return this.renderImagePreview();
     }
 
     return (

@@ -52,7 +52,9 @@ function sendToSlack(payload) {
     // methods are available from this function. You should call the `sent`
     // method if the request was successfully sent to Slack.
     this.sent();
-  }, this.error);
+  }, error => {
+    this.error(error.statusText);
+  });
 }
 
 /**
@@ -73,7 +75,7 @@ function uploadImage(image) {
       // If you've called the `uploadImage` function with `image => uploadImage(image)`,
       // you'll have to use a ref on the SlackFeedback component to access the
       // 'imageUploaded' and 'error' methods
-      res => this.imageUploaded(),
+      url => this.imageUploaded(url),
       err => this.error(err)
     );
 }

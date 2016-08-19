@@ -46,6 +46,4 @@ app.post('/upload', upload.single('image'), (req, res) => {
 });
 
 // Listen
-app.listen(3001, function () {
-  console.log('EXPRESS LISTENING ON PORT 3001');
-});
+app.listen(3001);

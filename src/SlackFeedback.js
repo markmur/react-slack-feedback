@@ -17,6 +17,8 @@ const propTypes = {
   emoji: PropTypes.string,
   buttonText: PropTypes.string,
   imageUploadText: PropTypes.string,
+  triggerStyles: PropTypes.object,
+  contentStyles: PropTypes.object
 };
 
 const defaultProps = {
@@ -26,7 +28,9 @@ const defaultProps = {
   emoji: ':speaking_head_in_silhouette:',
   buttonText: 'Slack Feedback',
   disableImageUpload: false,
-  imageUploadText: 'Attach Image'
+  imageUploadText: 'Attach Image',
+  triggerStyles: {},
+  contentStyles: {}
 };
 
 const types = [
@@ -313,7 +317,10 @@ class SlackFeedback extends Component {
 
     return (
       <div ref="SlackFeedback" id="SlackFeedback" class={classNames('SlackFeedback', { active })}>
-        <div ref="container" class="SlackFeedback--container fadeInUp">
+        <div
+          ref="container"
+          style={this.props.contentStyles}
+          class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
             <SlackIcon /> Send Feedback to Slack
             <div class="close" onClick={this.close}>close</div>
@@ -358,6 +365,7 @@ class SlackFeedback extends Component {
         </div>
 
         <div
+          style={this.props.triggerStyles}
           class={classNames('SlackFeedback--trigger', { active })}
           onClick={this.toggle}>
           <SlackIcon /> {this.props.buttonText}

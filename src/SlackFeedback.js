@@ -18,7 +18,8 @@ const propTypes = {
   buttonText: PropTypes.string,
   imageUploadText: PropTypes.string,
   triggerStyles: PropTypes.object,
-  contentStyles: PropTypes.object
+  contentStyles: PropTypes.object,
+  hideSlack: PropTypes.bool
 };
 
 const defaultProps = {
@@ -30,7 +31,8 @@ const defaultProps = {
   disableImageUpload: false,
   imageUploadText: 'Attach Image',
   triggerStyles: {},
-  contentStyles: {}
+  contentStyles: {},
+  hideSlack: false
 };
 
 const types = [
@@ -322,14 +324,16 @@ class SlackFeedback extends Component {
           style={this.props.contentStyles}
           class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
-            <SlackIcon /> Send Feedback to Slack
+            {(this.props.hideSlack)?
+              <span>Send feedback</span>:
+              <span><SlackIcon /> Send Feedback to Slack</span>}
             <div class="close" onClick={this.close}>close</div>
           </div>
 
           <div class="SlackFeedback--content">
 
-            <label class="SlackFeedback--label">Channel</label>
-            <input class="SlackFeedback--input" value={this.props.channel} disabled />
+            {!this.props.hideSlack && <label class="SlackFeedback--label">Channel</label>}
+            <input class="SlackFeedback--input" value={this.props.channel} disabled hidden={this.props.hideSlack} />
 
             <label class="SlackFeedback--label">Feedback Type</label>
             <ul class="SlackFeedback--tabs">
@@ -368,7 +372,7 @@ class SlackFeedback extends Component {
           style={this.props.triggerStyles}
           class={classNames('SlackFeedback--trigger', { active })}
           onClick={this.toggle}>
-          <SlackIcon /> {this.props.buttonText}
+          {!this.props.hideSlack && <SlackIcon />} {this.props.buttonText}
         </div>
       </div>
     );

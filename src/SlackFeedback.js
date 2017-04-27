@@ -85,7 +85,7 @@ class SlackFeedback extends Component {
 
     if (event.defaultPrevented) return;
 
-    if (this.refs.SlackFeedback && !this.refs.SlackFeedback.contains(event.target)) {
+    if (!this.refs.SlackFeedback.contains(event.target)) {
       this.close();
     }
   }

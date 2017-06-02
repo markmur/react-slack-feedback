@@ -3,6 +3,8 @@ React Slack Feedback
 
 React component for gathering user feedback to send to slack.
 
+![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)
+
 ### Usage
 
 Install via NPM:
@@ -102,9 +104,6 @@ function uploadImage(image) {
 | uploadError() | error (string) | Should be called if there's an error uploading an image. |
 
 ___
-
-### What does it look like?
-![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)
 
 ### Running Locally
 

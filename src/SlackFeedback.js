@@ -15,13 +15,12 @@ const propTypes = {
   user: PropTypes.string,
   disabled: PropTypes.bool,
   emoji: PropTypes.string,
-  buttonText: PropTypes.string,
+  buttonText: PropTypes.node,
   imageUploadText: PropTypes.string,
   triggerStyles: PropTypes.object,
   contentStyles: PropTypes.object,
   showChannel: PropTypes.bool,
-  icon: PropTypes.node,
-  title: PropTypes.string
+  title: PropTypes.node
 };
 
 const defaultProps = {
@@ -29,14 +28,13 @@ const defaultProps = {
   user: 'Unknown User',
   disabled: false,
   emoji: ':speaking_head_in_silhouette:',
-  buttonText: 'Slack Feedback',
+  buttonText: <span><SlackIcon/> Slack Feedback</span>,
   disableImageUpload: false,
   imageUploadText: 'Attach Image',
   triggerStyles: {},
   contentStyles: {},
   showChannel: true,
-  icon: <SlackIcon />,
-  title: 'Send Feedback to Slack'
+  title: <span><SlackIcon /> Send Feedback to Slack</span>
 
 };
 
@@ -329,7 +327,7 @@ class SlackFeedback extends Component {
           style={this.props.contentStyles}
           class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
-            {this.props.icon} {this.props.title}
+            {this.props.title}
             <div class="close" onClick={this.close}>close</div>
           </div>
 
@@ -375,7 +373,7 @@ class SlackFeedback extends Component {
           style={this.props.triggerStyles}
           class={classNames('SlackFeedback--trigger', { active })}
           onClick={this.toggle}>
-          {this.props.icon} {this.props.buttonText}
+          {this.props.buttonText}
         </div>
       </div>
     );

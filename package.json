@@ -55,7 +55,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "es6-promise": "^3.2.1"
+    "es6-promise": "^3.2.1",
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^0.14 || ^15.0.0-rc || ^15.0",

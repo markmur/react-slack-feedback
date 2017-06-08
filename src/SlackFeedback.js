@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 // classnames
 import classNames from 'classnames';
@@ -15,10 +16,12 @@ const propTypes = {
   user: PropTypes.string,
   disabled: PropTypes.bool,
   emoji: PropTypes.string,
-  buttonText: PropTypes.string,
+  buttonText: PropTypes.node,
   imageUploadText: PropTypes.string,
   triggerStyles: PropTypes.object,
-  contentStyles: PropTypes.object
+  contentStyles: PropTypes.object,
+  showChannel: PropTypes.bool,
+  title: PropTypes.node
 };
 
 const defaultProps = {
@@ -26,11 +29,14 @@ const defaultProps = {
   user: 'Unknown User',
   disabled: false,
   emoji: ':speaking_head_in_silhouette:',
-  buttonText: 'Slack Feedback',
+  buttonText: <span><SlackIcon/> Slack Feedback</span>,
   disableImageUpload: false,
   imageUploadText: 'Attach Image',
   triggerStyles: {},
-  contentStyles: {}
+  contentStyles: {},
+  showChannel: true,
+  title: <span><SlackIcon /> Send Feedback to Slack</span>
+
 };
 
 const types = [
@@ -322,14 +328,14 @@ class SlackFeedback extends Component {
           style={this.props.contentStyles}
           class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
-            <SlackIcon /> Send Feedback to Slack
+            {this.props.title}
             <div class="close" onClick={this.close}>close</div>
           </div>
 
           <div class="SlackFeedback--content">
 
-            <label class="SlackFeedback--label">Channel</label>
-            <input class="SlackFeedback--input" value={this.props.channel} disabled />
+            {this.props.showChannel && <label class="SlackFeedback--label">Channel</label>}
+            <input class="SlackFeedback--input" value={this.props.channel} disabled hidden={!this.props.showChannel} />
 
             <label class="SlackFeedback--label">Feedback Type</label>
             <ul class="SlackFeedback--tabs">
@@ -368,7 +374,7 @@ class SlackFeedback extends Component {
           style={this.props.triggerStyles}
           class={classNames('SlackFeedback--trigger', { active })}
           onClick={this.toggle}>
-          <SlackIcon /> {this.props.buttonText}
+          {this.props.buttonText}
         </div>
       </div>
     );

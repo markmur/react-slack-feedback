@@ -9,10 +9,10 @@ import SlackIcon from './SlackIcon';
 import './SlackFeedback.scss';
 
 const propTypes = {
-  channel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onImageUpload: PropTypes.func,
   sending: PropTypes.bool,
+  channel: PropTypes.string,
   user: PropTypes.string,
   disabled: PropTypes.bool,
   emoji: PropTypes.string,
@@ -58,6 +58,9 @@ class SlackFeedback extends Component {
       selectedType: 'Bug',
       image: {}
     };
+
+    // do not show channel UI if no channel defined
+    if (!this.props.channel) this.props.showChannel = false;
 
     // Bind event handlers once to avoid performance issues with re-binding
     // on every render

@@ -59,9 +59,6 @@ class SlackFeedback extends Component {
       image: {}
     };
 
-    // do not show channel UI if no channel defined
-    if (!this.props.channel) this.props.showChannel = false;
-
     // Bind event handlers once to avoid performance issues with re-binding
     // on every render
     this.removeImage = this.removeImage.bind(this);
@@ -315,6 +312,9 @@ class SlackFeedback extends Component {
       uploadingImage
     } = this.state;
 
+    // do not show channel UI if no channel defined
+    var showChannel = !!this.props.channel && this.props.showChannel;
+
     var submitText = 'Send Feedback';
 
     if (sent) submitText = 'Sent!';
@@ -337,8 +337,8 @@ class SlackFeedback extends Component {
 
           <div class="SlackFeedback--content">
 
-            {this.props.showChannel && <label class="SlackFeedback--label">Channel</label>}
-            <input class="SlackFeedback--input" value={this.props.channel} disabled hidden={!this.props.showChannel} />
+            {showChannel && <label class="SlackFeedback--label">Channel</label>}
+            <input class="SlackFeedback--input" value={this.props.channel} disabled hidden={!showChannel} />
 
             <label class="SlackFeedback--label">Feedback Type</label>
             <ul class="SlackFeedback--tabs">

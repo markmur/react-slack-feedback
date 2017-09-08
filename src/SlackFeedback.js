@@ -9,10 +9,10 @@ import SlackIcon from './SlackIcon';
 import './SlackFeedback.scss';
 
 const propTypes = {
-  channel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onImageUpload: PropTypes.func,
   sending: PropTypes.bool,
+  channel: PropTypes.string,
   user: PropTypes.string,
   disabled: PropTypes.bool,
   emoji: PropTypes.string,
@@ -312,6 +312,9 @@ class SlackFeedback extends Component {
       uploadingImage
     } = this.state;
 
+    // do not show channel UI if no channel defined
+    var showChannel = !!this.props.channel && this.props.showChannel;
+
     var submitText = 'Send Feedback';
 
     if (sent) submitText = 'Sent!';
@@ -334,8 +337,8 @@ class SlackFeedback extends Component {
 
           <div class="SlackFeedback--content">
 
-            {this.props.showChannel && <label class="SlackFeedback--label">Channel</label>}
-            <input class="SlackFeedback--input" value={this.props.channel} disabled hidden={!this.props.showChannel} />
+            {showChannel && <label class="SlackFeedback--label">Channel</label>}
+            <input class="SlackFeedback--input" value={this.props.channel} disabled hidden={!showChannel} />
 
             <label class="SlackFeedback--label">Feedback Type</label>
             <ul class="SlackFeedback--tabs">

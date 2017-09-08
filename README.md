@@ -16,7 +16,7 @@ npm install react-slack-feedback --save
 To use the component, import it and render in your app's global component,
 or individual components (if you don't want it on every page).
 
-> NOTE
+> NOTE:
 Your Slack Webhook URL should _never_ be available on the front end.
 For this reason you must have a server which sends the request to slack.
 This component will produce the JSON object to send to Slack but it won't send
@@ -26,14 +26,13 @@ the request for you.
 import SlackFeedback from 'react-slack-feedback';
 
 <SlackFeedback
-  // required
-  channel="#general"
   // NOTE: The `onSubmit` method is called with the SlackFeedback context which
   // allows you to call `this.sent()` in the sendToSlack function. If you use
   // `payload => sendToSlack(payload)` or `sendToSlack.bind(this)` then you must
   // use a ref to call the sent method. i.e `this.refs.SlackFeedback.sent();`
   onSubmit={sendToSlack}
   onImageUpload={uploadImage}
+  channel="#general"
   disabled={true} // completely disable the component (default = false)
   user="Users Name" // The logged in user (default = "Unknown User")
   emoji=":bug:" // default = :speaking_head_in_silhouette:
@@ -87,13 +86,16 @@ function uploadImage(image) {
 ### Props
 | Prop     | Type   | Default      | Required      | Description |
 |----------|--------|--------------|:-------------:|-------------|
-| channel       | string |   | required | The Slack channel to send messages. Note: All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback' |
 | onSubmit | function |    | required | A JSON payload object will be returned when the user submits the form. |
 | onImageUpload | function |    |  | Method that will be called with a file argument |
+| channel       | string |   |  | The Slack channel to send messages. The default webhook channel will be used if none is provided. |
 | user          | string | "Unknown User" |               | The logged in user's name (if applicable) |
 | emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
 | buttonText    | string | "Slack Feedback" |          | The text for the trigger button |
 | disabled    | boolean | false |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
+
+> NOTE:
+All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback'
 
 ### Callback Functions
 | Function  | Arguments | Description |

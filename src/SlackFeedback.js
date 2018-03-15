@@ -21,7 +21,8 @@ const propTypes = {
   triggerStyles: PropTypes.object,
   contentStyles: PropTypes.object,
   showChannel: PropTypes.bool,
-  title: PropTypes.node
+  title: PropTypes.node,
+  closeButton: PropTypes.node
 };
 
 const defaultProps = {
@@ -35,8 +36,8 @@ const defaultProps = {
   triggerStyles: {},
   contentStyles: {},
   showChannel: true,
-  title: <span><SlackIcon /> Send Feedback to Slack</span>
-
+  title: <span><SlackIcon /> Send Feedback to Slack</span>,
+  closeButton: 'close'
 };
 
 const types = [
@@ -338,7 +339,7 @@ class SlackFeedback extends Component {
           class="SlackFeedback--container fadeInUp">
           <div class="SlackFeedback--header">
             {this.props.title}
-            <div class="close" onClick={this.close}>close</div>
+            <div class="close" onClick={this.close}>{this.props.closeButton}</div>
           </div>
 
           <div class="SlackFeedback--content">

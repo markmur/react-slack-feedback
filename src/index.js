@@ -9,7 +9,7 @@ ReactDOM.render(
     onImageUpload={uploadImage}
     user="Mark Murray"
     emoji=":bug:"
-    channel="#yab-feedback"
+    channel="#feedback"
   />,
   document.getElementById('root')
 );
@@ -26,14 +26,14 @@ function sendToSlack(payload) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-  .then(res => res.json())
-  .then(res => {
-    if (res.status >= 200 && res.status < 300) {
-      this.sent();
-    } else {
-      this.error(res);
-    }
-  });
+    .then(res => res.json())
+    .then(res => {
+      if (res.status >= 200 && res.status < 300) {
+        this.sent();
+      } else {
+        this.error(res);
+      }
+    });
 }
 
 /**
@@ -50,14 +50,13 @@ function uploadImage(file) {
     method: 'POST',
     body: form
   })
-  .then(res => {
-    console.log(res.status, res.statusText);
-    if (res.status < 200 || res.status >= 300) {
-      this.uploadError(res.statusText);
-    }
+    .then(res => {
+      console.log(res.status, res.statusText);
+      if (res.status < 200 || res.status >= 300) {
+        this.uploadError(res.statusText);
+      }
 
-    return res.json();
-  })
-  .then(url => this.imageUploaded(url));
-
+      return res.json();
+    })
+    .then(url => this.imageUploaded(url));
 }

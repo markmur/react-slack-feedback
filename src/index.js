@@ -3,24 +3,13 @@ import ReactDOM from 'react-dom';
 import fetch from 'isomorphic-fetch';
 import SlackFeedback from './SlackFeedback';
 
-ReactDOM.render(
-  <SlackFeedback
-    onSubmit={sendToSlack}
-    onImageUpload={uploadImage}
-    user="Mark Murray"
-    emoji=":bug:"
-    channel="#feedback"
-  />,
-  document.getElementById('root')
-);
-
 /**
  * Send payload to server
  * @method sendToSlack
  * @param  {Object} payload
  * @return {null}
  */
-function sendToSlack(payload) {
+const sendToSlack = payload => {
   fetch('/api/slack', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -34,7 +23,7 @@ function sendToSlack(payload) {
         this.error(res);
       }
     });
-}
+};
 
 /**
  * Upload image to server
@@ -42,7 +31,7 @@ function sendToSlack(payload) {
  * @param  {File} file
  * @return {null}
  */
-function uploadImage(file) {
+const uploadImage = file => {
   var form = new FormData();
   form.append('image', file);
 
@@ -59,4 +48,15 @@ function uploadImage(file) {
       return res.json();
     })
     .then(url => this.imageUploaded(url));
-}
+};
+
+ReactDOM.render(
+  <SlackFeedback
+    onSubmit={sendToSlack}
+    onImageUpload={uploadImage}
+    user="Mark Murray"
+    emoji=":bug:"
+    channel="#feedback"
+  />,
+  document.getElementById('root')
+);

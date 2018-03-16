@@ -112,19 +112,19 @@ function uploadImage(image) {
 
 To run this module locally:
 
-1. Clone the repo:
+1.  Clone the repo:
 
 ```bash
 git clone https://github.com/markmur/react-slack-feedback.git
 ```
 
-2. Install the node modules
+2.  Install the node modules
 
 ```bash
 npm install
 ```
 
-3. Create an ENV file with your `WEBHOOK_URL`
+3.  Create an ENV file with your `WEBHOOK_URL`
 
 `./env.js`
 
@@ -134,7 +134,7 @@ module.exports = {
 };
 ```
 
-4. Run the `Procfile` with `foreman`:
+4.  Run the `Procfile` with `foreman`:
 
 ```bash
 nf start

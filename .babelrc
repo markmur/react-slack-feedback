@@ -1,4 +1,4 @@
 {
-  "presets": ["env", "stage-0", "react"],
-  "plugins": ["react-html-attrs"]
+  "presets": ["@babel/env", "@babel/react", "@babel/stage-1"],
+  "plugins": []
 }

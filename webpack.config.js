@@ -1,42 +1,27 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
+  mode: 'development',
   devtool: 'inline-source-map',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src/index'
-  ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    filename: 'main.js'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: ['react-hot', 'babel'],
-        include: path.join(__dirname, 'src')
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'autoprefixer', 'sass'],
-        include: path.join(__dirname, 'src')
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css']
+        loader: 'babel-loader'
       },
       {
         test: /\.(png|jpg|jpeg|svg)$/,
-        loaders: ['file?name=[filename].[ext]'],
-        include: path.join(__dirname, 'src')
+        loader: 'file-loader?name=[filename].[ext]'
       }
     ]
+  },
+  resolve: {
+    modules: ['node_modules', path.resolve(__dirname, 'src')],
+    extensions: ['.js', '.json', '.css', '.scss']
   }
 };

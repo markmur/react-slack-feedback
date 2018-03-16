@@ -1,24 +1,15 @@
 {
-  "extends": [
-    "prettier"
-  ],
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
   },
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
-  "parser": "babel-eslint",
-  "rules": {
-    "quotes": [2, "single"],
-    "strict": [2, "never"],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2
-  },
-  "plugins": [
-    "react"
-  ]
+  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
 }

@@ -1,14 +1,17 @@
 {
   "name": "react-slack-feedback",
   "version": "1.1.1",
-  "description": "React component for gathering user feedback to send to slack.",
+  "description":
+    "React component for gathering user feedback to send to slack.",
   "main": "lib/SlackFeedback.js",
-  "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+  "author":
+    "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
   "license": "MIT",
   "scripts": {
     "start": "nf start --wrap",
     "build": " NODE_ENV=production webpack --config webpack.config.prod.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "**/*.js": [
@@ -18,19 +21,13 @@
     ]
   },
   "precommit": {
-    "run": [
-      "lint-staged"
-    ]
+    "run": ["lint-staged"]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/markmur/react-slack-feedback.git"
   },
-  "keywords": [
-    "react",
-    "slack",
-    "feedback"
-  ],
+  "keywords": ["react", "slack", "feedback"],
   "bugs": {
     "url": "https://github.com/markmur/react-slack-feedback/issues"
   },
@@ -62,6 +59,7 @@
     "multer": "^1.2.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.10.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

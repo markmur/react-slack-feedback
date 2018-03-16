@@ -1,7 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import { hot } from 'react-hot-loader';
 import fetch from 'isomorphic-fetch';
-import SlackFeedback from './SlackFeedback';
+import SlackFeedback from './feedback';
+
+const App = hot(module)(({ children }) => <div>{children}</div>);
+
+App.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 /**
  * Send payload to server
@@ -32,7 +40,7 @@ const sendToSlack = payload => {
  * @return {null}
  */
 const uploadImage = file => {
-  var form = new FormData();
+  const form = new FormData();
   form.append('image', file);
 
   fetch('/api/upload', {
@@ -50,13 +58,17 @@ const uploadImage = file => {
     .then(url => this.imageUploaded(url));
 };
 
+const root = document.getElementById('root');
+
 ReactDOM.render(
-  <SlackFeedback
-    onSubmit={sendToSlack}
-    onImageUpload={uploadImage}
-    user="Mark Murray"
-    emoji=":bug:"
-    channel="#feedback"
-  />,
-  document.getElementById('root')
+  <App>
+    <SlackFeedback
+      onSubmit={sendToSlack}
+      onImageUpload={uploadImage}
+      user="markmur"
+      emoji=":bug:"
+      channel="#feedback"
+    />
+  </App>,
+  root
 );

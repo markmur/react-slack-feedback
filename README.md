@@ -4,6 +4,8 @@ React component for gathering user feedback to send to slack.
 
 ![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)
 
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+
 ### Usage
 
 Install via NPM:

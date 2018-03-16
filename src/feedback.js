@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import SlackIcon from './slack-icon';
 import {
   SlackFeedback as StyledSlackFeedback,
   Loader,
   Container,
   Header,
   Content,
-  Icon,
   Trigger,
   Tabs,
   Label,
   Checkbox,
   CheckboxLabel,
   ImageUpload,
+  ImagePreview,
+  PreviewOverlay,
   UploadButton,
   SubmitButton,
   FormElement
 } from './styles';
 
 const Input = FormElement.withComponent('input');
-const Textarea = FormElement.withComponent('textarea');
-
-// Images
-import SlackIcon from './SlackIcon';
+const Textarea = FormElement.withComponent('textarea')`
+min-height: 150px;`;
 
 const types = [
   { value: 'bug', label: 'Bug' },
@@ -55,9 +55,9 @@ class SlackFeedback extends Component {
   };
 
   activate = () => {
-    this.setState({
-      active: !this.state.active
-    });
+    this.setState(({ active }) => ({
+      active: !active
+    }));
 
     document.addEventListener('click', this.handleClickOutside);
   };
@@ -65,7 +65,7 @@ class SlackFeedback extends Component {
   handleClickOutside = event => {
     if (event.defaultPrevented) return;
 
-    if (!this.refs.SlackFeedback.contains(event.target)) {
+    if (!this.SlackFeedback.contains(event.target)) {
       this.close();
     }
   };
@@ -79,9 +79,9 @@ class SlackFeedback extends Component {
   };
 
   toggleSendURL = () => {
-    this.setState({
-      sendURL: !this.state.sendURL
-    });
+    this.setState(({ sendURL }) => ({
+      sendURL: !sendURL
+    }));
   };
 
   selectType = type => () => {
@@ -99,7 +99,7 @@ class SlackFeedback extends Component {
         error: false
       },
       () => {
-        this.refs.message.value = '';
+        this.message.value = '';
         setTimeout(() => {
           this.setState({ sent: false });
         }, this.props.sentTimeout);
@@ -142,9 +142,9 @@ class SlackFeedback extends Component {
   };
 
   send = () => {
-    var { selectedType, sendURL, image } = this.state;
-    var message = this.refs.message.value;
-    var level;
+    const { selectedType, sendURL, image } = this.state;
+    let message = this.message.value;
+    let level;
 
     this.setState({
       sending: true
@@ -162,6 +162,9 @@ class SlackFeedback extends Component {
         level = 'good';
         break;
       case 'Improvement':
+        level = 'warning';
+        break;
+      default:
         level = 'warning';
         break;
     }
@@ -191,9 +194,9 @@ class SlackFeedback extends Component {
   };
 
   attachImage = event => {
-    var { files } = event.target;
+    const { files } = event.target;
 
-    var file = files[0];
+    const file = files[0];
     file.preview = window.URL.createObjectURL(file);
 
     this.setState(
@@ -208,10 +211,16 @@ class SlackFeedback extends Component {
   };
 
   uploadError = err => {
+    let errorMessage = 'Error uploading image!';
+
+    if (err && typeof err === 'string') {
+      errorMessage = err;
+    }
+
     this.setState(
       {
-        uploading: false,
-        error: 'Error Uploading Image!'
+        uploadingImage: false,
+        error: errorMessage
       },
       () => {
         this.removeImage();
@@ -225,11 +234,9 @@ class SlackFeedback extends Component {
 
   imageUploaded = url => {
     if (typeof url !== 'string') {
-      /* eslint-disable */
       console.error(
         '[SlackFeedback] `url` argument in `imageUploaded` method must be a string'
       );
-      /* eslint-enable */
       this.removeImage();
       return;
     }
@@ -237,12 +244,13 @@ class SlackFeedback extends Component {
     // Merge the image URL with the file object,
     // the resulting object will contain only the preview and the URL.
     // Any file information will be lost
-    const image = { ...this.state.image, url };
-
-    this.setState({
+    this.setState(({ image }) => ({
       uploadingImage: false,
-      image
-    });
+      image: {
+        ...image,
+        url
+      }
+    }));
   };
 
   renderImageUpload = () => {
@@ -252,9 +260,9 @@ class SlackFeedback extends Component {
 
     return (
       <ImageUpload>
-        <label className="SlackFeedback-image-upload-button" for="imageUpload">
+        <UploadButton for="imageUpload">
           {this.props.imageUploadText}
-        </label>
+        </UploadButton>
 
         <Input
           type="file"
@@ -308,8 +316,8 @@ class SlackFeedback extends Component {
       uploadingImage
     } = this.state;
 
-    // do not show channel UI if no channel defined
-    const showChannel = !!this.props.channel && this.props.showChannel;
+    // Do not show channel UI if no channel defined
+    const showChannel = Boolean(this.props.channel) && this.props.showChannel;
 
     let submitText = 'Send Feedback';
 
@@ -321,11 +329,18 @@ class SlackFeedback extends Component {
     if (this.props.disabled) return null;
 
     return (
-      <StyledSlackFeedback ref="SlackFeedback" className={cx({ active })}>
+      <StyledSlackFeedback
+        ref={c => {
+          this.SlackFeedback = c;
+        }}
+        className={cx({ active })}
+      >
         <Container
-          ref="container"
+          ref={c => {
+            this.container = c;
+          }}
+          className={cx('fadeInUp', { active })}
           style={this.props.contentStyles}
-          className="fadeInUp"
         >
           <Header>
             {this.props.title}
@@ -342,18 +357,24 @@ class SlackFeedback extends Component {
             <Tabs>
               {types.map(type => (
                 <li
+                  key={type.value}
                   onClick={this.selectType(type.label)}
                   className={cx({
                     selected: selectedType === type.label
                   })}
                 >
-                  type.label
+                  {type.label}
                 </li>
               ))}
             </Tabs>
 
             <Label>Your Message</Label>
-            <Textarea ref="message" placeholder="Message..." />
+            <Textarea
+              ref={c => {
+                this.message = c;
+              }}
+              placeholder="Message..."
+            />
 
             {/* Only render the image upload if there's callback available  */}
             {this.props.onImageUpload ? this.renderImageUpload() : null}
@@ -396,9 +417,6 @@ class SlackFeedback extends Component {
 }
 
 SlackFeedback.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onImageUpload: PropTypes.func,
-  sending: PropTypes.bool,
   channel: PropTypes.string,
   user: PropTypes.string,
   disabled: PropTypes.bool,
@@ -411,11 +429,15 @@ SlackFeedback.propTypes = {
   title: PropTypes.node,
   closeButton: PropTypes.node,
   errorTimeout: PropTypes.number,
-  sentTimeout: PropTypes.number
+  sentTimeout: PropTypes.number,
+  onSubmit: PropTypes.func.isRequired,
+  onImageUpload: PropTypes.func
 };
 
+const noop = () => {};
+
 SlackFeedback.defaultProps = {
-  sending: false,
+  channel: '',
   user: 'Unknown User',
   disabled: false,
   emoji: ':speaking_head_in_silhouette:',
@@ -424,7 +446,6 @@ SlackFeedback.defaultProps = {
       <SlackIcon /> Slack Feedback
     </span>
   ),
-  disableImageUpload: false,
   imageUploadText: 'Attach Image',
   triggerStyles: {},
   contentStyles: {},
@@ -436,7 +457,8 @@ SlackFeedback.defaultProps = {
   ),
   closeButton: 'close',
   errorTimeout: 8 * 1000,
-  sentTimeout: 5 * 1000
+  sentTimeout: 5 * 1000,
+  onImageUpload: noop
 };
 
 export default SlackFeedback;

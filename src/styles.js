@@ -1,16 +1,23 @@
 import styled, { keyframes, css } from 'styled-components';
 
-// $border: #d0d8e1;
-// $blue: #0088ff;
-// $green: #3dc86f;
-// $red: #ec3c3c;
-// $background: #f4f4f7;
-// $navy: #222c4f;
-// $text: #858ba0;
-//
-// $loader-color: white;
-// $loader-size: 4em;
-// $loader-width: 7px;
+const fontStack =
+  '-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif';
+
+const theme = {
+  font: fontStack,
+  border: '#d0d8e1',
+  primary: '#0088ff',
+  secondary: '#222c4f',
+  background: '#f4f4f7',
+  success: '#3dc86f',
+  error: '#ec3c3c',
+  text: '#858ba0',
+  loader: {
+    color: '#ffffff',
+    size: '4em',
+    width: '7px'
+  }
+};
 
 const resets = css`
   box-shadow: none;
@@ -20,7 +27,7 @@ const resets = css`
 `;
 
 const formStyles = css`
-  ${css};
+  ${resets};
   box-sizing: border-box;
 `;
 
@@ -36,7 +43,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-const animationFadeInUp = css`
+export const animationFadeInUp = css`
   animation: ${fadeInUp} 0.4s ease;
   animation-fill-mode: both;
 `;
@@ -54,12 +61,12 @@ const fadeOutDown = keyframes`
   }
 `;
 
-const animationFadeOutDown = css`
+export const animationFadeOutDown = css`
   animation: ${fadeOutDown} 0.4s ease;
   animation-fill-mode: both;
 `;
 
-const Load = keyframes`
+const load = keyframes`
   0% {
     transform: rotate(0deg);
   }
@@ -70,7 +77,7 @@ const Load = keyframes`
 
 const SlackFeedback = styled.div`
   position: fixed;
-  font-family: 'Proxima Nova', sans-serif;
+  font-family: ${theme.font};
   z-index: 99999998;
   bottom: 12px;
   right: 0;
@@ -94,26 +101,25 @@ const Loader = styled.div`
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: $loader-width solid rgba(white, 0.2);
-  border-right: $loader-width solid rgba(white, 0.2);
-  border-bottom: $loader-width solid rgba(white, 0.2);
-  border-left: $loader-width solid $loader-color;
+  border-top: ${theme.loader.width} solid rgba(#ffffff, 0.2);
+  border-right: ${theme.loader.width} solid rgba(#ffffff, 0.2);
+  border-bottom: ${theme.loader.width} solid rgba(#ffffff, 0.2);
+  border-left: ${theme.loader.width} solid ${theme.loader.color};
   transform: translateZ(0);
-  animation: SlackFeedback-loader 0.5s infinite linear;
+  animation: ${load} 0.5s infinite linear;
   border-radius: 50%;
-  width: $loader-size;
-  height: $loader-size;
+  width: ${theme.loader.size};
+  height: ${theme.loader.size};
 
   &:after {
     border-radius: 50%;
-    width: $loader-size;
-    height: $loader-size;
+    width: ${theme.loader.size};
+    height: ${theme.loader.size};
   }
 `;
 
 const Container = styled.div`
-  display: none;
-  background: $background;
+  background: ${theme.background};
   position: relative;
   z-index: 999999999;
   border-radius: 4px;
@@ -121,18 +127,22 @@ const Container = styled.div`
   width: 360px;
   top: -2.5em;
   right: 0;
-  box-shadow: 0 6px 30px 2px rgba($navy, 0.3);
+  box-shadow: 0 6px 30px 2px rgba(${theme.secondary}, 0.3);
+
+  .active {
+    display: block;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
-  background: $navy;
+  background: ${theme.secondary};
   padding: 0.75em 1em;
   border-radius: 3px 3px 0 0;
   font-size: 14px;
   font-weight: 300;
   align-items: center;
-  color: white;
+  color: #ffffff;
 
   > img {
     margin-right: 0.5em;
@@ -164,25 +174,24 @@ const Trigger = styled.div`
   right: 0;
   bottom: 0;
   align-items: center;
-  background: white;
-  color: $text;
-  border: 1px solid $border;
-  white-space: nowrap;
+  background: #ffffff;
+  color: ${theme.text};
+  border: 1px solid ${theme.border};
+  #ffffff-space: nowrap;
   padding: 12px 1.25em;
   border-radius: 30px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
-  box-shadow: 0 3px 12px 1px rgba($navy, 0.1);
+  box-shadow: 0 3px 12px 1px rgba(${theme.secondary}, 0.1);
   transition: box-shadow 0.3s, transform 0.2s ease-in, color 0.2s;
-  @extend .border-box;
 
   &:hover,
   &.active {
-    box-shadow: 0 6px 16px 2px rgba(black, 0.2);
+    box-shadow: 0 6px 16px 2px rgba(#000000, 0.2);
     transform: translateY(-3px);
     color: #5d606c;
-    border-color: darken($border, 10%);
+    border-color: darken(${theme.border}, 10%);
   }
 
   img {
@@ -199,25 +208,25 @@ const Tabs = styled.ul`
 
   > li {
     flex: 1;
-    background: rgba(white, 0.6);
+    background: rgba(#ffffff, 0.6);
     color: #5d606c;
     text-align: center;
     padding: 0.75em;
     font-size: 13px;
     cursor: pointer;
-    border: 1px solid $border;
+    border: 1px solid ${theme.border};
 
     &.selected {
       border-color: #08f;
-      background: white;
+      background: #ffffff;
       color: #08f;
       position: relative;
-      text-shadow: 0 1px 6px rgba($blue, 0.1);
-      box-shadow: 0 0 8px rgba($blue, 0.2);
+      text-shadow: 0 1px 6px rgba(${theme.primary}, 0.1);
+      box-shadow: 0 0 8px rgba(${theme.primary}, 0.2);
     }
 
     &:hover:not(.selected) {
-      border: 1px solid darken($border, 8%);
+      border: 1px solid darken(${theme.border}, 8%);
     }
 
     &:first-of-type {
@@ -239,37 +248,27 @@ const ImageUpload = styled.div`
 `;
 
 const UploadButton = styled.button`
-  border: 1px solid $border;
+  border: 1px solid ${theme.border};
   padding: 0.75em 3em;
   text-align: center;
   font-size: 13px;
   margin: auto;
   width: 100%;
   display: table;
-  color: darken($text, 5%);
-  background: white;
+  color: darken(${theme.text}, 5%);
+  background: #ffffff;
   cursor: pointer;
   border-radius: 4px;
-  @extend .border-box;
 
   &:hover {
-    border: 1px solid darken($border, 7%);
-    background: rgba(white, 0.6);
-    color: darken($text, 5%);
+    border: 1px solid darken(${theme.border}, 7%);
+    background: rgba(#ffffff, 0.6);
+    color: darken(${theme.text}, 5%);
   }
 `;
 
-const Input = styled.input`
-  margin-bottom: 0.75em;
-  color: $text;
-`;
-
-const Textarea = styled.textarea`
-  min-height: 150px;
-`;
-
 const Label = styled.label`
-  color: $blue;
+  color: ${theme.primary};
   display: block;
   font-size: 11px;
   margin: 5px 0;
@@ -278,27 +277,27 @@ const Label = styled.label`
 const FormElement = styled.input`
   ${formStyles};
 
+  color: ${theme.text};
   width: 100%;
   color: #444;
-  border: 1px solid $border;
+  border: 1px solid ${theme.border};
   border-radius: 3px;
   padding: 0.5em;
   outline: none;
   font-size: 14px;
-  background: white;
+  background: #ffffff;
   margin-bottom: 0.5em;
-  @extend .border-box;
 
   &:focus {
-    border: 1px solid $blue;
-    box-shadow: 0 0 8px rgba($blue, 0.3);
+    border: 1px solid ${theme.primary};
+    box-shadow: 0 0 8px rgba(${theme.primary}, 0.3);
   }
 
   &[disabled],
   &.disabled {
     opacity: 0.8;
     pointer-events: none;
-    color: darken($text, 13%);
+    color: darken(${theme.text}, 13%);
   }
 `;
 
@@ -328,16 +327,16 @@ const CheckboxLabel = styled.label`
 `;
 
 const SubmitButton = styled.button`
-  display: block !important;
-  width: 100% !important;
-  padding: 1em 0.75em !important;
-  text-align: center !important;
-  background: $blue !important;
-  color: white !important;
+  display: block;
+  width: 100%;
+  padding: 1em 0.75em;
+  text-align: center;
+  background: ${theme.primary};
+  color: #ffffff;
   font-weight: 400;
   outline: none;
   border: none;
-  font-size: 11px !important;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-radius: 4px;
@@ -346,23 +345,23 @@ const SubmitButton = styled.button`
 
   &[disabled],
   &.disabled {
-    pointer-events: none !important;
-    opacity: 0.4 !important;
+    pointer-events: none;
+    opacity: 0.4;
   }
 
   &.sent {
-    background: $green !important;
+    background: ${theme.success};
     pointer-events: none;
   }
 
   &.error {
-    background: $red !important;
+    background: ${theme.error};
     pointer-events: none;
   }
 
   &:hover {
-    background: lighten($blue, 7%);
-    box-shadow: 0 2px 8px 2px rgba($blue, 0.2);
+    background: lighten(${theme.primary}, 7%);
+    box-shadow: 0 2px 8px 2px rgba(${theme.primary}, 0.2);
   }
 `;
 
@@ -373,7 +372,7 @@ const PreviewOverlay = styled.div`
   bottom: 0;
   left: 0;
   text-align: center;
-  background: rgba($navy, 0.4);
+  background: rgba(${theme.secondary}, 0.4);
   opacity: 0;
 
   span {
@@ -384,20 +383,19 @@ const PreviewOverlay = styled.div`
     padding: 1em 3em;
     font-size: 12px;
     text-transform: uppercase;
-    color: white;
+    color: #ffffff;
     border-radius: 4px;
     cursor: pointer;
-    background: rgba($navy, 0.6);
+    background: rgba(${theme.secondary}, 0.6);
     transition: background 0.15s;
 
     &:hover {
-      background: $blue;
+      background: ${theme.primary};
     }
   }
 `;
 
 const ImagePreview = styled.div`
-  @extend .border-box;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -405,7 +403,7 @@ const ImagePreview = styled.div`
   height: 140px;
   border-radius: 4px;
   margin-bottom: 5px;
-  border: 1px solid $border;
+  border: 1px solid ${theme.border};
 
   &:hover {
     .SlackFeedback--preview-overlay {
@@ -418,7 +416,7 @@ const Select = styled.div`
   margin-bottom: 0.5em;
 
   .Select-control {
-    border: 1px solid $border;
+    border: 1px solid ${theme.border};
   }
 `;
 
@@ -430,13 +428,15 @@ export {
   Header,
   Icon,
   Trigger,
+  Tabs,
   Checkbox,
   CheckboxLabel,
   Label,
-  Textarea,
   SubmitButton,
   PreviewOverlay,
+  ImageUpload,
   ImagePreview,
   Select,
+  UploadButton,
   FormElement
 };

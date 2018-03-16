@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "description":
     "React component for gathering user feedback to send to slack.",
-  "main": "lib/SlackFeedback.js",
+  "main": "lib/feedback.js",
   "author":
     "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
   "license": "MIT",
@@ -11,14 +11,11 @@
     "start": "nf start --wrap",
     "build": " NODE_ENV=production webpack --config webpack.config.prod.js",
     "lint": "eslint src",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "test": "xo"
   },
   "lint-staged": {
-    "**/*.js": [
-      "prettier --single-quote --write",
-      "git add",
-      "eslint --color --max-warnings=1"
-    ]
+    "src/*.js": ["prettier --single-quote --write", "git add", "xo"]
   },
   "precommit": {
     "run": ["lint-staged"]
@@ -41,15 +38,14 @@
     "autoprefixer-loader": "^3.2.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-styled-components": "^1.5.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.15.2",
     "cloudinary": "^1.4.1",
     "css-loader": "^0.23.1",
     "cssnano": "^3.7.3",
-    "eslint": "^4.18.2",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-recommended": "^2.0.0",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-config-xo-react": "^0.16.0",
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
@@ -68,7 +64,8 @@
     "style-loader": "^0.13.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "xo": "^0.20.3"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -79,5 +76,27 @@
   "peerDependencies": {
     "react": "^0.14 || ^15 || ^16",
     "react-dom": "^0.14 || ^15 || ^16"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true
+  },
+  "xo": {
+    "parser": "babel-eslint",
+    "extends": "xo-react",
+    "envs": ["browser", "node"],
+    "prettier": true,
+    "space": true,
+    "plugins": ["react"],
+    "rules": {
+      "camelcase": [
+        2,
+        {
+          "properties": "never"
+        }
+      ]
+    }
   }
 }

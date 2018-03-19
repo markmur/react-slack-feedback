@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import cx from 'classnames';
 import merge from 'lodash.merge';
+
 import SlackIcon from './slack-icon';
 import {
   SlackFeedback as StyledSlackFeedback,

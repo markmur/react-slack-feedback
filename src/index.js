@@ -58,13 +58,6 @@ ReactDOM.render(
     user="markmur"
     emoji=":bug:"
     channel="#feedback"
-    theme={{
-      trigger: {
-        background: '#08f',
-        color: 'white',
-        borderRadius: '4px'
-      }
-    }}
   />,
   root
 );

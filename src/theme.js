@@ -16,7 +16,7 @@ export default {
   },
   trigger: {
     color: '#333333',
-    background: 'white',
+    background: '#ffffff',
     border: 'none',
     padding: '12px 1.25em',
     borderRadius: '30px',
@@ -26,7 +26,7 @@ export default {
   input: {
     background: 'white',
     padding: '0.5em',
-    color: '#444',
+    color: '#444444',
     fontSize: '14px'
   }
 };

@@ -1,6 +1,6 @@
-import path from 'path';
-import jest from 'danger-plugin-jest';
-import { message, danger } from 'danger';
+const path = require('path');
+const jest = require('danger-plugin-jest');
+const { message, danger } = require('danger');
 
 const modifiedMD = danger.git.modified_files.join('- ');
 message('Changed Files in this PR: \n - ' + modifiedMD);

@@ -1,4 +1,4 @@
-const jest = require('danger-plugin-jest');
+const jest = require('danger-plugin-jest').default;
 const { message, danger } = require('danger');
 
 const modifiedMD = danger.git.modified_files.join('- ');

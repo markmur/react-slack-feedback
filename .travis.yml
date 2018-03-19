@@ -1,3 +1,16 @@
-language: javascript
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  email: false
 before_script:
 - yarn danger ci
+script:
+  - yarn add jest
+  - yarn run test -- --coverage --outputFile test-results.json --json
+  - yarn run lint
+  - yarn run build
+  - yarn run danger
+  - rm -f test-results.json

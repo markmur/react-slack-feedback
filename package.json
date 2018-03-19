@@ -1,9 +1,11 @@
 {
   "name": "react-slack-feedback",
   "version": "1.1.2",
-  "description": "React component for gathering user feedback to send to slack.",
+  "description":
+    "React component for gathering user feedback to send to slack.",
   "main": "lib/SlackFeedback.js",
-  "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+  "author":
+    "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
   "license": "MIT",
   "scripts": {
     "start": "node webpack-dev-server",
@@ -11,31 +13,20 @@
     "build": " NODE_ENV=production webpack --config webpack.config.prod.js",
     "lint": "xo",
     "lint-staged": "lint-staged",
-    "test": "jest && codecov",
+    "test": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
     "prepublish": "npm run build"
   },
   "lint-staged": {
-    "src/*.js": [
-      "prettier --single-quote --write",
-      "git add",
-      "xo",
-      "test"
-    ]
+    "src/*.js": ["prettier --single-quote --write", "git add", "xo", "test"]
   },
   "precommit": {
-    "run": [
-      "lint-staged"
-    ]
+    "run": ["lint-staged"]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/markmur/react-slack-feedback.git"
   },
-  "keywords": [
-    "react",
-    "slack",
-    "feedback"
-  ],
+  "keywords": ["react", "slack", "feedback"],
   "bugs": {
     "url": "https://github.com/markmur/react-slack-feedback/issues"
   },
@@ -109,17 +100,10 @@
   "xo": {
     "parser": "babel-eslint",
     "extends": "xo-react",
-    "envs": [
-      "browser",
-      "node",
-      "jest/globals"
-    ],
+    "envs": ["browser", "node", "jest/globals"],
     "prettier": true,
     "space": true,
-    "plugins": [
-      "react",
-      "jest"
-    ],
+    "plugins": ["react", "jest"],
     "rules": {
       "camelcase": [
         2,

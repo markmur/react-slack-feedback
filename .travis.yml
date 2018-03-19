@@ -10,8 +10,7 @@ node_js:
 before_script:
 - yarn danger ci
 script:
-  - yarn add jest
-  - yarn run test --outputFile test-results.json --json
+  - yarn run test
   - yarn run build
   - yarn run danger
   - rm -f test-results.json

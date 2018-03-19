@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1521494615874" clover="3.2.0">
-  <project timestamp="1521494615875" name="All files">
+<coverage generated="1521502013040" clover="3.2.0">
+  <project timestamp="1521502013041" name="All files">
     <metrics statements="177" coveredstatements="52" conditionals="60" coveredconditionals="14" methods="91" coveredmethods="6" elements="328" coveredelements="72" complexity="0" loc="177" ncloc="177" packages="1" files="4" classes="4">
       <file name="feedback.js" path="/Users/markmurray/apps/react-slack-feedback/src/feedback.js">
         <metrics statements="95" coveredstatements="24" conditionals="56" coveredconditionals="13" methods="35" coveredmethods="5"/>

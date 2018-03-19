@@ -1,11 +1,9 @@
 {
   "name": "react-slack-feedback",
   "version": "1.1.2",
-  "description":
-    "React component for gathering user feedback to send to slack.",
+  "description": "React component for gathering user feedback to send to slack.",
   "main": "lib/SlackFeedback.js",
-  "author":
-    "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+  "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
   "license": "MIT",
   "scripts": {
     "start": "node webpack-dev-server",
@@ -17,16 +15,27 @@
     "prepublish": "npm run build"
   },
   "lint-staged": {
-    "src/*.js": ["prettier --single-quote --write", "git add", "xo", "test"]
+    "src/*.js": [
+      "prettier --single-quote --write",
+      "git add",
+      "xo",
+      "test"
+    ]
   },
   "precommit": {
-    "run": ["lint-staged"]
+    "run": [
+      "lint-staged"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/markmur/react-slack-feedback.git"
   },
-  "keywords": ["react", "slack", "feedback"],
+  "keywords": [
+    "react",
+    "slack",
+    "feedback"
+  ],
   "bugs": {
     "url": "https://github.com/markmur/react-slack-feedback/issues"
   },
@@ -43,6 +52,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "body-parser": "^1.15.2",
+    "codecov": "^3.0.0",
     "cssnano": "^3.7.3",
     "danger": "^3.2.0",
     "danger-plugin-jest": "^1.1.0",
@@ -99,10 +109,17 @@
   "xo": {
     "parser": "babel-eslint",
     "extends": "xo-react",
-    "envs": ["browser", "node", "jest/globals"],
+    "envs": [
+      "browser",
+      "node",
+      "jest/globals"
+    ],
     "prettier": true,
     "space": true,
-    "plugins": ["react", "jest"],
+    "plugins": [
+      "react",
+      "jest"
+    ],
     "rules": {
       "camelcase": [
         2,

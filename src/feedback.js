@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
 import cx from 'classnames';
+import merge from 'lodash.merge';
 import SlackIcon from './slack-icon';
 import {
   SlackFeedback as StyledSlackFeedback,
@@ -20,28 +22,22 @@ import {
   SubmitButton,
   FormElement
 } from './styles';
+import defaultTheme from './theme';
 
 const Input = FormElement.withComponent('input');
-const Textarea = FormElement.withComponent('textarea')`
-min-height: 150px;`;
-
-const types = [
-  { value: 'bug', label: 'Bug' },
-  { value: 'improvement', label: 'Improvement' },
-  { value: 'feature', label: 'Feature Request' }
-];
+const Textarea = FormElement.withComponent('textarea');
 
 class SlackFeedback extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      active: false,
+      active: true,
       sendURL: true,
       sent: false,
       error: false,
       uploadingImage: false,
-      selectedType: 'Bug',
+      selectedType: props.defaultSelectedType,
       image: {}
     };
   }
@@ -260,12 +256,13 @@ class SlackFeedback extends Component {
 
     return (
       <ImageUpload>
-        <UploadButton for="imageUpload">
+        <UploadButton htmlFor="imageUpload">
           {this.props.imageUploadText}
         </UploadButton>
 
         <Input
           type="file"
+          id="imageUpload"
           accept="image/*"
           style={{ display: 'none' }}
           onChange={event => this.attachImage(event)}
@@ -328,93 +325,102 @@ class SlackFeedback extends Component {
     // Return nothing if the component has been disabled
     if (this.props.disabled) return null;
 
+    const theme = merge({}, defaultTheme, this.props.theme);
+
     return (
-      <StyledSlackFeedback
-        ref={c => {
-          this.SlackFeedback = c;
-        }}
-        className={cx({ active })}
-      >
-        <Container
-          ref={c => {
-            this.container = c;
+      <ThemeProvider theme={theme}>
+        <StyledSlackFeedback
+          innerRef={c => {
+            this.SlackFeedback = c;
           }}
-          className={cx('fadeInUp', { active })}
-          style={this.props.contentStyles}
-        >
-          <Header>
-            {this.props.title}
-            <div className="close" onClick={this.close}>
-              {this.props.closeButton}
-            </div>
-          </Header>
-
-          <Content>
-            {showChannel && <Label>Channel</Label>}
-            <Input value={this.props.channel} disabled hidden={!showChannel} />
-
-            <Label>Feedback Type</Label>
-            <Tabs>
-              {types.map(type => (
-                <li
-                  key={type.value}
-                  onClick={this.selectType(type.label)}
-                  className={cx({
-                    selected: selectedType === type.label
-                  })}
-                >
-                  {type.label}
-                </li>
-              ))}
-            </Tabs>
-
-            <Label>Your Message</Label>
-            <Textarea
-              ref={c => {
-                this.message = c;
-              }}
-              placeholder="Message..."
-            />
-
-            {/* Only render the image upload if there's callback available  */}
-            {this.props.onImageUpload ? this.renderImageUpload() : null}
-
-            <div style={{ padding: '0.5em 0 1em' }}>
-              <Checkbox
-                id="sendURL"
-                type="checkbox"
-                checked={sendURL}
-                onChange={this.toggleSendURL}
-              />
-              <CheckboxLabel for="sendURL">
-                Send URL with Feedback
-              </CheckboxLabel>
-            </div>
-
-            <SubmitButton
-              className={cx({
-                sent,
-                error,
-                disabled: sending || uploadingImage
-              })}
-              onClick={this.send}
-            >
-              {submitText}
-            </SubmitButton>
-          </Content>
-        </Container>
-
-        <Trigger
-          style={this.props.triggerStyles}
           className={cx({ active })}
-          onClick={this.toggle}
         >
-          {this.props.buttonText}
-        </Trigger>
-      </StyledSlackFeedback>
+          <Container
+            innerRef={c => {
+              this.container = c;
+            }}
+            className={cx('fadeInUp', { active })}
+          >
+            <Header>
+              {this.props.title}
+              <div className="close" onClick={this.close}>
+                {this.props.closeButton}
+              </div>
+            </Header>
+
+            <Content>
+              {showChannel && <Label>Channel</Label>}
+              <Input
+                value={this.props.channel}
+                disabled
+                hidden={!showChannel}
+              />
+
+              <Label>Feedback Type</Label>
+              <Tabs>
+                {this.props.feedbackTypes.map(type => (
+                  <li
+                    key={type.value}
+                    onClick={this.selectType(type.label)}
+                    className={cx({
+                      selected: selectedType === type.label
+                    })}
+                  >
+                    {type.label}
+                  </li>
+                ))}
+              </Tabs>
+
+              <Label>Your Message</Label>
+              <Textarea
+                innerRef={c => {
+                  this.message = c;
+                }}
+                placeholder="Message..."
+              />
+
+              {/* Only render the image upload if there's callback available  */}
+              {this.props.onImageUpload ? this.renderImageUpload() : null}
+
+              <div style={{ padding: '0.5em 0 1em' }}>
+                <Checkbox
+                  id="sendURL"
+                  type="checkbox"
+                  checked={sendURL}
+                  onChange={this.toggleSendURL}
+                />
+                <CheckboxLabel htmlFor="sendURL">
+                  Send URL with Feedback
+                </CheckboxLabel>
+              </div>
+
+              <SubmitButton
+                className={cx({
+                  sent,
+                  error,
+                  disabled: sending || uploadingImage
+                })}
+                onClick={this.send}
+              >
+                {submitText}
+              </SubmitButton>
+            </Content>
+          </Container>
+
+          <Trigger className={cx({ active })} onClick={this.toggle}>
+            {this.props.buttonText}
+          </Trigger>
+        </StyledSlackFeedback>
+      </ThemeProvider>
     );
   }
 }
+
+const defaultFeedbackTypes = [
+  { value: 'bug', label: 'Bug' },
+  { value: 'improvement', label: 'Improvement' },
+  { value: 'feature', label: 'Feature Request' }
+];
 
 SlackFeedback.propTypes = {
   channel: PropTypes.string,
@@ -422,43 +428,56 @@ SlackFeedback.propTypes = {
   disabled: PropTypes.bool,
   emoji: PropTypes.string,
   buttonText: PropTypes.node,
+  defaultSelectedType: PropTypes.string,
+  feedbackTypes: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ),
   imageUploadText: PropTypes.string,
-  triggerStyles: PropTypes.object,
-  contentStyles: PropTypes.object,
   showChannel: PropTypes.bool,
   title: PropTypes.node,
   closeButton: PropTypes.node,
   errorTimeout: PropTypes.number,
   sentTimeout: PropTypes.number,
   onSubmit: PropTypes.func.isRequired,
-  onImageUpload: PropTypes.func
+  onImageUpload: PropTypes.func,
+  theme: PropTypes.object
 };
 
 const noop = () => {};
+
+const defaultButtonText = (
+  <span>
+    <SlackIcon /> Slack Feedback
+  </span>
+);
+
+const defaultTitle = (
+  <span>
+    <SlackIcon /> Send Feedback to Slack
+  </span>
+);
 
 SlackFeedback.defaultProps = {
   channel: '',
   user: 'Unknown User',
   disabled: false,
   emoji: ':speaking_head_in_silhouette:',
-  buttonText: (
-    <span>
-      <SlackIcon /> Slack Feedback
-    </span>
-  ),
+  buttonText: defaultButtonText,
   imageUploadText: 'Attach Image',
-  triggerStyles: {},
-  contentStyles: {},
+  defaultSelectedType: 'Bug',
+  feedbackTypes: defaultFeedbackTypes,
   showChannel: true,
-  title: (
-    <span>
-      <SlackIcon /> Send Feedback to Slack
-    </span>
-  ),
+  title: defaultTitle,
   closeButton: 'close',
   errorTimeout: 8 * 1000,
   sentTimeout: 5 * 1000,
-  onImageUpload: noop
+  onImageUpload: noop,
+  theme: defaultTheme
 };
+
+SlackFeedback.defaultTheme = defaultTheme;
 
 export default SlackFeedback;

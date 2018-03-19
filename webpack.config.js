@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -22,5 +23,11 @@ module.exports = {
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src')],
     extensions: ['.js', '.json', '.css', '.scss']
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.ejs',
+      title: 'React Slack Feedback'
+    })
+  ]
 };

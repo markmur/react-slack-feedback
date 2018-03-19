@@ -1,22 +1,13 @@
 import styled, { keyframes, css } from 'styled-components';
 
-const fontStack =
-  '-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif';
-
-const theme = {
-  font: fontStack,
-  border: '#d0d8e1',
-  primary: '#0088ff',
-  secondary: '#222c4f',
-  background: '#f4f4f7',
-  success: '#3dc86f',
-  error: '#ec3c3c',
-  text: '#858ba0',
-  loader: {
-    color: '#ffffff',
-    size: '4em',
-    width: '7px'
-  }
+const toRgb = hex => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
+        result[3],
+        16
+      )}`
+    : null;
 };
 
 const resets = css`
@@ -77,7 +68,7 @@ const load = keyframes`
 
 const SlackFeedback = styled.div`
   position: fixed;
-  font-family: ${theme.font};
+  font-family: ${p => p.theme.font || 'inherit'};
   z-index: 99999998;
   bottom: 12px;
   right: 0;
@@ -94,6 +85,10 @@ const SlackFeedback = styled.div`
   *:after {
     box-sizing: border-box;
   }
+
+  textarea {
+    min-height: 150px;
+  }
 `;
 
 const Loader = styled.div`
@@ -101,25 +96,26 @@ const Loader = styled.div`
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: ${theme.loader.width} solid rgba(#ffffff, 0.2);
-  border-right: ${theme.loader.width} solid rgba(#ffffff, 0.2);
-  border-bottom: ${theme.loader.width} solid rgba(#ffffff, 0.2);
-  border-left: ${theme.loader.width} solid ${theme.loader.color};
+  border-top: ${p => p.theme.loader.width} solid rgba(255, 255, 255, 0.2);
+  border-right: ${p => p.theme.loader.width} solid rgba(255, 255, 255, 0.2);
+  border-bottom: ${p => p.theme.loader.width} solid rgba(255, 255, 255, 0.2);
+  border-left: ${p => p.theme.loader.width} solid ${p => p.theme.loader.color};
   transform: translateZ(0);
   animation: ${load} 0.5s infinite linear;
   border-radius: 50%;
-  width: ${theme.loader.size};
-  height: ${theme.loader.size};
+  width: ${p => p.theme.loader.size};
+  height: ${p => p.theme.loader.size};
 
   &:after {
     border-radius: 50%;
-    width: ${theme.loader.size};
-    height: ${theme.loader.size};
+    width: ${p => p.theme.loader.size};
+    height: ${p => p.theme.loader.size};
   }
 `;
 
 const Container = styled.div`
-  background: ${theme.background};
+  display: none;
+  background: ${p => p.theme.background};
   position: relative;
   z-index: 999999999;
   border-radius: 4px;
@@ -127,16 +123,18 @@ const Container = styled.div`
   width: 360px;
   top: -2.5em;
   right: 0;
-  box-shadow: 0 6px 30px 2px rgba(${theme.secondary}, 0.3);
+  box-shadow: 0 6px 30px 2px rgba(${toRgb('#222c4f')}, 0.3);
+  ${animationFadeOutDown};
 
-  .active {
+  &.active {
+    ${animationFadeInUp};
     display: block;
   }
 `;
 
 const Header = styled.div`
   display: flex;
-  background: ${theme.secondary};
+  background: ${p => p.theme.secondary};
   padding: 0.75em 1em;
   border-radius: 3px 3px 0 0;
   font-size: 14px;
@@ -161,7 +159,7 @@ const Header = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 0.5em;
+  padding: ${p => p.theme.padding};
 `;
 
 const Icon = styled.div`
@@ -170,28 +168,27 @@ const Icon = styled.div`
 
 const Trigger = styled.div`
   display: flex;
+  align-items: center;
   position: absolute;
   right: 0;
   bottom: 0;
   align-items: center;
-  background: #ffffff;
-  color: ${theme.text};
-  border: 1px solid ${theme.border};
-  #ffffff-space: nowrap;
-  padding: 12px 1.25em;
-  border-radius: 30px;
+  background: ${p => p.theme.trigger.background};
+  color: ${p => p.theme.trigger.color};
+  border: 1px solid ${p => p.theme.trigger.border};
+  white-space: nowrap;
+  padding: ${p => p.theme.trigger.padding};
+  border-radius: ${p => p.theme.trigger.borderRadius};
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  box-shadow: 0 3px 12px 1px rgba(${theme.secondary}, 0.1);
+  font-size: ${p => p.theme.trigger.fontSize};
+  box-shadow: ${p => p.theme.trigger.shadow};
   transition: box-shadow 0.3s, transform 0.2s ease-in, color 0.2s;
 
-  &:hover,
-  &.active {
-    box-shadow: 0 6px 16px 2px rgba(#000000, 0.2);
-    transform: translateY(-3px);
-    color: #5d606c;
-    border-color: darken(${theme.border}, 10%);
+  &:hover {
+    box-shadow: 0 6px 16px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    color: ${p => p.theme.trigger.hoverColor};
+    border-color: ${p => p.theme.border};
   }
 
   img {
@@ -208,25 +205,26 @@ const Tabs = styled.ul`
 
   > li {
     flex: 1;
-    background: rgba(#ffffff, 0.6);
-    color: #5d606c;
+    background: rgba(255, 255, 255, 0.1);
+    color: ${p => p.theme.color};
     text-align: center;
     padding: 0.75em;
     font-size: 13px;
     cursor: pointer;
-    border: 1px solid ${theme.border};
+    white-space: nowrap;
+    border: 1px solid ${p => p.theme.border};
 
     &.selected {
-      border-color: #08f;
-      background: #ffffff;
-      color: #08f;
+      border-color: ${p => p.theme.primary};
+      background: ${p => p.theme.primary};
+      color: white;
       position: relative;
-      text-shadow: 0 1px 6px rgba(${theme.primary}, 0.1);
-      box-shadow: 0 0 8px rgba(${theme.primary}, 0.2);
+      text-shadow: 0 1px 6px rgba(${p => p.theme.primary}, 0.1);
+      box-shadow: 0 0 8px rgba(${p => p.theme.primary}, 0.2);
     }
 
     &:hover:not(.selected) {
-      border: 1px solid darken(${theme.border}, 8%);
+      border: 1px solid darken(${p => p.theme.border}, 8%);
     }
 
     &:first-of-type {
@@ -247,28 +245,28 @@ const ImageUpload = styled.div`
   }
 `;
 
-const UploadButton = styled.button`
-  border: 1px solid ${theme.border};
+const UploadButton = styled.label`
+  border: 1px solid ${p => p.theme.border};
   padding: 0.75em 3em;
   text-align: center;
   font-size: 13px;
   margin: auto;
   width: 100%;
   display: table;
-  color: darken(${theme.text}, 5%);
+  color: darken(${p => p.theme.text}, 5%);
   background: #ffffff;
   cursor: pointer;
   border-radius: 4px;
 
   &:hover {
-    border: 1px solid darken(${theme.border}, 7%);
+    border: 1px solid darken(${p => p.theme.border}, 7%);
     background: rgba(#ffffff, 0.6);
-    color: darken(${theme.text}, 5%);
+    color: darken(${p => p.theme.text}, 5%);
   }
 `;
 
 const Label = styled.label`
-  color: ${theme.primary};
+  color: ${p => p.theme.primary};
   display: block;
   font-size: 11px;
   margin: 5px 0;
@@ -277,27 +275,27 @@ const Label = styled.label`
 const FormElement = styled.input`
   ${formStyles};
 
-  color: ${theme.text};
+  color: ${p => p.theme.text};
   width: 100%;
-  color: #444;
-  border: 1px solid ${theme.border};
-  border-radius: 3px;
-  padding: 0.5em;
+  color: ${p => p.theme.input.color};
+  border: 1px solid ${p => p.theme.border};
+  border-radius: ${p => p.theme.input.borderRadius};
+  padding: ${p => p.theme.input.padding};
   outline: none;
-  font-size: 14px;
-  background: #ffffff;
+  font-size: ${p => p.theme.input.fontSize};
+  background: ${p => p.theme.input.background};
   margin-bottom: 0.5em;
 
   &:focus {
-    border: 1px solid ${theme.primary};
-    box-shadow: 0 0 8px rgba(${theme.primary}, 0.3);
+    border: 1px solid ${p => p.theme.primary};
+    box-shadow: 0 0 8px rgba(${p => toRgb(p.theme.primary)}, 0.3);
   }
 
   &[disabled],
   &.disabled {
-    opacity: 0.8;
+    background: #fafafa;
     pointer-events: none;
-    color: darken(${theme.text}, 13%);
+    color: ${p => p.theme.text};
   }
 `;
 
@@ -322,7 +320,7 @@ const CheckboxLabel = styled.label`
   cursor: pointer;
 
   &:hover {
-    color: darken(#858ba0, 5%);
+    color: #858ba0;
   }
 `;
 
@@ -331,8 +329,8 @@ const SubmitButton = styled.button`
   width: 100%;
   padding: 1em 0.75em;
   text-align: center;
-  background: ${theme.primary};
-  color: #ffffff;
+  background: ${p => p.theme.primary};
+  color: white;
   font-weight: 400;
   outline: none;
   border: none;
@@ -350,18 +348,18 @@ const SubmitButton = styled.button`
   }
 
   &.sent {
-    background: ${theme.success};
+    background: ${p => p.theme.success};
     pointer-events: none;
   }
 
   &.error {
-    background: ${theme.error};
+    background: ${p => p.theme.error};
     pointer-events: none;
   }
 
   &:hover {
-    background: lighten(${theme.primary}, 7%);
-    box-shadow: 0 2px 8px 2px rgba(${theme.primary}, 0.2);
+    background: lighten(${p => p.theme.primary}, 7%);
+    box-shadow: 0 2px 8px 2px rgba(${p => p.theme.primary}, 0.2);
   }
 `;
 
@@ -372,7 +370,7 @@ const PreviewOverlay = styled.div`
   bottom: 0;
   left: 0;
   text-align: center;
-  background: rgba(${theme.secondary}, 0.4);
+  background: rgba(${p => toRgb(p.theme.secondary)}, 0.4);
   opacity: 0;
 
   span {
@@ -386,11 +384,11 @@ const PreviewOverlay = styled.div`
     color: #ffffff;
     border-radius: 4px;
     cursor: pointer;
-    background: rgba(${theme.secondary}, 0.6);
+    background: rgba(${p => toRgb(p.theme.secondary)}, 0.6);
     transition: background 0.15s;
 
     &:hover {
-      background: ${theme.primary};
+      background: ${p => p.theme.primary};
     }
   }
 `;
@@ -403,7 +401,7 @@ const ImagePreview = styled.div`
   height: 140px;
   border-radius: 4px;
   margin-bottom: 5px;
-  border: 1px solid ${theme.border};
+  border: 1px solid ${p => p.theme.border};
 
   &:hover {
     .SlackFeedback--preview-overlay {
@@ -416,7 +414,7 @@ const Select = styled.div`
   margin-bottom: 0.5em;
 
   .Select-control {
-    border: 1px solid ${theme.border};
+    border: 1px solid ${p => p.theme.border};
   }
 `;
 

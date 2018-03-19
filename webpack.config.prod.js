@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
-  entry: ['./src/SlackFeedback.js'],
+  entry: ['./src/feedback.js'],
   output: {
     path: path.join(__dirname, 'lib'),
     publicPath: path.join(__dirname, 'lib'),

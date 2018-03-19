@@ -1,15 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { hot } from 'react-hot-loader';
 import fetch from 'isomorphic-fetch';
 import SlackFeedback from './feedback';
-
-const App = hot(module)(({ children }) => <div>{children}</div>);
-
-App.propTypes = {
-  children: PropTypes.node.isRequired
-};
 
 /**
  * Send payload to server
@@ -39,7 +31,7 @@ const sendToSlack = payload => {
  * @param  {File} file
  * @return {null}
  */
-const uploadImage = file => {
+function uploadImage(file) {
   const form = new FormData();
   form.append('image', file);
 
@@ -47,28 +39,32 @@ const uploadImage = file => {
     method: 'POST',
     body: form
   })
-    .then(res => {
-      console.log(res.status, res.statusText);
+    .then(function(res) {
       if (res.status < 200 || res.status >= 300) {
         this.uploadError(res.statusText);
       }
 
       return res.json();
     })
-    .then(url => this.imageUploaded(url));
-};
+    .then(({ url }) => this.imageUploaded(url));
+}
 
 const root = document.getElementById('root');
 
 ReactDOM.render(
-  <App>
-    <SlackFeedback
-      onSubmit={sendToSlack}
-      onImageUpload={uploadImage}
-      user="markmur"
-      emoji=":bug:"
-      channel="#feedback"
-    />
-  </App>,
+  <SlackFeedback
+    onSubmit={sendToSlack}
+    onImageUpload={uploadImage}
+    user="markmur"
+    emoji=":bug:"
+    channel="#feedback"
+    theme={{
+      trigger: {
+        background: '#08f',
+        color: 'white',
+        borderRadius: '4px'
+      }
+    }}
+  />,
   root
 );

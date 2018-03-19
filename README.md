@@ -4,6 +4,7 @@ React component for gathering user feedback to send to slack.
 
 ![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)
 
+[![Build Status](https://travis-ci.org/markmur/react-slack-feedback.svg?branch=master)](https://travis-ci.org/markmur/react-slack-feedback)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 
 ### Usage

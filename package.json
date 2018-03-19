@@ -11,7 +11,7 @@
     "start": "node webpack-dev-server",
     "start:server": "node server.js",
     "build": " NODE_ENV=production webpack --config webpack.config.prod.js",
-    "lint": "eslint src",
+    "lint": "xo",
     "lint-staged": "lint-staged",
     "test": "xo && jest",
     "prepublish": "npm run build"

@@ -26,7 +26,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.ejs',
+      template: 'index.ejs',
       title: 'React Slack Feedback'
     })
   ]

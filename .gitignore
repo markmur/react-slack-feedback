@@ -3,5 +3,5 @@ npm-debug.log
 .DS_Store
 env.js
 uploads/
-lib/
+lib
 dist

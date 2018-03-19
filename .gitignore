@@ -5,4 +5,5 @@ env.js
 uploads/
 lib
 dist
-.log
+*.log
+test-results.json

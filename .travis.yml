@@ -11,7 +11,7 @@ before_script:
 - yarn danger ci
 script:
   - yarn add jest
-  - yarn run test -- --coverage --outputFile test-results.json --json
+  - yarn run test --coverage --outputFile test-results.json --json
   - yarn run lint
   - yarn run build
   - yarn run danger

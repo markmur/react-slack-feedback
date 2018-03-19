@@ -1,11 +1,9 @@
 {
   "name": "react-slack-feedback",
   "version": "1.1.2",
-  "description":
-    "React component for gathering user feedback to send to slack.",
+  "description": "React component for gathering user feedback to send to slack.",
   "main": "lib/SlackFeedback.js",
-  "author":
-    "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+  "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
   "license": "MIT",
   "scripts": {
     "start": "node webpack-dev-server",
@@ -17,23 +15,32 @@
     "prepublish": "npm run build"
   },
   "lint-staged": {
-    "src/*.js": ["prettier --single-quote --write", "git add", "xo", "test"]
+    "src/*.js": [
+      "prettier --single-quote --write",
+      "git add",
+      "xo",
+      "test"
+    ]
   },
   "precommit": {
-    "run": ["lint-staged"]
+    "run": [
+      "lint-staged"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/markmur/react-slack-feedback.git"
   },
-  "keywords": ["react", "slack", "feedback"],
+  "keywords": [
+    "react",
+    "slack",
+    "feedback"
+  ],
   "bugs": {
     "url": "https://github.com/markmur/react-slack-feedback/issues"
   },
   "homepage": "https://github.com/markmur/react-slack-feedback",
   "devDependencies": {
-    "autoprefixer": "^6.4.0",
-    "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^23.0.0-alpha.0",
@@ -45,8 +52,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "body-parser": "^1.15.2",
-    "cloudinary": "^1.4.1",
-    "css-loader": "^0.23.1",
     "cssnano": "^3.7.3",
     "danger": "^3.2.0",
     "danger-plugin-jest": "^1.1.0",
@@ -64,15 +69,12 @@
     "jest": "^22.4.2",
     "lint-staged": "^7.0.0",
     "multer": "^1.2.0",
-    "node-sass": "^4.7.2",
     "nodemon": "^1.17.2",
     "pre-commit": "^1.2.2",
     "prettier": "^1.11.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "regenerator-runtime": "^0.11.1",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.13.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
@@ -103,10 +105,17 @@
   "xo": {
     "parser": "babel-eslint",
     "extends": "xo-react",
-    "envs": ["browser", "node", "jest/globals"],
+    "envs": [
+      "browser",
+      "node",
+      "jest/globals"
+    ],
     "prettier": true,
     "space": true,
-    "plugins": ["react", "jest"],
+    "plugins": [
+      "react",
+      "jest"
+    ],
     "rules": {
       "camelcase": [
         2,

@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/markmurray/.nvm/versions/node/v9.2.0/bin/node /Users/markmurray/.nvm/versions/node/v9.2.0/bin/yarn danger pr https://github.com/markmur/react-slack-feedback/pull/13
+  /Users/markmurray/.nvm/versions/node/v9.2.0/bin/node /Users/markmurray/.nvm/versions/node/v9.2.0/bin/yarn run test -- --coverage --outputFile test-results.json --json
 
 PATH: 
   /Users/markmurray/.nvm/versions/node/v9.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Genymotion.app/Contents/MacOS/tools/
@@ -10254,7 +10254,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c /Users/markmurray/apps/react-slack-feedback/node_modules/.bin/danger pr https://github.com/markmur/react-slack-feedback/pull/13
+  Arguments: -c xo && jest --coverage --outputFile test-results.json --json
   Directory: /Users/markmurray/apps/react-slack-feedback
   Output:
   

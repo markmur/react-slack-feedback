@@ -33,15 +33,22 @@ class SlackFeedback extends Component {
     super(props);
 
     this.state = {
-      active: true,
+      active: false,
       sendURL: true,
+      sending: false,
       sent: false,
       error: false,
       uploadingImage: false,
-      selectedType: props.defaultSelectedType,
-      image: {}
+      selectedType: props.defaultSelectedType || props.feedbackTypes[0].label,
+      image: {},
+      message: ''
     };
   }
+
+  handleChange = key => event =>
+    this.setState({
+      [key]: event.target.value
+    });
 
   toggle = () => {
     if (this.state.active) {
@@ -52,9 +59,12 @@ class SlackFeedback extends Component {
   };
 
   activate = () => {
-    this.setState(({ active }) => ({
-      active: !active
-    }));
+    this.setState(
+      ({ active }) => ({
+        active: !active
+      }),
+      this.props.onOpen
+    );
 
     document.addEventListener('click', this.handleClickOutside);
   };
@@ -68,9 +78,14 @@ class SlackFeedback extends Component {
   };
 
   close = () => {
-    this.setState({
-      active: false
-    });
+    this.setState(
+      {
+        active: false
+      },
+      () => {
+        this.props.onClose();
+      }
+    );
 
     document.removeEventListener('click', this.handleClickOutside);
   };
@@ -81,11 +96,10 @@ class SlackFeedback extends Component {
     }));
   };
 
-  selectType = type => () => {
+  selectType = type => () =>
     this.setState({
       selectedType: type
     });
-  };
 
   sent = () => {
     this.setState(
@@ -104,7 +118,7 @@ class SlackFeedback extends Component {
     );
   };
 
-  error = err => {
+  error = err =>
     this.setState(
       {
         sending: false,
@@ -116,7 +130,6 @@ class SlackFeedback extends Component {
         }, this.props.errorTimeout);
       }
     );
-  };
 
   determineErrorType = err => {
     if (!err) return 'Unexpected Error!';
@@ -140,15 +153,13 @@ class SlackFeedback extends Component {
 
   send = () => {
     const { selectedType, sendURL, image } = this.state;
-    let message = this.message.value;
+    let text = this.state.message;
     let level;
 
-    this.setState({
-      sending: true
-    });
+    this.setState({ sending: true });
 
     // Attach the curent URL
-    if (sendURL) message += `\n <${document.location.href}>`;
+    if (sendURL) text += `\n <${document.location.href}>`;
 
     // Slack accepts 3 color levels: danger (red), good (green) and warning (orange)
     switch (selectedType) {
@@ -177,7 +188,7 @@ class SlackFeedback extends Component {
           color: level,
           title: selectedType,
           title_link: document.location.href,
-          text: message,
+          text,
           footer: 'React Slack Feedback'
         }
       ]
@@ -187,7 +198,7 @@ class SlackFeedback extends Component {
     if (image.url) payload.attachments[0].image_url = image.url;
 
     // Submit the payload
-    this.props.onSubmit.call(this, payload);
+    this.props.onSubmit(payload);
   };
 
   attachImage = event => {
@@ -350,12 +361,12 @@ class SlackFeedback extends Component {
             </Header>
 
             <Content>
-              {showChannel && <Label>Channel</Label>}
-              <Input
-                value={this.props.channel}
-                disabled
-                hidden={!showChannel}
-              />
+              {showChannel && (
+                <span id="channel">
+                  <Label htmlFor="channel">Channel</Label>
+                  <Input value={this.props.channel} disabled />
+                </span>
+              )}
 
               <Label>Feedback Type</Label>
               <Tabs>
@@ -374,10 +385,10 @@ class SlackFeedback extends Component {
 
               <Label>Your Message</Label>
               <Textarea
-                innerRef={c => {
-                  this.message = c;
-                }}
-                placeholder="Message..."
+                name="message"
+                value={this.state.message}
+                placeholder={this.props.placeholder}
+                onChange={this.handleChange('message')}
               />
 
               {/* Only render the image upload if there's callback available  */}
@@ -396,10 +407,10 @@ class SlackFeedback extends Component {
               </div>
 
               <SubmitButton
+                disabled={sending || uploadingImage || !this.state.message}
                 className={cx({
                   sent,
-                  error,
-                  disabled: sending || uploadingImage
+                  error
                 })}
                 onClick={this.send}
               >
@@ -420,7 +431,7 @@ class SlackFeedback extends Component {
 const defaultFeedbackTypes = [
   { value: 'bug', label: 'Bug' },
   { value: 'improvement', label: 'Improvement' },
-  { value: 'feature', label: 'Feature Request' }
+  { value: 'feature', label: 'Feature' }
 ];
 
 SlackFeedback.propTypes = {
@@ -428,8 +439,9 @@ SlackFeedback.propTypes = {
   user: PropTypes.string,
   disabled: PropTypes.bool,
   emoji: PropTypes.string,
+  placeholder: PropTypes.string,
   buttonText: PropTypes.node,
-  defaultSelectedType: PropTypes.string,
+  defaultSelectedType: PropTypes.string, // eslint-disable-line react/require-default-props
   feedbackTypes: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -443,8 +455,10 @@ SlackFeedback.propTypes = {
   errorTimeout: PropTypes.number,
   sentTimeout: PropTypes.number,
   onSubmit: PropTypes.func.isRequired,
-  onImageUpload: PropTypes.func,
-  theme: PropTypes.object
+  theme: PropTypes.object,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
+  onImageUpload: PropTypes.func // eslint-disable-line react/require-default-props
 };
 
 const noop = () => {};
@@ -466,19 +480,21 @@ SlackFeedback.defaultProps = {
   user: 'Unknown User',
   disabled: false,
   emoji: ':speaking_head_in_silhouette:',
+  placeholder: 'Message...',
   buttonText: defaultButtonText,
   imageUploadText: 'Attach Image',
-  defaultSelectedType: 'Bug',
   feedbackTypes: defaultFeedbackTypes,
   showChannel: true,
   title: defaultTitle,
   closeButton: 'close',
   errorTimeout: 8 * 1000,
   sentTimeout: 5 * 1000,
-  onImageUpload: noop,
-  theme: defaultTheme
+  theme: defaultTheme,
+  onOpen: noop,
+  onClose: noop
 };
 
 SlackFeedback.defaultTheme = defaultTheme;
+SlackFeedback.SlackIcon = SlackIcon;
 
 export default SlackFeedback;

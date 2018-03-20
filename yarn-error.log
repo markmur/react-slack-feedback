@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/markmurray/.nvm/versions/node/v9.2.0/bin/node /Users/markmurray/.nvm/versions/node/v9.2.0/bin/yarn danger ci
+  /Users/markmurray/.nvm/versions/node/v9.2.0/bin/node /Users/markmurray/.nvm/versions/node/v9.2.0/bin/yarn lint-staged
 
 PATH: 
   /Users/markmurray/.nvm/versions/node/v9.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Genymotion.app/Contents/MacOS/tools/
@@ -17,9 +17,11 @@ npm manifest:
   {
     "name": "react-slack-feedback",
     "version": "1.1.2",
-    "description": "React component for gathering user feedback to send to slack.",
+    "description":
+      "React component for gathering user feedback to send to slack.",
     "main": "lib/SlackFeedback.js",
-    "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+    "author":
+      "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
     "license": "MIT",
     "scripts": {
       "start": "node webpack-dev-server",
@@ -28,30 +30,20 @@ npm manifest:
       "lint": "xo",
       "lint-staged": "lint-staged",
       "test": "jest",
+      "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
       "prepublish": "npm run build"
     },
     "lint-staged": {
-      "src/*.js": [
-        "prettier --single-quote --write",
-        "git add",
-        "xo",
-        "test"
-      ]
+      "src/*.js": ["prettier --single-quote --write", "git add", "xo", "test"]
     },
     "precommit": {
-      "run": [
-        "lint-staged"
-      ]
+      "run": ["lint-staged"]
     },
     "repository": {
       "type": "git",
       "url": "https://github.com/markmur/react-slack-feedback.git"
     },
-    "keywords": [
-      "react",
-      "slack",
-      "feedback"
-    ],
+    "keywords": ["react", "slack", "feedback"],
     "bugs": {
       "url": "https://github.com/markmur/react-slack-feedback/issues"
     },
@@ -68,6 +60,7 @@ npm manifest:
       "babel-preset-react": "^6.24.1",
       "babel-preset-stage-1": "^6.24.1",
       "body-parser": "^1.15.2",
+      "codecov": "^3.0.0",
       "cssnano": "^3.7.3",
       "danger": "^3.2.0",
       "danger-plugin-jest": "^1.1.0",
@@ -84,6 +77,8 @@ npm manifest:
       "html-webpack-plugin": "^3.0.6",
       "isomorphic-fetch": "^2.2.1",
       "jest": "^22.4.2",
+      "jest-environment-jsdom": "^23.0.0-alpha.0",
+      "jest-environment-jsdom-global": "^1.0.3",
       "lint-staged": "^7.0.0",
       "multer": "^1.2.0",
       "nodemon": "^1.17.2",
@@ -109,9 +104,12 @@ npm manifest:
       "react-dom": "^0.14 || ^15 || ^16"
     },
     "jest": {
+      "coverageDirectory": "./coverage/",
+      "collectCoverage": true,
       "transform": {
         "^.+\\.jsx?$": "babel-jest"
-      }
+      },
+      "testEnvironment": "jest-environment-jsdom-global"
     },
     "prettier": {
       "semi": true,
@@ -122,17 +120,11 @@ npm manifest:
     "xo": {
       "parser": "babel-eslint",
       "extends": "xo-react",
-      "envs": [
-        "browser",
-        "node",
-        "jest/globals"
-      ],
+      "envs": ["browser", "node", "jest/globals"],
       "prettier": true,
       "space": true,
-      "plugins": [
-        "react",
-        "jest"
-      ],
+      "plugins": ["react", "jest"],
+      "globals": ["jsdom"],
       "rules": {
         "camelcase": [
           2,
@@ -458,6 +450,10 @@ Lockfile:
       minimist "1.2.0"
       pkginfo "0.4.0"
       string-similarity "1.1.0"
+  
+  argv@0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/argv/-/argv-0.0.2.tgz#ecbd16f8949b157183711b1bda334f37840185ab"
   
   arr-diff@^2.0.0:
     version "2.0.0"
@@ -2084,6 +2080,14 @@ Lockfile:
   code-point-at@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+  
+  codecov@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.0.tgz#c273b8c4f12945723e8dc9d25803d89343e5f28e"
+    dependencies:
+      argv "0.0.2"
+      request "2.81.0"
+      urlgrey "0.4.4"
   
   collection-visit@^1.0.0:
     version "1.0.0"
@@ -5141,12 +5145,24 @@ Lockfile:
     dependencies:
       detect-newline "^2.1.0"
   
+  jest-environment-jsdom-global@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/jest-environment-jsdom-global/-/jest-environment-jsdom-global-1.0.3.tgz#e0616c235709e6919f33f9b5e5c3854cd8edba39"
+  
   jest-environment-jsdom@^22.4.1:
     version "22.4.1"
     resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-22.4.1.tgz#754f408872441740100d3917e5ec40c74de6447f"
     dependencies:
       jest-mock "^22.2.0"
       jest-util "^22.4.1"
+      jsdom "^11.5.1"
+  
+  jest-environment-jsdom@^23.0.0-alpha.0:
+    version "23.0.0-alpha.0"
+    resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-23.0.0-alpha.0.tgz#44e962603620d515e7660007bdd9e3e3236a8ff2"
+    dependencies:
+      jest-mock "^23.0.0-alpha.0"
+      jest-util "^23.0.0-alpha.0"
       jsdom "^11.5.1"
   
   jest-environment-node@^22.4.1:
@@ -5212,9 +5228,23 @@ Lockfile:
       slash "^1.0.0"
       stack-utils "^1.0.1"
   
+  jest-message-util@^23.0.0-alpha.0:
+    version "23.0.0-alpha.0"
+    resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-23.0.0-alpha.0.tgz#18fa4a3f52af2bf6dfaa5ff217865860387d3c17"
+    dependencies:
+      "@babel/code-frame" "^7.0.0-beta.35"
+      chalk "^2.0.1"
+      micromatch "^2.3.11"
+      slash "^1.0.0"
+      stack-utils "^1.0.1"
+  
   jest-mock@^22.2.0:
     version "22.2.0"
     resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-22.2.0.tgz#444b3f9488a7473adae09bc8a77294afded397a7"
+  
+  jest-mock@^23.0.0-alpha.0:
+    version "23.0.0-alpha.0"
+    resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-23.0.0-alpha.0.tgz#d2a1fd81d8356b24fe602650e61acc49e008f9df"
   
   jest-regex-util@^22.1.0:
     version "22.1.0"
@@ -5298,6 +5328,18 @@ Lockfile:
       graceful-fs "^4.1.11"
       is-ci "^1.0.10"
       jest-message-util "^22.4.0"
+      mkdirp "^0.5.1"
+      source-map "^0.6.0"
+  
+  jest-util@^23.0.0-alpha.0:
+    version "23.0.0-alpha.0"
+    resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-23.0.0-alpha.0.tgz#ff4b9d0990e57121a220f571e4415a5316ad3777"
+    dependencies:
+      callsites "^2.0.0"
+      chalk "^2.0.1"
+      graceful-fs "^4.1.11"
+      is-ci "^1.0.10"
+      jest-message-util "^23.0.0-alpha.0"
       mkdirp "^0.5.1"
       source-map "^0.6.0"
   
@@ -9183,6 +9225,10 @@ Lockfile:
       punycode "1.3.2"
       querystring "0.2.0"
   
+  urlgrey@0.4.4:
+    version "0.4.4"
+    resolved "https://registry.yarnpkg.com/urlgrey/-/urlgrey-0.4.4.tgz#892fe95960805e85519f1cd4389f2cb4cbb7652f"
+  
   use@^3.1.0:
     version "3.1.0"
     resolved "https://registry.yarnpkg.com/use/-/use-3.1.0.tgz#14716bf03fdfefd03040aef58d8b4b85f3a7c544"
@@ -9815,7 +9861,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c /Users/markmurray/apps/react-slack-feedback/node_modules/.bin/danger ci
+  Arguments: -c lint-staged
   Directory: /Users/markmurray/apps/react-slack-feedback
   Output:
   

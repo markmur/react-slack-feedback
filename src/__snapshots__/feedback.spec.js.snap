@@ -11,11 +11,10 @@ ShallowWrapper {
          Slack Feedback
       </span>
     }
-    channel="#feedback"
+    channel="#tests"
     closeButton="close"
-    defaultSelectedType="Bug"
     disabled={false}
-    emoji=":bug:"
+    emoji=":party:"
     errorTimeout={8000}
     feedbackTypes={
       Array [
@@ -28,14 +27,17 @@ ShallowWrapper {
           "value": "improvement",
         },
         Object {
-          "label": "Feature Request",
+          "label": "Feature",
           "value": "feature",
         },
       ]
     }
     imageUploadText="Attach Image"
+    onClose={[MockFunction]}
     onImageUpload={[MockFunction]}
+    onOpen={[MockFunction]}
     onSubmit={[MockFunction]}
+    placeholder="Message..."
     sentTimeout={5000}
     showChannel={true}
     theme={
@@ -77,7 +79,7 @@ ShallowWrapper {
          Send Feedback to Slack
       </span>
     }
-    user="markmur"
+    user="unit-tester"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -92,11 +94,11 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": <styles__SlackFeedback
-        className="active"
+        className=""
         innerRef={[Function]}
       >
         <styles__Container
-          className="fadeInUp active"
+          className="fadeInUp"
           innerRef={[Function]}
         >
           <styles__Header>
@@ -112,14 +114,19 @@ ShallowWrapper {
             </div>
           </styles__Header>
           <styles__Content>
-            <styles__Label>
-              Channel
-            </styles__Label>
-            <styles__FormElement
-              disabled={true}
-              hidden={false}
-              value="#feedback"
-            />
+            <span
+              id="channel"
+            >
+              <styles__Label
+                htmlFor="channel"
+              >
+                Channel
+              </styles__Label>
+              <styles__FormElement
+                disabled={true}
+                value="#tests"
+              />
+            </span>
             <styles__Label>
               Feedback Type
             </styles__Label>
@@ -140,15 +147,17 @@ ShallowWrapper {
                 className=""
                 onClick={[Function]}
               >
-                Feature Request
+                Feature
               </li>
             </styles__Tabs>
             <styles__Label>
               Your Message
             </styles__Label>
             <styles__FormElement
-              innerRef={[Function]}
+              name="message"
+              onChange={[Function]}
               placeholder="Message..."
+              value=""
             />
             <styles__ImageUpload>
               <styles__UploadButton
@@ -189,6 +198,7 @@ ShallowWrapper {
             </div>
             <styles__SubmitButton
               className=""
+              disabled={true}
               onClick={[Function]}
             >
               Send Feedback
@@ -196,7 +206,7 @@ ShallowWrapper {
           </styles__Content>
         </styles__Container>
         <styles__Trigger
-          className="active"
+          className=""
           onClick={[Function]}
         >
           <span>
@@ -245,7 +255,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <styles__Container
-            className="fadeInUp active"
+            className="fadeInUp"
             innerRef={[Function]}
           >
             <styles__Header>
@@ -261,14 +271,19 @@ ShallowWrapper {
               </div>
             </styles__Header>
             <styles__Content>
-              <styles__Label>
-                Channel
-              </styles__Label>
-              <styles__FormElement
-                disabled={true}
-                hidden={false}
-                value="#feedback"
-              />
+              <span
+                id="channel"
+              >
+                <styles__Label
+                  htmlFor="channel"
+                >
+                  Channel
+                </styles__Label>
+                <styles__FormElement
+                  disabled={true}
+                  value="#tests"
+                />
+              </span>
               <styles__Label>
                 Feedback Type
               </styles__Label>
@@ -289,15 +304,17 @@ ShallowWrapper {
                   className=""
                   onClick={[Function]}
                 >
-                  Feature Request
+                  Feature
                 </li>
               </styles__Tabs>
               <styles__Label>
                 Your Message
               </styles__Label>
               <styles__FormElement
-                innerRef={[Function]}
+                name="message"
+                onChange={[Function]}
                 placeholder="Message..."
+                value=""
               />
               <styles__ImageUpload>
                 <styles__UploadButton
@@ -338,6 +355,7 @@ ShallowWrapper {
               </div>
               <styles__SubmitButton
                 className=""
+                disabled={true}
                 onClick={[Function]}
               >
                 Send Feedback
@@ -345,7 +363,7 @@ ShallowWrapper {
             </styles__Content>
           </styles__Container>,
           <styles__Trigger
-            className="active"
+            className=""
             onClick={[Function]}
           >
             <span>
@@ -354,7 +372,7 @@ ShallowWrapper {
             </span>
           </styles__Trigger>,
         ],
-        "className": "active",
+        "className": "",
         "innerRef": [Function],
       },
       "ref": null,
@@ -378,14 +396,19 @@ ShallowWrapper {
                 </div>
               </styles__Header>,
               <styles__Content>
-                <styles__Label>
-                  Channel
-                </styles__Label>
-                <styles__FormElement
-                  disabled={true}
-                  hidden={false}
-                  value="#feedback"
-                />
+                <span
+                  id="channel"
+                >
+                  <styles__Label
+                    htmlFor="channel"
+                  >
+                    Channel
+                  </styles__Label>
+                  <styles__FormElement
+                    disabled={true}
+                    value="#tests"
+                  />
+                </span>
                 <styles__Label>
                   Feedback Type
                 </styles__Label>
@@ -406,15 +429,17 @@ ShallowWrapper {
                     className=""
                     onClick={[Function]}
                   >
-                    Feature Request
+                    Feature
                   </li>
                 </styles__Tabs>
                 <styles__Label>
                   Your Message
                 </styles__Label>
                 <styles__FormElement
-                  innerRef={[Function]}
+                  name="message"
+                  onChange={[Function]}
                   placeholder="Message..."
+                  value=""
                 />
                 <styles__ImageUpload>
                   <styles__UploadButton
@@ -455,13 +480,14 @@ ShallowWrapper {
                 </div>
                 <styles__SubmitButton
                   className=""
+                  disabled={true}
                   onClick={[Function]}
                 >
                   Send Feedback
                 </styles__SubmitButton>
               </styles__Content>,
             ],
-            "className": "fadeInUp active",
+            "className": "fadeInUp",
             "innerRef": [Function],
           },
           "ref": null,
@@ -533,14 +559,19 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": Array [
-                  <styles__Label>
-                    Channel
-                  </styles__Label>,
-                  <styles__FormElement
-                    disabled={true}
-                    hidden={false}
-                    value="#feedback"
-                  />,
+                  <span
+                    id="channel"
+                  >
+                    <styles__Label
+                      htmlFor="channel"
+                    >
+                      Channel
+                    </styles__Label>
+                    <styles__FormElement
+                      disabled={true}
+                      value="#tests"
+                    />
+                  </span>,
                   <styles__Label>
                     Feedback Type
                   </styles__Label>,
@@ -561,15 +592,17 @@ ShallowWrapper {
                       className=""
                       onClick={[Function]}
                     >
-                      Feature Request
+                      Feature
                     </li>
                   </styles__Tabs>,
                   <styles__Label>
                     Your Message
                   </styles__Label>,
                   <styles__FormElement
-                    innerRef={[Function]}
+                    name="message"
+                    onChange={[Function]}
                     placeholder="Message..."
+                    value=""
                   />,
                   <styles__ImageUpload>
                     <styles__UploadButton
@@ -610,6 +643,7 @@ ShallowWrapper {
                   </div>,
                   <styles__SubmitButton
                     className=""
+                    disabled={true}
                     onClick={[Function]}
                   >
                     Send Feedback
@@ -621,26 +655,49 @@ ShallowWrapper {
                 Object {
                   "instance": null,
                   "key": undefined,
-                  "nodeType": "class",
+                  "nodeType": "host",
                   "props": Object {
-                    "children": "Channel",
+                    "children": Array [
+                      <styles__Label
+                        htmlFor="channel"
+                      >
+                        Channel
+                      </styles__Label>,
+                      <styles__FormElement
+                        disabled={true}
+                        value="#tests"
+                      />,
+                    ],
+                    "id": "channel",
                   },
                   "ref": null,
-                  "rendered": "Channel",
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "disabled": true,
-                    "hidden": false,
-                    "value": "#feedback",
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": "Channel",
+                        "htmlFor": "channel",
+                      },
+                      "ref": null,
+                      "rendered": "Channel",
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "disabled": true,
+                        "value": "#tests",
+                      },
+                      "ref": null,
+                      "rendered": null,
+                      "type": [Function],
+                    },
+                  ],
+                  "type": "span",
                 },
                 Object {
                   "instance": null,
@@ -675,7 +732,7 @@ ShallowWrapper {
                         className=""
                         onClick={[Function]}
                       >
-                        Feature Request
+                        Feature
                       </li>,
                     ],
                   },
@@ -712,12 +769,12 @@ ShallowWrapper {
                       "key": "feature",
                       "nodeType": "host",
                       "props": Object {
-                        "children": "Feature Request",
+                        "children": "Feature",
                         "className": "",
                         "onClick": [Function],
                       },
                       "ref": null,
-                      "rendered": "Feature Request",
+                      "rendered": "Feature",
                       "type": "li",
                     },
                   ],
@@ -739,8 +796,10 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "innerRef": [Function],
+                    "name": "message",
+                    "onChange": [Function],
                     "placeholder": "Message...",
+                    "value": "",
                   },
                   "ref": null,
                   "rendered": null,
@@ -864,6 +923,7 @@ ShallowWrapper {
                   "props": Object {
                     "children": "Send Feedback",
                     "className": "",
+                    "disabled": true,
                     "onClick": [Function],
                   },
                   "ref": null,
@@ -885,7 +945,7 @@ ShallowWrapper {
               <SlackIcon />
                Slack Feedback
             </span>,
-            "className": "active",
+            "className": "",
             "onClick": [Function],
           },
           "ref": null,
@@ -928,11 +988,11 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": <styles__SlackFeedback
-          className="active"
+          className=""
           innerRef={[Function]}
         >
           <styles__Container
-            className="fadeInUp active"
+            className="fadeInUp"
             innerRef={[Function]}
           >
             <styles__Header>
@@ -948,14 +1008,19 @@ ShallowWrapper {
               </div>
             </styles__Header>
             <styles__Content>
-              <styles__Label>
-                Channel
-              </styles__Label>
-              <styles__FormElement
-                disabled={true}
-                hidden={false}
-                value="#feedback"
-              />
+              <span
+                id="channel"
+              >
+                <styles__Label
+                  htmlFor="channel"
+                >
+                  Channel
+                </styles__Label>
+                <styles__FormElement
+                  disabled={true}
+                  value="#tests"
+                />
+              </span>
               <styles__Label>
                 Feedback Type
               </styles__Label>
@@ -976,15 +1041,17 @@ ShallowWrapper {
                   className=""
                   onClick={[Function]}
                 >
-                  Feature Request
+                  Feature
                 </li>
               </styles__Tabs>
               <styles__Label>
                 Your Message
               </styles__Label>
               <styles__FormElement
-                innerRef={[Function]}
+                name="message"
+                onChange={[Function]}
                 placeholder="Message..."
+                value=""
               />
               <styles__ImageUpload>
                 <styles__UploadButton
@@ -1025,6 +1092,7 @@ ShallowWrapper {
               </div>
               <styles__SubmitButton
                 className=""
+                disabled={true}
                 onClick={[Function]}
               >
                 Send Feedback
@@ -1032,7 +1100,7 @@ ShallowWrapper {
             </styles__Content>
           </styles__Container>
           <styles__Trigger
-            className="active"
+            className=""
             onClick={[Function]}
           >
             <span>
@@ -1081,7 +1149,7 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             <styles__Container
-              className="fadeInUp active"
+              className="fadeInUp"
               innerRef={[Function]}
             >
               <styles__Header>
@@ -1097,14 +1165,19 @@ ShallowWrapper {
                 </div>
               </styles__Header>
               <styles__Content>
-                <styles__Label>
-                  Channel
-                </styles__Label>
-                <styles__FormElement
-                  disabled={true}
-                  hidden={false}
-                  value="#feedback"
-                />
+                <span
+                  id="channel"
+                >
+                  <styles__Label
+                    htmlFor="channel"
+                  >
+                    Channel
+                  </styles__Label>
+                  <styles__FormElement
+                    disabled={true}
+                    value="#tests"
+                  />
+                </span>
                 <styles__Label>
                   Feedback Type
                 </styles__Label>
@@ -1125,15 +1198,17 @@ ShallowWrapper {
                     className=""
                     onClick={[Function]}
                   >
-                    Feature Request
+                    Feature
                   </li>
                 </styles__Tabs>
                 <styles__Label>
                   Your Message
                 </styles__Label>
                 <styles__FormElement
-                  innerRef={[Function]}
+                  name="message"
+                  onChange={[Function]}
                   placeholder="Message..."
+                  value=""
                 />
                 <styles__ImageUpload>
                   <styles__UploadButton
@@ -1174,6 +1249,7 @@ ShallowWrapper {
                 </div>
                 <styles__SubmitButton
                   className=""
+                  disabled={true}
                   onClick={[Function]}
                 >
                   Send Feedback
@@ -1181,7 +1257,7 @@ ShallowWrapper {
               </styles__Content>
             </styles__Container>,
             <styles__Trigger
-              className="active"
+              className=""
               onClick={[Function]}
             >
               <span>
@@ -1190,7 +1266,7 @@ ShallowWrapper {
               </span>
             </styles__Trigger>,
           ],
-          "className": "active",
+          "className": "",
           "innerRef": [Function],
         },
         "ref": null,
@@ -1214,14 +1290,19 @@ ShallowWrapper {
                   </div>
                 </styles__Header>,
                 <styles__Content>
-                  <styles__Label>
-                    Channel
-                  </styles__Label>
-                  <styles__FormElement
-                    disabled={true}
-                    hidden={false}
-                    value="#feedback"
-                  />
+                  <span
+                    id="channel"
+                  >
+                    <styles__Label
+                      htmlFor="channel"
+                    >
+                      Channel
+                    </styles__Label>
+                    <styles__FormElement
+                      disabled={true}
+                      value="#tests"
+                    />
+                  </span>
                   <styles__Label>
                     Feedback Type
                   </styles__Label>
@@ -1242,15 +1323,17 @@ ShallowWrapper {
                       className=""
                       onClick={[Function]}
                     >
-                      Feature Request
+                      Feature
                     </li>
                   </styles__Tabs>
                   <styles__Label>
                     Your Message
                   </styles__Label>
                   <styles__FormElement
-                    innerRef={[Function]}
+                    name="message"
+                    onChange={[Function]}
                     placeholder="Message..."
+                    value=""
                   />
                   <styles__ImageUpload>
                     <styles__UploadButton
@@ -1291,13 +1374,14 @@ ShallowWrapper {
                   </div>
                   <styles__SubmitButton
                     className=""
+                    disabled={true}
                     onClick={[Function]}
                   >
                     Send Feedback
                   </styles__SubmitButton>
                 </styles__Content>,
               ],
-              "className": "fadeInUp active",
+              "className": "fadeInUp",
               "innerRef": [Function],
             },
             "ref": null,
@@ -1369,14 +1453,19 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": Array [
-                    <styles__Label>
-                      Channel
-                    </styles__Label>,
-                    <styles__FormElement
-                      disabled={true}
-                      hidden={false}
-                      value="#feedback"
-                    />,
+                    <span
+                      id="channel"
+                    >
+                      <styles__Label
+                        htmlFor="channel"
+                      >
+                        Channel
+                      </styles__Label>
+                      <styles__FormElement
+                        disabled={true}
+                        value="#tests"
+                      />
+                    </span>,
                     <styles__Label>
                       Feedback Type
                     </styles__Label>,
@@ -1397,15 +1486,17 @@ ShallowWrapper {
                         className=""
                         onClick={[Function]}
                       >
-                        Feature Request
+                        Feature
                       </li>
                     </styles__Tabs>,
                     <styles__Label>
                       Your Message
                     </styles__Label>,
                     <styles__FormElement
-                      innerRef={[Function]}
+                      name="message"
+                      onChange={[Function]}
                       placeholder="Message..."
+                      value=""
                     />,
                     <styles__ImageUpload>
                       <styles__UploadButton
@@ -1446,6 +1537,7 @@ ShallowWrapper {
                     </div>,
                     <styles__SubmitButton
                       className=""
+                      disabled={true}
                       onClick={[Function]}
                     >
                       Send Feedback
@@ -1457,26 +1549,49 @@ ShallowWrapper {
                   Object {
                     "instance": null,
                     "key": undefined,
-                    "nodeType": "class",
+                    "nodeType": "host",
                     "props": Object {
-                      "children": "Channel",
+                      "children": Array [
+                        <styles__Label
+                          htmlFor="channel"
+                        >
+                          Channel
+                        </styles__Label>,
+                        <styles__FormElement
+                          disabled={true}
+                          value="#tests"
+                        />,
+                      ],
+                      "id": "channel",
                     },
                     "ref": null,
-                    "rendered": "Channel",
-                    "type": [Function],
-                  },
-                  Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "disabled": true,
-                      "hidden": false,
-                      "value": "#feedback",
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
+                    "rendered": Array [
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "children": "Channel",
+                          "htmlFor": "channel",
+                        },
+                        "ref": null,
+                        "rendered": "Channel",
+                        "type": [Function],
+                      },
+                      Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "disabled": true,
+                          "value": "#tests",
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                    ],
+                    "type": "span",
                   },
                   Object {
                     "instance": null,
@@ -1511,7 +1626,7 @@ ShallowWrapper {
                           className=""
                           onClick={[Function]}
                         >
-                          Feature Request
+                          Feature
                         </li>,
                       ],
                     },
@@ -1548,12 +1663,12 @@ ShallowWrapper {
                         "key": "feature",
                         "nodeType": "host",
                         "props": Object {
-                          "children": "Feature Request",
+                          "children": "Feature",
                           "className": "",
                           "onClick": [Function],
                         },
                         "ref": null,
-                        "rendered": "Feature Request",
+                        "rendered": "Feature",
                         "type": "li",
                       },
                     ],
@@ -1575,8 +1690,10 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "class",
                     "props": Object {
-                      "innerRef": [Function],
+                      "name": "message",
+                      "onChange": [Function],
                       "placeholder": "Message...",
+                      "value": "",
                     },
                     "ref": null,
                     "rendered": null,
@@ -1700,6 +1817,7 @@ ShallowWrapper {
                     "props": Object {
                       "children": "Send Feedback",
                       "className": "",
+                      "disabled": true,
                       "onClick": [Function],
                     },
                     "ref": null,
@@ -1721,7 +1839,7 @@ ShallowWrapper {
                 <SlackIcon />
                  Slack Feedback
               </span>,
-              "className": "active",
+              "className": "",
               "onClick": [Function],
             },
             "ref": null,
@@ -1757,6 +1875,108 @@ ShallowWrapper {
       },
       "type": [Function],
     },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`SlackFeedback should match the snapshots 2`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <SlackFeedback
+    buttonText={
+      <span>
+        <SlackIcon />
+         Slack Feedback
+      </span>
+    }
+    channel="#tests"
+    closeButton="close"
+    disabled={true}
+    emoji=":party:"
+    errorTimeout={8000}
+    feedbackTypes={
+      Array [
+        Object {
+          "label": "Bug",
+          "value": "bug",
+        },
+        Object {
+          "label": "Improvement",
+          "value": "improvement",
+        },
+        Object {
+          "label": "Feature",
+          "value": "feature",
+        },
+      ]
+    }
+    imageUploadText="Attach Image"
+    onClose={[MockFunction]}
+    onImageUpload={[MockFunction]}
+    onOpen={[MockFunction]}
+    onSubmit={[MockFunction]}
+    placeholder="Message..."
+    sentTimeout={5000}
+    showChannel={true}
+    theme={
+      Object {
+        "background": "#f4f4f7",
+        "border": "#d0d8e1",
+        "error": "#ec3c3c",
+        "font": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
+        "input": Object {
+          "background": "white",
+          "color": "#444444",
+          "fontSize": "14px",
+          "padding": "0.5em",
+        },
+        "loader": Object {
+          "color": "#ffffff",
+          "size": "4em",
+          "width": "3px",
+        },
+        "padding": "0.6em",
+        "primary": "#0088ff",
+        "secondary": "#222c4f",
+        "success": "#3dc86f",
+        "text": "#333333",
+        "trigger": Object {
+          "background": "#ffffff",
+          "border": "none",
+          "borderRadius": "30px",
+          "color": "#333333",
+          "fontSize": "13px",
+          "padding": "12px 1.25em",
+          "shadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
+        },
+      }
+    }
+    title={
+      <span>
+        <SlackIcon />
+         Send Feedback to Slack
+      </span>
+    }
+    user="unit-tester"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): null,
+  Symbol(enzyme.__nodes__): Array [
+    null,
   ],
   Symbol(enzyme.__options__): Object {
     "adapter": ReactSixteenAdapter {

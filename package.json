@@ -13,11 +13,12 @@
     "build": " NODE_ENV=production webpack --config webpack.config.prod.js",
     "lint": "xo",
     "lint-staged": "lint-staged",
-    "test": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
+    "test": "jest",
+    "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
     "prepublish": "npm run build"
   },
   "lint-staged": {
-    "src/*.js": ["prettier --single-quote --write", "git add", "xo", "test"]
+    "src/*.js": ["prettier --single-quote --write", "git add", "xo", "jest"]
   },
   "precommit": {
     "run": ["lint-staged"]
@@ -60,6 +61,8 @@
     "html-webpack-plugin": "^3.0.6",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^22.4.2",
+    "jest-environment-jsdom": "^23.0.0-alpha.0",
+    "jest-environment-jsdom-global": "^1.0.3",
     "lint-staged": "^7.0.0",
     "multer": "^1.2.0",
     "nodemon": "^1.17.2",
@@ -89,7 +92,8 @@
     "collectCoverage": true,
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
-    }
+    },
+    "testEnvironment": "jest-environment-jsdom-global"
   },
   "prettier": {
     "semi": true,
@@ -104,6 +108,7 @@
     "prettier": true,
     "space": true,
     "plugins": ["react", "jest"],
+    "globals": ["jsdom"],
     "rules": {
       "camelcase": [
         2,

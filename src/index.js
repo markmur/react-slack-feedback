@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import fetch from 'isomorphic-fetch';
-import SlackFeedback from './SlackFeedback';
+import SlackFeedback, { SlackIcon } from './SlackFeedback';
+
+console.log(SlackIcon);
 
 ReactDOM.render(
   <SlackFeedback
@@ -26,14 +28,14 @@ function sendToSlack(payload) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-  .then(res => res.json())
-  .then(res => {
-    if (res.status >= 200 && res.status < 300) {
-      this.sent();
-    } else {
-      this.error(res);
-    }
-  });
+    .then(res => res.json())
+    .then(res => {
+      if (res.status >= 200 && res.status < 300) {
+        this.sent();
+      } else {
+        this.error(res);
+      }
+    });
 }
 
 /**
@@ -50,14 +52,13 @@ function uploadImage(file) {
     method: 'POST',
     body: form
   })
-  .then(res => {
-    console.log(res.status, res.statusText);
-    if (res.status < 200 || res.status >= 300) {
-      this.uploadError(res.statusText);
-    }
+    .then(res => {
+      console.log(res.status, res.statusText);
+      if (res.status < 200 || res.status >= 300) {
+        this.uploadError(res.statusText);
+      }
 
-    return res.json();
-  })
-  .then(url => this.imageUploaded(url));
-
+      return res.json();
+    })
+    .then(url => this.imageUploaded(url));
 }

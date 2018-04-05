@@ -141,7 +141,13 @@ class SlackFeedback extends Component {
   }
 
   determineErrorType(err) {
-    if (!err || typeof err !== 'string') return 'Unexpected Error!';
+    if (!err) {
+      return 'Unexpected Error!';
+    }
+
+    if(typeof err === 'string') {
+      return err;
+    }
 
     switch(err.status) {
       case 400: return 'Bad Request!';

@@ -20,6 +20,7 @@ const propTypes = {
   imageUploadText: PropTypes.string,
   triggerStyles: PropTypes.object,
   contentStyles: PropTypes.object,
+  buttonStyles: PropTypes.object,
   showChannel: PropTypes.bool,
   title: PropTypes.node,
   closeButton: PropTypes.node
@@ -39,6 +40,7 @@ const defaultProps = {
   imageUploadText: 'Attach Image',
   triggerStyles: {},
   contentStyles: {},
+  buttonStyles: {},
   showChannel: true,
   title: (
     <span>
@@ -362,6 +364,7 @@ class SlackFeedback extends Component {
       <div
         ref="SlackFeedback"
         id="SlackFeedback"
+        style={this.props.buttonStyles}
         class={classNames('SlackFeedback', { active })}
       >
         <div

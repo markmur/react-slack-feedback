@@ -17,8 +17,7 @@ cloudinary.config({
 var jsonParser = bodyParser.json();
 
 // Send payload to Slack
-app.post('/slack', jsonParser, (req, res) => {
-
+app.post('/api/slack', jsonParser, (req, res) => {
   fetch(config.WEBHOOK_URL, {
     method: 'POST',
     body: JSON.stringify(req.body)
@@ -34,7 +33,7 @@ app.post('/slack', jsonParser, (req, res) => {
 });
 
 // Upload image to Cloudinary
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/api/upload', upload.single('image'), (req, res) => {
 
   var stream = cloudinary.uploader.upload_stream(result => {
     fs.unlink(req.file.path);

@@ -9,7 +9,7 @@ React component for gathering user feedback to send to slack.
 
 Install via NPM:
 
-```
+```bash
 npm install react-slack-feedback --save
 ```
 
@@ -84,15 +84,18 @@ function uploadImage(image) {
 ```
 
 ### Props
-| Prop     | Type   | Default      | Required      | Description |
-|----------|--------|--------------|:-------------:|-------------|
-| onSubmit | function |    | required | A JSON payload object will be returned when the user submits the form. |
-| onImageUpload | function |    |  | Method that will be called with a file argument |
-| channel       | string |   |  | The Slack channel to send messages. The default webhook channel will be used if none is provided. |
-| user          | string | "Unknown User" |               | The logged in user's name (if applicable) |
-| emoji         | string | 🗣 |          | The emoji that will show in place of the users avatar on Slack |
-| buttonText    | string | "Slack Feedback" |          | The text for the trigger button |
-| disabled    | boolean | false |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
+| Prop          | Type     | Default          | Required | Description                                                                                          |
+| ------------- | -------- | ---------------- |:--------:| ---------------------------------------------------------------------------------------------------- |
+| onSubmit      | function |                  | required | A JSON payload object will be returned when the user submits the form.                               |
+| onImageUpload | function |                  |          | Method that will be called with a file argument                                                      |
+| channel       | string   |                  |          | The Slack channel to send messages. The default webhook channel will be used if none is provided.    |
+| user          | string   | "Unknown User"   |          | The logged in user's name (if applicable)                                                            |
+| emoji         | string   | 🗣                |          | The emoji that will show in place of the users avatar on Slack                                       |
+| buttonText    | string   | "Slack Feedback" |          | The text for the trigger button                                                                      |
+| disabled      | boolean  | false            |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
+| triggerStyles | object   | {}               |          | Allows override of css `SlackFeedback--trigger`, see `src/SlackFeedback.scss`                        |
+| contentStyles | object   | {}               |          | Allows override of css `SlackFeedback--container`, see `src/SlackFeedback.scss`                      |
+| buttonStyles  | object   | {}               |          | Allows override of css `SlackFeedback`, see `src/SlackFeedback.scss`, base positioning               |
 
 > NOTE:
 All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback'
@@ -126,10 +129,16 @@ npm install
 3. Create an ENV file with your `WEBHOOK_URL`
 
 `./env.js`
-```
+
+```js
 module.exports = {
-  WEBHOOK_URL: 'YOUR_SLACK_WEBHOOK_URL'
-};
+  WEBHOOK_URL: 'YOUR_SLACK_WEBHOOK_URL',
+  CLOUDINARY: {
+    CLOUD_NAME: 'YOUR_CLOUDINARY_NAME',
+    API_KEY: 'YOUR_CLOUDINARY_NAME_API_KEY',
+    API_SECRET:'YOUR_CLOUDINARY_API_SECRET'
+  }
+}
 ```
 
 4. Run the `Procfile` with `foreman`:

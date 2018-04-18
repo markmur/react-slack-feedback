@@ -23,7 +23,8 @@ const propTypes = {
   buttonStyles: PropTypes.object,
   showChannel: PropTypes.bool,
   title: PropTypes.node,
-  closeButton: PropTypes.node
+  closeButton: PropTypes.node,
+  headerPass: PropTypes.object
 };
 
 const defaultProps = {
@@ -47,7 +48,8 @@ const defaultProps = {
       <SlackIcon /> Send Feedback to Slack
     </span>
   ),
-  closeButton: 'close'
+  closeButton: 'close',
+  headerPass: {}
 };
 
 const types = [
@@ -226,7 +228,7 @@ class SlackFeedback extends Component {
     if (image.url) payload.attachments[0].image_url = image.url;
 
     // Submit the payload
-    this.props.onSubmit.call(this, payload);
+    this.props.onSubmit.call(this, payload, this.props.headerPass);
   }
 
   attachImage(event) {

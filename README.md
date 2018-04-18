@@ -41,9 +41,10 @@ import SlackFeedback from 'react-slack-feedback';
 /**
  * Send the Slack message to your server
  * @param  {Object} payload
+ * @param  {Object} headerPass
  * @return {null}
  */
-function sendToSlack(payload) {
+function sendToSlack(payload, headerPass) {
   $.post('/api/slack', {
     data: payload
   }).then(res => {
@@ -96,6 +97,7 @@ function uploadImage(image) {
 | triggerStyles | object   | {}               |          | Allows override of css `SlackFeedback--trigger`, see `src/SlackFeedback.scss`                        |
 | contentStyles | object   | {}               |          | Allows override of css `SlackFeedback--container`, see `src/SlackFeedback.scss`                      |
 | buttonStyles  | object   | {}               |          | Allows override of css `SlackFeedback`, see `src/SlackFeedback.scss`, base positioning               |
+| headerPass    | object   | {}               |          | Items to be __*added*__ to the http headers such as session or auth tokens                                 |
 
 > NOTE:
 All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback'

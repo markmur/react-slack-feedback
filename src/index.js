@@ -18,12 +18,14 @@ ReactDOM.render(
  * Send payload to server
  * @method sendToSlack
  * @param  {Object} payload
+ * @param  {Object} headerPass
  * @return {null}
  */
-function sendToSlack(payload) {
+function sendToSlack(payload, headerPass) {
+  headerPass['Content-Type'] = 'application/json';
   fetch('/api/slack', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: headerPass,
     body: JSON.stringify(payload)
   })
     .then(res => res.json())

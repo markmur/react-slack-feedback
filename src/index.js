@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import fetch from 'isomorphic-fetch';
 import SlackFeedback, { SlackIcon } from './SlackFeedback';
 
-console.log(SlackIcon);
-
 ReactDOM.render(
   <SlackFeedback
     onSubmit={sendToSlack}

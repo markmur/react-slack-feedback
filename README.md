@@ -65,7 +65,7 @@ function sendToSlack(payload, headerPass) {
  * @param  {File} image
  * @return {null}
  */
-function uploadImage(image) {
+function uploadImage(image, headerPass) {
   var form = new FormData();
   form.append('image', image);
 

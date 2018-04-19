@@ -47,12 +47,17 @@ function sendToSlack(payload, headerPass) {
  * @param  {File} file
  * @return {null}
  */
-function uploadImage(file) {
+function uploadImage(file, headerPass) {
+  const fullHeader = Object.assign(
+    {}, // no header in default
+    headerPass,
+  );
   var form = new FormData();
   form.append('image', file);
 
   fetch('/api/upload', {
     method: 'POST',
+    headers: fullHeader,
     body: form
   })
     .then(res => {

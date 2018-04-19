@@ -243,7 +243,7 @@ class SlackFeedback extends Component {
         uploadingImage: true
       },
       () => {
-        this.props.onImageUpload.call(this, file);
+        this.props.onImageUpload.call(this, file, this.props.headerPass);
       }
     );
   }

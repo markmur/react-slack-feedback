@@ -22,10 +22,13 @@ ReactDOM.render(
  * @return {null}
  */
 function sendToSlack(payload, headerPass) {
-  headerPass['Content-Type'] = 'application/json';
+  const fullHeader = Object.assign(
+    { 'Content-Type': 'application/json' },
+    headerPass,
+  );
   fetch('/api/slack', {
     method: 'POST',
-    headers: headerPass,
+    headers: fullHeader,
     body: JSON.stringify(payload)
   })
     .then(res => res.json())

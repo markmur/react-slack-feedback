@@ -113,6 +113,13 @@ All slack channels are lowercase. The string should be identical to the channel 
 
 ___
 
+### Translation
+
+This module is translated via react-i18next. Please, see react-i18next's documentation for more information.
+
+> NOTE: 
+If you are using the front-end component <SlackFeedback /> separately (i.e., including it in your own project), make sure you've got i18next & i18next-react modules in your packages.json. Follow i18next-react's documentation for setting-up i18n.js. 
+
 ### Running Locally
 
 To run this module locally:

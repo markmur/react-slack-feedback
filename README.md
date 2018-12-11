@@ -92,6 +92,9 @@ function uploadImage(image) {
 | user          | string   | "Unknown User"   |          | The logged in user's name (if applicable)                                                            |
 | emoji         | string   | 🗣                |          | The emoji that will show in place of the users avatar on Slack                                       |
 | buttonText    | string   | "Slack Feedback" |          | The text for the trigger button                                                                      |
+| imageUploadText | string   | 'Attach Image' |          | The text for the attach image button                       |
+| title | string   | 'Send Feedback to Slack'               |          | The text for the title of the component                      |
+| closeButton | string   | 'close'               |          | The text for the close link                    |
 | disabled      | boolean  | false            |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
 | triggerStyles | object   | {}               |          | Allows override of css `SlackFeedback--trigger`, see `src/SlackFeedback.scss`                        |
 | contentStyles | object   | {}               |          | Allows override of css `SlackFeedback--container`, see `src/SlackFeedback.scss`                      |

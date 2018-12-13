@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// translation
-import { withNamespaces } from 'react-i18next';
 
 // classnames
 import classNames from 'classnames';
@@ -49,7 +47,22 @@ const defaultProps = {
       Send Feedback to Slack
     </span>
   ),
-  closeButton: 'close'
+  closeButton: 'close',
+  translations: {
+    feedback: {
+      bug: 'Bug',
+      feature: 'Feature',
+      improvement: 'Improvement',
+      send: 'Send Feedback',
+      sent: 'Sent!',
+      sending: 'Sending Feedback...',
+      channel: 'Channel',
+      type: 'Feedback Type',
+      messageLabel: 'Your Message',
+      messagePlaceholder: 'Message...',
+      sendUrl: 'Send URL with Feedback'
+    }
+  }
 };
 
 const types = [
@@ -331,7 +344,7 @@ class SlackFeedback extends Component {
           <div class="SlackFeedback--loader" />
         ) : (
           <div class="SlackFeedback--preview-overlay">
-            <span onClick={this.removeImage}>{t('Remove')}</span>
+            <span onClick={this.removeImage}>{this.props.translations.feedback.remove}</span>
           </div>
         )}
       </div>
@@ -339,8 +352,6 @@ class SlackFeedback extends Component {
   }
 
   render() {
-    // translation function
-    const t = this.props.t;
 
     var {
       active,
@@ -356,10 +367,10 @@ class SlackFeedback extends Component {
     // do not show channel UI if no channel defined
     var showChannel = !!this.props.channel && this.props.showChannel;
 
-    var submitText = t('Send Feedback');
+    var submitText = this.props.translations.feedback.send;
 
-    if (sent) submitText = t('Sent!');
-    if (sending && !sent) submitText = t('Sending Feedback...');
+    if (sent) submitText = this.props.translations.feedback.sent;
+    if (sending && !sent) submitText = this.props.translations.feedback.sending;
     if (error) submitText = error;
 
     // Return nothing if the component has been disabled
@@ -379,13 +390,13 @@ class SlackFeedback extends Component {
         >
           <div class="SlackFeedback--header">
           <SlackIcon /> {this.props.title}
-            <div class="closeFeedback" onClick={this.close}>
+            <div class="close" onClick={this.close}>
               {this.props.closeButton}
             </div>
           </div>
 
           <div class="SlackFeedback--content">
-            {showChannel && <label class="SlackFeedback--label">{t('Channel')}</label>}
+            {showChannel && <label class="SlackFeedback--label">{this.props.translations.feedback.channel}</label>}
             <input
               class="SlackFeedback--input"
               value={this.props.channel}
@@ -393,7 +404,7 @@ class SlackFeedback extends Component {
               hidden={!showChannel}
             />
 
-            <label class="SlackFeedback--label">{t('Feedback Type')}</label>
+            <label class="SlackFeedback--label">{this.props.translations.feedback.type}</label>
             <ul class="SlackFeedback--tabs">
               <li
                 onClick={this.selectType}
@@ -401,7 +412,7 @@ class SlackFeedback extends Component {
                   selected: selectedType === 'Bug'
                 })}
               >
-                {t('Bug')}
+                {this.props.translations.feedback.bug}
               </li>
               <li
                 onClick={this.selectType}
@@ -409,7 +420,7 @@ class SlackFeedback extends Component {
                   selected: selectedType === 'Feature'
                 })}
               >
-                {t('Feature')}
+                {this.props.translations.feedback.feature}
               </li>
               <li
                 onClick={this.selectType}
@@ -417,15 +428,15 @@ class SlackFeedback extends Component {
                   selected: selectedType === 'Improvement'
                 })}
               >
-                {t('Improvement')}
+                {this.props.translations.feedback.improvement}
               </li>
             </ul>
 
-            <label class="SlackFeedback--label">{t('Your Message')}</label>
+            <label class="SlackFeedback--label">{this.props.translations.feedback.messageLabel}</label>
             <textarea
               ref="message"
               class="SlackFeedback--textarea"
-              placeholder={t('Message...')}
+              placeholder={this.props.translations.messagePlaceholder}
             />
 
             {/* Only render the image upload if there's callback available  */}
@@ -440,7 +451,7 @@ class SlackFeedback extends Component {
                 onChange={this.toggleSendURL}
               />
               <label for="sendURL" class="SlackFeedback--checkbox-label">
-                {t('Send URL with Feedback')}
+                {this.props.translations.feedback.sendUrl}
               </label>
             </div>
 
@@ -474,4 +485,4 @@ SlackFeedback.defaultProps = defaultProps;
 
 export { SlackIcon };
 
-export default withNamespaces()(SlackFeedback);
+export default SlackFeedback;

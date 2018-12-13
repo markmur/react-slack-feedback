@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import fetch from 'isomorphic-fetch';
 import SlackFeedback from './SlackFeedback';
-// translation
-import './i18n';
 
 ReactDOM.render(
   <SlackFeedback

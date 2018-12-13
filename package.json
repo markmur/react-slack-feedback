@@ -57,9 +57,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "es6-promise": "^3.2.1",
-    "i18next": "^12.1.0",
-    "prop-types": "^15.5.10",
-    "react-i18next": "^8.3.8"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^0.14 || ^15.0.0-rc || ^15.0",

@@ -92,13 +92,14 @@ function uploadImage(image) {
 | user          | string   | "Unknown User"   |          | The logged in user's name (if applicable)                                                            |
 | emoji         | string   | 🗣                |          | The emoji that will show in place of the users avatar on Slack                                       |
 | buttonText    | string   | "Slack Feedback" |          | The text for the trigger button                                                                      |
-| imageUploadText | string   | 'Attach Image' |          | The text for the attach image button                       |
-| title | string   | 'Send Feedback to Slack'               |          | The text for the title of the component                      |
-| closeButton | string   | 'close'               |          | The text for the close link                    |
+| imageUploadText | string   | "Attach Image" |          | The text for the attach image button                       |
+| title | string   | "Send Feedback to Slack"               |          | The text for the title of the component                      |
+| closeButton | string   | "close"               |          | The text for the close link                    |
 | disabled      | boolean  | false            |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
 | triggerStyles | object   | {}               |          | Allows override of css `SlackFeedback--trigger`, see `src/SlackFeedback.scss`                        |
 | contentStyles | object   | {}               |          | Allows override of css `SlackFeedback--container`, see `src/SlackFeedback.scss`                      |
 | buttonStyles  | object   | {}               |          | Allows override of css `SlackFeedback`, see `src/SlackFeedback.scss`, base positioning               |
+| translations  | object   | {}               |          | Allows for translation of default messages (see Translation section below)               |
 
 > NOTE:
 All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback'
@@ -115,10 +116,24 @@ ___
 
 ### Translation
 
-This module is translated via react-i18next. Please, see react-i18next's documentation for more information.
+This module is translated by supplying the translation object via props (see props above).
 
-> NOTE: 
-If you are using the front-end component <SlackFeedback /> separately (i.e., including it in your own project), make sure you've got i18next & i18next-react modules in your packages.json. Follow i18next-react's documentation for setting-up i18n.js. 
+Default translation object:
+```
+feedback: {
+  bug: 'Bug',
+  feature: 'Feature',
+  improvement: 'Improvement',
+  send: 'Send Feedback',
+  sent: 'Sent!',
+  sending: 'Sending Feedback...',
+  channel: 'Channel',
+  type: 'Feedback Type',
+  messageLabel: 'Your Message',
+  messagePlaceholder: 'Message...',
+  sendUrl: 'Send URL with Feedback'
+}
+```
 
 ### Running Locally
 

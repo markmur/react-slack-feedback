@@ -49,19 +49,17 @@ const defaultProps = {
   ),
   closeButton: 'close',
   translations: {
-    feedback: {
-      bug: 'Bug',
-      feature: 'Feature',
-      improvement: 'Improvement',
-      send: 'Send Feedback',
-      sent: 'Sent!',
-      sending: 'Sending Feedback...',
-      channel: 'Channel',
-      type: 'Feedback Type',
-      messageLabel: 'Your Message',
-      messagePlaceholder: 'Message...',
-      sendUrl: 'Send URL with Feedback'
-    }
+    bug: 'Bug',
+    feature: 'Feature',
+    improvement: 'Improvement',
+    send: 'Send Feedback',
+    sent: 'Sent!',
+    sending: 'Sending Feedback...',
+    channel: 'Channel',
+    type: 'Feedback Type',
+    messageLabel: 'Your Message',
+    messagePlaceholder: 'Message...',
+    sendUrl: 'Send URL with Feedback'
   }
 };
 
@@ -344,7 +342,7 @@ class SlackFeedback extends Component {
           <div class="SlackFeedback--loader" />
         ) : (
           <div class="SlackFeedback--preview-overlay">
-            <span onClick={this.removeImage}>{this.props.translations.feedback.remove}</span>
+            <span onClick={this.removeImage}>{this.props.translations.remove}</span>
           </div>
         )}
       </div>
@@ -367,10 +365,10 @@ class SlackFeedback extends Component {
     // do not show channel UI if no channel defined
     var showChannel = !!this.props.channel && this.props.showChannel;
 
-    var submitText = this.props.translations.feedback.send;
+    var submitText = this.props.translations.send;
 
-    if (sent) submitText = this.props.translations.feedback.sent;
-    if (sending && !sent) submitText = this.props.translations.feedback.sending;
+    if (sent) submitText = this.props.translations.sent;
+    if (sending && !sent) submitText = this.props.translations.sending;
     if (error) submitText = error;
 
     // Return nothing if the component has been disabled
@@ -396,7 +394,7 @@ class SlackFeedback extends Component {
           </div>
 
           <div class="SlackFeedback--content">
-            {showChannel && <label class="SlackFeedback--label">{this.props.translations.feedback.channel}</label>}
+            {showChannel && <label class="SlackFeedback--label">{this.props.translations.channel}</label>}
             <input
               class="SlackFeedback--input"
               value={this.props.channel}
@@ -404,7 +402,7 @@ class SlackFeedback extends Component {
               hidden={!showChannel}
             />
 
-            <label class="SlackFeedback--label">{this.props.translations.feedback.type}</label>
+            <label class="SlackFeedback--label">{this.props.translations.type}</label>
             <ul class="SlackFeedback--tabs">
               <li
                 onClick={this.selectType}
@@ -412,7 +410,7 @@ class SlackFeedback extends Component {
                   selected: selectedType === 'Bug'
                 })}
               >
-                {this.props.translations.feedback.bug}
+                {this.props.translations.bug}
               </li>
               <li
                 onClick={this.selectType}
@@ -420,7 +418,7 @@ class SlackFeedback extends Component {
                   selected: selectedType === 'Feature'
                 })}
               >
-                {this.props.translations.feedback.feature}
+                {this.props.translations.feature}
               </li>
               <li
                 onClick={this.selectType}
@@ -428,11 +426,11 @@ class SlackFeedback extends Component {
                   selected: selectedType === 'Improvement'
                 })}
               >
-                {this.props.translations.feedback.improvement}
+                {this.props.translations.improvement}
               </li>
             </ul>
 
-            <label class="SlackFeedback--label">{this.props.translations.feedback.messageLabel}</label>
+            <label class="SlackFeedback--label">{this.props.translations.messageLabel}</label>
             <textarea
               ref="message"
               class="SlackFeedback--textarea"
@@ -451,7 +449,7 @@ class SlackFeedback extends Component {
                 onChange={this.toggleSendURL}
               />
               <label for="sendURL" class="SlackFeedback--checkbox-label">
-                {this.props.translations.feedback.sendUrl}
+                {this.props.translations.sendUrl}
               </label>
             </div>
 

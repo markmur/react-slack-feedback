@@ -120,7 +120,7 @@ This module is translated by supplying the translation object via props (see pro
 
 Default translation object:
 ```
-feedback: {
+{
   bug: 'Bug',
   feature: 'Feature',
   improvement: 'Improvement',

@@ -33,7 +33,7 @@ const defaultProps = {
   emoji: ':speaking_head_in_silhouette:',
   buttonText: (
     <span>
-      Slack Feedback
+      <SlackIcon /> Slack Feedback
     </span>
   ),
   disableImageUpload: false,
@@ -44,7 +44,7 @@ const defaultProps = {
   showChannel: true,
   title: (
     <span>
-      Send Feedback to Slack
+      <SlackIcon /> Send Feedback to Slack
     </span>
   ),
   closeButton: 'close',
@@ -471,7 +471,7 @@ class SlackFeedback extends Component {
           class={classNames('SlackFeedback--trigger', { active })}
           onClick={this.toggle}
         >
-          <SlackIcon /> {this.props.buttonText}
+          {this.props.buttonText}
         </div>
       </div>
     );

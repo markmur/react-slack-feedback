@@ -53,7 +53,6 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^23.0.0-alpha.0",
-    "babel-loader": "^7.1.4",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-react": "^1.0.0",
     "babel-plugin-styled-components": "^1.5.1",
@@ -79,10 +78,8 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.12.4",
     "express": "^4.14.0",
-    "file-loader": "^0.9.0",
     "foreman": "^2.0.0",
     "fs-extra": "^7.0.1",
-    "html-webpack-plugin": "^3.2.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^22.4.2",
     "jest-environment-jsdom": "^23.0.0-alpha.0",
@@ -104,8 +101,6 @@
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-terser": "^4.0.4",
-    "webpack": "^4.29.3",
-    "webpack-cli": "^2.0.12",
     "xo": "^0.20.3"
   },
   "jest": {

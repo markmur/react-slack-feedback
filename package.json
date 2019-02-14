@@ -1,33 +1,52 @@
 {
   "name": "react-slack-feedback",
-  "version": "1.1.2",
-  "description":
-    "React component for gathering user feedback to send to slack.",
-  "main": "lib/SlackFeedback.js",
-  "author":
-    "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
+  "version": "1.1.4",
+  "description": "React component for gathering user feedback to send to slack.",
+  "main": "dist/index.js",
+  "author": "Mark Murray <mark.murray.ie@gmail.com> (https://github.com/markmur)",
   "license": "MIT",
   "scripts": {
-    "start": "node webpack-dev-server",
-    "start:server": "node server.js",
     "build": " NODE_ENV=production webpack --config webpack.config.prod.js",
-    "lint": "xo",
     "lint-staged": "lint-staged",
-    "test": "jest",
+    "lint": "xo",
+    "start:client": "parcel demo/index.html",
+    "start:server": "nodemon demo/server --watch demo/server.js",
+    "start": "concurrently -n client,server 'yarn start:client' 'yarn start:server'",
     "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
-    "prepublish": "npm run build"
+    "test": "jest"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash.merge": "^4.6.1",
+    "prop-types": "^15.7.1",
+    "styled-components": "^4.1.3"
+  },
+  "peerDependencies": {
+    "react": "^0.14 || >=15",
+    "react-dom": "^0.14 || >=15"
   },
   "lint-staged": {
-    "src/*.js": ["prettier --single-quote --write", "git add", "xo", "jest"]
+    "src/*.js": [
+      "prettier --single-quote --write",
+      "git add",
+      "xo",
+      "jest"
+    ]
   },
   "precommit": {
-    "run": ["lint-staged"]
+    "run": [
+      "lint-staged"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/markmur/react-slack-feedback.git"
   },
-  "keywords": ["react", "slack", "feedback"],
+  "keywords": [
+    "react",
+    "slack",
+    "feedback"
+  ],
   "bugs": {
     "url": "https://github.com/markmur/react-slack-feedback/issues"
   },
@@ -45,47 +64,44 @@
     "babel-preset-stage-1": "^6.24.1",
     "body-parser": "^1.15.2",
     "codecov": "^3.0.0",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "cssnano": "^3.7.3",
     "danger": "^3.2.0",
     "danger-plugin-jest": "^1.1.0",
+    "dotenv": "^6.2.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "4",
-    "eslint-config-xo-react": "^0.16.0",
-    "eslint-plugin-jest": "^21.15.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-config-xo-react": "^0.18.0",
+    "eslint-plugin-jest": "^22.2.2",
     "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react": "^7.12.4",
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "foreman": "^2.0.0",
-    "html-webpack-plugin": "^3.0.6",
+    "fs-extra": "^7.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^22.4.2",
     "jest-environment-jsdom": "^23.0.0-alpha.0",
     "jest-environment-jsdom-global": "^1.0.3",
-    "lint-staged": "^7.0.0",
+    "lint-staged": "^8.1.3",
     "multer": "^1.2.0",
-    "nodemon": "^1.17.2",
+    "nodemon": "^1.18.10",
+    "parcel-bundler": "^1.11.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.11.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "prettier": "^1.16.4",
+    "prettier-eslint": "^8.8.2",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "regenerator-runtime": "^0.11.1",
+    "rimraf": "^2.6.3",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
     "xo": "^0.20.3"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "es6-promise": "^3.2.1",
-    "lodash.merge": "^4.6.1",
-    "prop-types": "^15.5.10",
-    "styled-components": "^3.2.3"
-  },
-  "peerDependencies": {
-    "react": "^0.14 || ^15 || ^16",
-    "react-dom": "^0.14 || ^15 || ^16"
   },
   "jest": {
     "coverageDirectory": "./coverage/",
@@ -96,26 +112,28 @@
     "testEnvironment": "jest-environment-jsdom-global"
   },
   "prettier": {
-    "semi": true,
+    "semi": false,
     "singleQuote": true,
     "trailingComma": "none",
     "bracketSpacing": true
   },
   "xo": {
     "parser": "babel-eslint",
-    "extends": "xo-react",
-    "envs": ["browser", "node", "jest/globals"],
+    "envs": [
+      "browser",
+      "node",
+      "jest/globals"
+    ],
     "prettier": true,
     "space": true,
-    "plugins": ["react", "jest"],
-    "globals": ["jsdom"],
     "rules": {
-      "camelcase": [
-        2,
-        {
-          "properties": "never"
-        }
-      ]
-    }
+      "camelcase": 0,
+      "import/prefer-default-export": 0
+    },
+    "extends": "xo-react",
+    "plugins": [
+      "react",
+      "jest"
+    ]
   }
 }

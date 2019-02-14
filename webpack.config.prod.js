@@ -5,9 +5,9 @@ module.exports = {
   devtool: 'source-map',
   entry: ['./src/feedback.js'],
   output: {
-    path: path.join(__dirname, 'lib'),
-    publicPath: path.join(__dirname, 'lib'),
-    filename: 'SlackFeedback.js',
+    path: path.join(__dirname, 'dist'),
+    publicPath: path.join(__dirname, 'dist'),
+    filename: 'index.js',
     library: 'react-slack-feedback',
     libraryTarget: 'umd'
   },
@@ -28,22 +28,9 @@ module.exports = {
     ]
   },
 
-  externals: [
-    {
-      react: {
-        root: 'React',
-        commonjs2: 'react',
-        commonjs: 'react',
-        amd: 'react'
-      }
-    },
-    {
-      'react-dom': {
-        root: 'ReactDOM',
-        commonjs2: 'react-dom',
-        commonjs: 'react-dom',
-        amd: 'react-dom'
-      }
-    }
-  ]
+  externals: {
+    react: 'react',
+    'react-dom': 'react-dom',
+    'prop-types': 'prop-types'
+  }
 };

@@ -9,10 +9,14 @@ React component for gathering user feedback to send to slack.
 
 ### Usage
 
-Install via NPM:
+Install with `yarn` or `npm`:
 
-```
+```bash
+# npm
 npm install react-slack-feedback
+
+# yarn
+yarn add react-slack-feedback
 ```
 
 To use the component, import it and render in your app's global component,
@@ -25,42 +29,38 @@ or individual components (if you don't want it on every page).
 > the request for you.
 
 ```js
-import SlackFeedback from 'react-slack-feedback';
+import SlackFeedback from 'react-slack-feedback'
 
-<SlackFeedback
-  // NOTE: The `onSubmit` method is called with the SlackFeedback context which
-  // allows you to call `this.sent()` in the sendToSlack function. If you use
-  // `payload => sendToSlack(payload)` or `sendToSlack.bind(this)` then you must
-  // use a ref to call the sent method. i.e `this.refs.SlackFeedback.sent();`
-  onSubmit={sendToSlack}
-  onImageUpload={uploadImage}
-  channel="#general"
-  disabled={true} // completely disable the component (default = false)
-  user="Users Name" // The logged in user (default = "Unknown User")
-  emoji=":bug:" // default = :speaking_head_in_silhouette:
-/>;
-
-/**
- * Send the Slack message to your server
- * @param  {Object} payload
- * @return {null}
- */
-function sendToSlack(payload) {
-  $.post('/api/slack', {
-    data: payload
-  }).then(
+const sendMessageToSlack = (payload = {}) =>
+  fetch('http://localhost:8080/api/slack', {
+    method: 'POST',
+    data: JSON.stringify(payload)
+  })).then(
     res => {
       // The `onSubmit` prop function is called with the SlackFeedback component
       // context (this.props.onSubmit.call(this, payload)), meaning the component
       // methods are available from this function. You should call the `sent`
       // method if the request was successfully sent to Slack.
-      this.sent();
-    },
-    error => {
-      this.error(error.statusText);
-    }
-  );
-}
+      this.sent()
+    })
+    .catch(error => this.error(error.statusText))
+  )
+
+ReactDOM.render(
+  <SlackFeedback
+    // NOTE: The `onSubmit` method is called with the SlackFeedback context which
+    // allows you to call `this.sent()` in the sendToSlack function. If you use
+    // `payload => sendToSlack(payload)` or `sendToSlack.bind(this)` then you must
+    // use a ref to call the sent method. i.e `this.refs.SlackFeedback.sent();`
+    disabled // completely disable the component (default = false)
+    channel="#general"
+    user="Username" // The logged in user (default = "Unknown User")
+    emoji=":bug:" // default = :speaking_head_in_silhouette:
+    onImageUpload={uploadImage}
+    onSubmit={sendMessageToSlack}
+  />,
+  document.getElementById('root')
+)
 
 /**
  * Upload image to server
@@ -69,8 +69,8 @@ function sendToSlack(payload) {
  * @return {null}
  */
 function uploadImage(image) {
-  var form = new FormData();
-  form.append('image', image);
+  var form = new FormData()
+  form.append('image', image)
 
   $.post('/api/upload', { data: form }).then(
     // It is important that you call the `imageUploaded` method or
@@ -81,7 +81,7 @@ function uploadImage(image) {
     // 'imageUploaded' and 'error' methods
     url => this.imageUploaded(url),
     err => this.error(err)
-  );
+  )
 }
 ```
 
@@ -124,24 +124,21 @@ git clone https://github.com/markmur/react-slack-feedback.git
 2.  Install the node modules
 
 ```bash
-npm install
+yarn
 ```
 
-3.  Create an ENV file with your `WEBHOOK_URL`
+3.  Create a ENV file with your `WEBHOOK_URL`
 
-`./env.js`
+`.env`
 
-```
-module.exports = {
-  WEBHOOK_URL: 'YOUR_SLACK_WEBHOOK_URL'
-};
+```js
+WEBHOOK_URL = 'YOUR_SLACK_WEBHOOK_URL'
 ```
 
-4.  Run the `Procfile` with `foreman`:
+4.  Run the demo:
 
 ```bash
-nf start
+yarn start
 ```
 
-This will start the `webpack-dev-server` and an `express` backend server.
-The component will be available at http://localhost:3000
+This will bundle the client with `parcel` and startup a simple `express` server.

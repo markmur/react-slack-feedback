@@ -88,3 +88,4 @@ env.js
 
 # DynamoDB Local files
 .dynamodb/
+coverage

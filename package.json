@@ -29,13 +29,13 @@
     "src/*.js": [
       "prettier --single-quote --write",
       "git add",
-      "xo",
-      "jest"
+      "xo"
     ]
   },
   "precommit": {
     "run": [
-      "lint-staged"
+      "lint-staged",
+      "test"
     ]
   },
   "repository": {

@@ -1,9 +1,9 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
-  entry: ['./src/feedback.js'],
+  entry: ['./src/slack-feedback.js'],
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: path.join(__dirname, 'dist'),
@@ -33,4 +33,4 @@ module.exports = {
     'react-dom': 'react-dom',
     'prop-types': 'prop-types'
   }
-};
+}

@@ -6,9 +6,9 @@ cache:
 notifications:
   email: false
 node_js:
-  - '8'
+  - '10'
 before_script:
-- yarn danger ci
+  - yarn danger ci
 script:
   - yarn run test:ci
   - yarn run build

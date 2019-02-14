@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from 'styled-components'
 import { get } from './utils'
 
-const theme = (key, fallback = 'inherit') => props =>
+const theme = (key, fallback = 'inherit') => (props = {}) =>
   get(props.theme, key, fallback)
 
 const resets = css`
@@ -336,17 +336,19 @@ const SubmitButton = styled.button`
   &[disabled],
   &.disabled {
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.8;
   }
 
   &.sent {
     background: ${theme('colors.success')};
     pointer-events: none;
+    opacity: 1;
   }
 
   &.error {
     background: ${theme('colors.error')};
     pointer-events: none;
+    opacity: 1;
   }
 
   &:hover {

@@ -7,42 +7,75 @@ import SlackIcon from './slack-icon'
 import defaultTheme from './themes/default'
 import SlackFeedback from './slack-feedback'
 
+import translations from './translations'
+
 configure({ adapter: new Adapter() })
 
-jsdom.reconfigure({ href: 'unit-test' }) // eslint-disable-line no-undef
+const __ = key => (key in translations ? translations[key] : key)
 
-const onSubmit = jest.fn()
-const onImageUpload = jest.fn()
-const onOpen = jest.fn()
-const onClose = jest.fn()
+jsdom.reconfigure({ href: 'unit-test' }) // eslint-disable-line no-undef
 
 const DEFAULT_PROPS = {
   user: 'unit-tester',
   emoji: ':party:',
   channel: '#tests',
-  onSubmit,
-  onImageUpload,
-  onOpen,
-  onClose
+  sentTimeout: 0
 }
 
 const render = props =>
   shallow(<SlackFeedback {...Object.assign({}, DEFAULT_PROPS, props)} />)
 
 describe('SlackFeedback', () => {
-  const component = render()
-  const find = name => component.find(`styles__${name}`)
+  let component
+  let find
+  let trigger
+  let submit
+  let checkbox
+  let textarea
+  let close
+  let onSubmit
+  let onImageUpload
+  let onOpen
+  let onClose
+  let defaultPropCallbacks
 
-  const trigger = find('Trigger')
-  const submit = find('SubmitButton')
-  const checkbox = find('Checkbox')
-  const textarea = component.find('[name="message"]')
-  const close = component.find('.close')
-  const tabs = find('Tabs').find('li')
+  beforeEach(() => {
+    onSubmit = jest.fn()
+    onImageUpload = jest.fn()
+    onOpen = jest.fn()
+    onClose = jest.fn()
+
+    defaultPropCallbacks = {
+      onSubmit,
+      onImageUpload,
+      onOpen,
+      onClose
+    }
+
+    component = render({
+      ...defaultPropCallbacks
+    })
+
+    find = name => component.find(`styles__${name}`)
+
+    trigger = find('Trigger')
+    submit = find('SubmitButton')
+    checkbox = find('Checkbox')
+    textarea = component.find('[name="message"]')
+    close = component.find('.close')
+  })
 
   it('should match the snapshots', () => {
     expect(component).toMatchSnapshot()
-    expect(render({ disabled: true })).toMatchSnapshot()
+    expect(
+      render({ disabled: true, ...defaultPropCallbacks })
+    ).toMatchSnapshot()
+    expect(
+      render({ showChannel: false, ...defaultPropCallbacks })
+    ).toMatchSnapshot()
+    expect(
+      render({ showIcon: false, ...defaultPropCallbacks })
+    ).toMatchSnapshot()
   })
 
   describe('exports', () => {
@@ -54,10 +87,23 @@ describe('SlackFeedback', () => {
     })
   })
 
+  describe('translations', () => {
+    it('should return the correct value from the translations', () => {
+      expect(component.instance().translate('submit.text')).toEqual(
+        'Send Feedback'
+      )
+    })
+
+    it('should return an empty string if not found', () => {
+      expect(component.instance().translate('not.available')).toEqual('')
+    })
+  })
+
   describe('presentational', () => {
     it('should show the channel by default', () => {
       expect(component.find('#channel')).toHaveLength(1)
     })
+
     it('should not show the channel if showChannel is false', () => {
       component.setProps({ showChannel: false })
       expect(component.find('#channel')).toHaveLength(0)
@@ -72,36 +118,29 @@ describe('SlackFeedback', () => {
       // Reset the value
       component.setProps({ disabled: false })
     })
-    it('should display the correct closeButton node', () => {
-      const closeButton = <a>x</a>
-      component.setProps({ closeButton })
-      expect(component.find('.close').html()).toEqual(
-        '<div class="close"><a>x</a></div>'
-      )
-    })
   })
 
   describe('open/close', () => {
     it('should be closed by default', () => {
-      expect(component.state('active')).toBe(false)
+      expect(component.state('open')).toBe(false)
     })
 
     it('should open when the trigger is clicked and fire this.props.onOpen', () => {
-      component.setState({ active: false })
+      component.setState({ open: false })
       trigger.simulate('click')
-      expect(component.state('active')).toBeTruthy()
+      expect(component.state('open')).toBeTruthy()
       expect(onOpen).toHaveBeenCalled()
     })
 
-    it('should set the active state to false on close click', () => {
-      component.setState({ active: true })
+    it('should set the open state to false on close click', () => {
+      component.setState({ open: true })
       close.simulate('click')
-      expect(component.state('active')).toEqual(false)
+      expect(component.state('open')).toEqual(false)
       expect(onClose).toHaveBeenCalled()
     })
   })
 
-  describe.skip('tabs', () => {
+  describe('tabs', () => {
     const customTabs = [
       {
         value: 'unit',
@@ -114,54 +153,76 @@ describe('SlackFeedback', () => {
     ]
 
     it('should select the first type by default', () => {
-      expect(component.state('selectedType')).toEqual('Bug')
-      component.setProps({
-        feedbackTypes: customTabs,
-        defaultSelectedType: null
-      })
-      expect(component.state('selectedType')).toEqual('Unit')
+      expect(component.state('selectedType')).toEqual('bug')
     })
 
     it('should select the correct tab', () => {
-      component.setProps({
+      const newComponent = render({
         feedbackTypes: customTabs,
-        defaultSelectedType: 'Test'
+        defaultSelectedType: 'test',
+        ...defaultPropCallbacks
       })
-      expect(component.state('selectedType')).toEqual('Test')
+      expect(newComponent.state('selectedType')).toEqual('test')
     })
     it('should change the tab state on click', () => {
-      tabs.first().simulate('click')
-      expect(component.state('selectedType')).toBe(customTabs[0].label)
+      const newComponent = render({
+        feedbackTypes: customTabs,
+        ...defaultPropCallbacks
+      })
 
-      tabs.second().simulate('click')
-      expect(component.state('selectedType')).toBe(customTabs[1].label)
-    })
-    xit('should render the default tab options', () => {
-      return Promise.reject()
-    })
-    xit('should render custom tab options', () => {
-      return Promise.reject()
+      expect(newComponent.state().selectedType).toBe(customTabs[0].value)
+
+      newComponent
+        .find('li')
+        .at(1)
+        .simulate('click')
+      expect(newComponent.state().selectedType).toBe(customTabs[1].value)
     })
   })
 
-  describe('send', () => {
+  describe('onSubmit', () => {
     it('should set the sending state to true', () => {
       expect(component.state('sending')).toBe(false)
       submit.simulate('click')
       expect(component.state('sending')).toBe(true)
     })
-    it('should set the default log level to "warning"', () => {
+    it('should set the default log level to "danger"', () => {
       submit.simulate('click')
+      const payload = onSubmit.mock.calls[0][0]
+      expect(payload.attachments[0].color).toEqual('danger')
     })
+
+    it('should set the correct log level', () => {
+      const nthPayload = n => onSubmit.mock.calls[n][0]
+
+      component.setState({ selectedType: 'bug' })
+      submit.simulate('click')
+      expect(nthPayload(0).attachments[0].color).toEqual('danger')
+
+      component.setState({ selectedType: 'feature' })
+      submit.simulate('click')
+      expect(nthPayload(1).attachments[0].color).toEqual('good')
+
+      component.setState({ selectedType: 'improvement' })
+      submit.simulate('click')
+      expect(nthPayload(2).attachments[0].color).toEqual('warning')
+    })
+
+    it('should return warning level if selectedType invalid', () => {
+      component.setState({ selectedType: 'invalid' })
+      submit.simulate('click')
+      const payload = onSubmit.mock.calls[0][0]
+      expect(payload.attachments[0].color).toEqual('warning')
+    })
+
     it('should return the correct payload', () => {
-      onSubmit.mockReset()
       const message = 'test'
       component.setState({ sendURL: false })
       textarea.simulate('change', { target: { value: message } })
       expect(component.state('message')).toBe(message)
       submit.simulate('click')
 
-      expect(onSubmit).toHaveBeenCalledWith({
+      const expectedPayload = {
         channel: DEFAULT_PROPS.channel,
         username: DEFAULT_PROPS.user,
         icon_emoji: DEFAULT_PROPS.emoji,
@@ -173,21 +234,66 @@ describe('SlackFeedback', () => {
             title: component.state('selectedType'),
             title_link: document.location.href,
             text: message,
-            footer: 'React Slack Feedback'
+            footer: __('footer.text')
           }
         ]
-      })
+      }
+
+      expect(onSubmit).toHaveBeenCalledWith(
+        expectedPayload,
+        expect.any(Function),
+        expect.any(Function)
+      )
       component.setState({ sendURL: true })
+    })
+
+    it('should change sent state', () => {
+      const message = 'test'
+      onSubmit.mockImplementation((payload, success) => success())
+      textarea.simulate('change', { target: { value: message } })
+      expect(component.state('message')).toBe(message)
+      submit.simulate('click')
+      expect(component.state().sent).toBeTruthy()
+      expect(component.state().sending).toBeFalsy()
+      expect(component.state().error).toBeFalsy()
+    })
+
+    it('should change error state', () => {
+      const message = 'test'
+      onSubmit.mockImplementation((payload, success, error) =>
+        error('TEST_ERROR')
+      )
+      textarea.simulate('change', { target: { value: message } })
+      expect(component.state('message')).toBe(message)
+      submit.simulate('click')
+      expect(component.state().sent).toBeFalsy()
+      expect(component.state().sending).toBeFalsy()
+      expect(component.state().error).toBe('TEST_ERROR')
     })
   })
 
   describe('errors', () => {
     it('determineErrorType: should determine the correct error type', () => {
       const instance = component.instance()
-      expect(instance.determineErrorType()).toEqual('Unexpected Error!')
+      expect(instance.determineErrorType()).toEqual(__('error.unexpected'))
       expect(instance.determineErrorType('error')).toEqual('error')
       expect(instance.determineErrorType({ status: 400 })).toEqual(
-        'Bad Request!'
+        __('error.badrequest')
+      )
+      expect(instance.determineErrorType({ status: 403 })).toEqual(
+        __('error.forbidden')
+      )
+      expect(instance.determineErrorType({ status: 404 })).toEqual(
+        __('error.notfound')
+      )
+      expect(instance.determineErrorType({ status: 410 })).toEqual(
+        __('error.archived')
+      )
+      expect(instance.determineErrorType({ status: 500 })).toEqual(
+        __('error.internal')
+      )
+      expect(instance.determineErrorType({ status: 100000 })).toEqual(
+        __('error.unexpected')
       )
     })
   })
@@ -220,13 +326,13 @@ describe('SlackFeedback', () => {
 
   describe('sendURL', () => {
     it('should be true by default', () => {
-      expect(component.state('sendURL')).toBeTruthy()
+      expect(component.state().sendURL).toBeTruthy()
       expect(checkbox.props().checked).toBeTruthy()
     })
     it('should toggle the sendURL state when the checkbox or label are clicked', () => {
       expect(checkbox.props().checked).toBeTruthy()
       checkbox.props().onChange()
-      expect(component.state('sendURL')).toBe(false)
+      expect(component.state().sendURL).toBe(false)
     })
   })
 })

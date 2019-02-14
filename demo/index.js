@@ -16,20 +16,23 @@ const API_URL = 'http://localhost:8080/api'
  * @param  {Object} payload
  * @return {null}
  */
-const sendToSlack = payload => {
+const sendToSlack = (payload, success, error) => {
+  console.log(payload)
   fetch(`${API_URL}/slack`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-    .then(parseJSON)
     .then(res => {
-      if (res.status >= 200 && res.status < 300) {
-        this.sent()
-      } else {
-        this.error(res)
+      if (!res.ok) {
+        error(res)
+        throw res
       }
+
+      return res
     })
+    .then(parseJSON)
+    .then(success)
 }
 
 /**
@@ -38,7 +41,7 @@ const sendToSlack = payload => {
  * @param  {File} file
  * @return {null}
  */
-function uploadImage(file) {
+function uploadImage(file, success, error) {
   const form = new FormData()
   form.append('image', file)
 
@@ -48,12 +51,13 @@ function uploadImage(file) {
   })
     .then(res => {
       if (res.status < 200 || res.status >= 300) {
-        this.uploadError(res.statusText)
+        error(res.statusText)
+        throw res
       }
 
       return res.json()
     })
-    .then(({ url }) => this.imageUploaded(url))
+    .then(({ url }) => success(url))
 }
 
 ReactDOM.render(
@@ -62,8 +66,8 @@ ReactDOM.render(
     user="username"
     emoji=":bug:"
     channel="#feedback"
-    onSubmit={sendToSlack}
-    onImageUpload={uploadImage}
+    onSubmit={(payload, success, error) => sendToSlack(payload, success, error)}
+    onImageUpload={(file, success, error) => uploadImage(file, success, error)}
   />,
   root
 )

@@ -21,21 +21,30 @@ app.use(express.static(path.resolve(UPLOADS)))
 const upload = multer({ dest: UPLOADS })
 
 // Send payload to Slack
+// app.post('/api/slack', bodyParser.json(), (req, res) => {
+//   fetch(process.env.WEBHOOK_URL, {
+//     method: 'POST',
+//     body: JSON.stringify(req.body)
+//   }).then(response => {
+//     // NOTE not sending the full response back to the client because it contains
+//     // the slack webhook url
+//     return res.status(response.status).send({
+//       status: response.status,
+//       statusText: response.statusText
+//     })
+//   })
+// })
+
 app.post('/api/slack', bodyParser.json(), (req, res) => {
-  fetch(process.env.WEBHOOK_URL, {
-    method: 'POST',
-    body: JSON.stringify(req.body)
-  }).then(response => {
-    // NOTE not sending the full response back to the client because it contains
-    // the slack webhook url
-    return res.status(response.status).send({
-      status: response.status,
-      statusText: response.statusText
+  setTimeout(() => {
+    return res.status(200).send({
+      status: 200,
+      statusText: 'success'
     })
-  })
+  }, 3000)
 })
 
-// Upload image to Cloudinary
+// Save image locally, images will be deleted when the server connection is closed
 app.post('/api/upload', upload.single('image'), (req, res) => {
   const ext = req.file.originalname.split('.').pop()
 

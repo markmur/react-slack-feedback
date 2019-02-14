@@ -21,5 +21,6 @@
   "submit.sent": "Sent!",
   "submit.text": "Send Feedback",
   "upload.text": "Attach Image",
-  "trigger.text": "Send Feedback"
+  "trigger.text": "Send Feedback",
+  "footer.text": "React Slack Feedback"
 }

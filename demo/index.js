@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import fetch from 'isomorphic-fetch'
 import SlackFeedback from '../src/slack-feedback'
-import darkTheme from '../src/themes/dark'
+import theme from '../src/themes/slack'
 
-const root = document.getElementById('root')
+const root = document.querySelector('#root')
 
 const parseJSON = res => res.json()
 
@@ -12,13 +12,13 @@ const API_URL = 'http://localhost:8080/api'
 
 /**
  * Send payload to server
- * @method sendToSlack
- * @param  {Object} payload
- * @return {null}
+ * @param {Object} payload - payload
+ * @param {Function} success - success callback
+ * @param {Function} error - error callback
+ * @return {Promise} returns promise
  */
 const sendToSlack = (payload, success, error) => {
-  console.log(payload)
-  fetch(`${API_URL}/slack`, {
+  return fetch(`${API_URL}/slack`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
@@ -62,7 +62,7 @@ function uploadImage(file, success, error) {
 
 ReactDOM.render(
   <SlackFeedback
-    theme={darkTheme}
+    theme={theme}
     user="username"
     emoji=":bug:"
     channel="#feedback"

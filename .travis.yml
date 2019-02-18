@@ -10,8 +10,8 @@ node_js:
 before_script:
   - yarn danger ci
 script:
-  - yarn run test:ci
+  - yarn build
+  - yarn test:ci
+  - yarn bundlesize --debug
   - yarn bundlesize
-  - yarn run build
-  - yarn run danger
-  - rm -f test-results.json
+  - yarn danger

@@ -50,8 +50,7 @@ export default {
     }),
     json(),
     babel({
-      exclude: ['node_modules/**'],
-      plugins: ['external-helpers']
+      exclude: ['node_modules/**']
     }),
     commonjs(),
     terser(),

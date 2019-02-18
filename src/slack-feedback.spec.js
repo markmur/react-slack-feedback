@@ -1,19 +1,13 @@
 import React from 'react'
-import { shallow, configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import merge from 'lodash.merge'
+import { shallow } from 'enzyme'
 
-import SlackIcon from './slack-icon'
+import { default as SlackIcon } from './slack-icon'
 import defaultTheme from './themes/default'
 import SlackFeedback from './slack-feedback'
-
 import translations from './translations'
-
-configure({ adapter: new Adapter() })
+import { merge } from './utils'
 
 const __ = key => (key in translations ? translations[key] : key)
-
-jsdom.reconfigure({ href: 'unit-test' }) // eslint-disable-line no-undef
 
 const DEFAULT_PROPS = {
   user: 'unit-tester',

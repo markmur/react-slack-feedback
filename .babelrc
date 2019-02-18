@@ -1,4 +1,0 @@
-{
-  "presets": ["env", "react", "stage-1"],
-  "plugins": ["transform-class-properties", "babel-plugin-styled-components"]
-}

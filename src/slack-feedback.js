@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 import cx from 'classnames'
-import merge from 'lodash.merge'
+import { merge } from './utils'
 
 import defaultTranslations from './translations'
 
@@ -392,7 +392,7 @@ class SlackFeedback extends React.Component {
     if (sending && !sent) submitText = this.translate('submit.sending')
     if (error) submitText = error
 
-    const theme = merge({}, defaultTheme, this.props.theme)
+    const theme = merge(defaultTheme, this.props.theme)
 
     return (
       <ThemeProvider theme={theme}>

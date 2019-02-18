@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const SlackIcon = styled(props => (
+export const SlackIcon = props => (
   <svg
     id="SlackIcon"
     width="16"
@@ -44,8 +44,8 @@ const SlackIcon = styled(props => (
       fill="#62803A"
     />
   </svg>
-))`
+)
+
+export default styled(SlackIcon)`
   margin-right: 8px;
 `
-
-export default SlackIcon

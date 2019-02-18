@@ -125,7 +125,10 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "testURL": "http://localhost:8080"
+    "testURL": "http://localhost:8080",
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
   "prettier": {
     "semi": false,

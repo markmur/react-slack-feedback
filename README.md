@@ -31,56 +31,34 @@ or individual components (if you don't want it on every page).
 ```js
 import SlackFeedback from 'react-slack-feedback'
 
-const sendMessageToSlack = (payload = {}) =>
-  fetch('http://localhost:8080/api/slack', {
-    method: 'POST',
-    data: JSON.stringify(payload)
-  })).then(
-    res => {
-      // The `onSubmit` prop function is called with the SlackFeedback component
-      // context (this.props.onSubmit.call(this, payload)), meaning the component
-      // methods are available from this function. You should call the `sent`
-      // method if the request was successfully sent to Slack.
-      this.sent()
-    })
-    .catch(error => this.error(error.statusText))
-  )
-
 ReactDOM.render(
   <SlackFeedback
-    // NOTE: The `onSubmit` method is called with the SlackFeedback context which
-    // allows you to call `this.sent()` in the sendToSlack function. If you use
-    // `payload => sendToSlack(payload)` or `sendToSlack.bind(this)` then you must
-    // use a ref to call the sent method. i.e `this.refs.SlackFeedback.sent();`
     disabled // completely disable the component (default = false)
     channel="#general"
     user="Username" // The logged in user (default = "Unknown User")
     emoji=":bug:" // default = :speaking_head_in_silhouette:
-    onImageUpload={uploadImage}
-    onSubmit={sendMessageToSlack}
+    onImageUpload={(image, success,error) => uploadImage(image).then(success).catch(error)}
+    onSubmit={(payload, success, error) => sendToServer(payload, success, error)}
   />,
   document.getElementById('root')
 )
 
-/**
- * Upload image to server
- * @method uploadImage
- * @param  {File} image
- * @return {null}
- */
-function uploadImage(image) {
+function sendToServer(payload, success, error) {
+  return fetch('/api/slack', {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  })
+  .then(success)
+  .catch(error)
+}
+
+function uploadImage(image, success, error) {
   var form = new FormData()
   form.append('image', image)
 
-  $.post('/api/upload', { data: form }).then(
-    // It is important that you call the `imageUploaded` method or
-    // the component will load indefinitely.
-    //
-    // If you've called the `uploadImage` function with `image => uploadImage(image)`,
-    // you'll have to use a ref on the SlackFeedback component to access the
-    // 'imageUploaded' and 'error' methods
-    url => this.imageUploaded(url),
-    err => this.error(err)
+  return fetch('/api/upload', { method: 'POST', data: form })
+    .then(({ url }) => success(url))
+    .catch(err => error(err))
   )
 }
 ```
@@ -102,12 +80,10 @@ function uploadImage(image) {
 
 ### Callback Functions
 
-| Function        | Arguments      | Description                                                                                                                                                      |
-| --------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| sent()          |                | Should be called when the payload has been successfully sent to your sever. The submit button will display a `Sent!` message and reset the loading state.        |
-| error()         | error (string) | Should be called if there's an error sending the slack payload to your server. Pass the `statusText` of the response to update the submit button.                |
-| imageUploaded() | url (string)   | Should be called if an image is successfully uploaded to your server. This adds the image url to the payload JSON and resets the loading state of the component. |
-| uploadError()   | error (string) | Should be called if there's an error uploading an image.                                                                                                         |
+| Function      | Arguments                                               | Description |
+| ------------- | ------------------------------------------------------- | ----------- |
+| onSubmit      | `(payload: Object, success: Function, error: Function)` |             |
+| onImageUpload | `(image: Object, success: Function, error: Function)`   |             |
 
 ---
 
@@ -131,8 +107,8 @@ yarn
 
 `.env`
 
-```js
-WEBHOOK_URL = 'YOUR_SLACK_WEBHOOK_URL'
+```.env
+WEBHOOK_URL='YOUR_SLACK_WEBHOOK_URL'
 ```
 
 4.  Run the demo:

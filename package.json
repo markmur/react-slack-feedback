@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": " NODE_ENV=production rollup --config rollup.config.js",
+    "bundlesize": "bundlesize",
     "lint-staged": "lint-staged",
     "lint": "xo",
     "start:client": "parcel demo/index.html",
@@ -16,6 +17,12 @@
     "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
     "test": "jest"
   },
+  "bundlesize": [
+    {
+      "path": "dist/index*.js",
+      "maxSize": "5 kB"
+    }
+  ],
   "dependencies": {
     "classnames": "^2.2.5"
   },
@@ -62,6 +69,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "body-parser": "^1.15.2",
+    "bundlesize": "^0.17.1",
     "codecov": "^3.0.0",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",

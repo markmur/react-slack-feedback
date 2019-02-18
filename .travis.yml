@@ -11,6 +11,7 @@ before_script:
   - yarn danger ci
 script:
   - yarn run test:ci
+  - yarn bundlesize
   - yarn run build
   - yarn run danger
   - rm -f test-results.json

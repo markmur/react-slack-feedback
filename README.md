@@ -65,15 +65,26 @@ function uploadImage(image, success, error) {
 
 ### Props
 
-| Prop          | Type     | Default          | Required | Description                                                                                          |
-| ------------- | -------- | ---------------- | :------: | ---------------------------------------------------------------------------------------------------- |
-| onSubmit      | function |                  | required | A JSON payload object will be returned when the user submits the form.                               |
-| onImageUpload | function |                  |          | Method that will be called with a file argument                                                      |
-| channel       | string   |                  |          | The Slack channel to send messages. The default webhook channel will be used if none is provided.    |
-| user          | string   | "Unknown User"   |          | The logged in user's name (if applicable)                                                            |
-| emoji         | string   | 🗣                |          | The emoji that will show in place of the users avatar on Slack                                       |
-| buttonText    | string   | "Slack Feedback" |          | The text for the trigger button                                                                      |
-| disabled      | boolean  | false            |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
+| Prop                | Type                                      | Default               | Required | Description                                                                                          |
+| ------------------- | ----------------------------------------- | --------------------- | :------: | ---------------------------------------------------------------------------------------------------- |
+| buttonText          | `String`                                  | "Slack Feedback"      |          | The text for the trigger button                                                                      |
+| channel             | `String`                                  |                       |          | The Slack channel to send messages. The default webhook channel will be used if none is provided.    |
+| defaultSelectedType | `String`                                  |                       |          |
+| disabled            | `Boolean`                                 | false                 |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
+| emoji               | `String`                                  | 🗣                     |          | The emoji that will show in place of the users avatar on Slack                                       |
+| errorTimeout        | `Number`                                  | 8000 (8 seconds)      |          |                                                                                                      |
+| feedbackTypes       | `Array<{ value: String, label: String }>` | See code              |          |                                                                                                      |
+| icon                | `Function`                                | `() => <SlackIcon />` |          |                                                                                                      |
+| onClose             | `Function`                                |                       |          |
+| onImageUpload       | `Function`                                |                       |          | Method that will be called with a file argument                                                      |
+| onOpen              | `Function`                                |                       |          |
+| onSubmit            | `Function`                                |                       | required | A JSON payload object will be returned when the user submits the form.                               |
+| sentTimeout         | `Number`                                  | 5000 (5 seconds)      |          |                                                                                                      |
+| showChannel         | `Boolean`                                 | true                  |          |
+| showIcon            | `Boolean`                                 | true                  |          |
+| theme               | `Object`                                  | See themes directory  |          |
+| translations        | `Object`                                  | See translations file |          |
+| user                | `String`                                  | "Unknown User"        |          | The logged in user's name (if applicable)                                                            |
 
 > NOTE:
 > All slack channels are lowercase. The string should be identical to the channel name e.g '#feedback'

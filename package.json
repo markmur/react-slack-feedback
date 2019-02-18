@@ -20,7 +20,7 @@
   "bundlesize": [
     {
       "path": "dist/index*.js",
-      "maxSize": "5 kB"
+      "maxSize": "7 kB"
     }
   ],
   "dependencies": {

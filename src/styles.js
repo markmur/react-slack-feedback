@@ -120,12 +120,15 @@ const Container = styled.div`
 
 const CloseButton = styled.div`
   cursor: pointer;
-  opacity: 0.7;
+  font-weight: ${theme('closeButton.fontWeight', 'normal')};
+  opacity: ${theme('closeButton.opacity', 0.7)};
+  color: ${theme('closeButton.color', 'white')};
   margin-left: auto;
   font-size: 11px;
 
   &:hover {
-    opacity: 1;
+    opacity: ${theme('closeButton.hoverOpacity', 1)};
+    color: ${theme('closeButton.hoverColor', 'inherit')};
   }
 `
 

@@ -6,7 +6,7 @@ import { merge } from './utils'
 
 import defaultTranslations from './translations'
 
-import SlackIcon from './slack-icon'
+import { default as SlackIcon } from './slack-icon'
 import {
   Checkbox,
   CheckboxContainer,
@@ -370,7 +370,7 @@ class SlackFeedback extends React.Component {
     if (this.props.disabled) return null
 
     const {
-      active,
+      open,
       sending,
       sent,
       error,
@@ -398,9 +398,9 @@ class SlackFeedback extends React.Component {
       <ThemeProvider theme={theme}>
         <StyledSlackFeedback
           ref={this.SlackFeedback}
-          className={cx({ active })}
+          className={cx({ active: open })}
         >
-          <Container className={cx('fadeInUp', { active })}>
+          <Container className={cx('fadeInUp', { active: open })}>
             <Header>
               {this.props.showIcon ? <Icon /> : null}{' '}
               {this.translate('header.title')}
@@ -472,7 +472,7 @@ class SlackFeedback extends React.Component {
             </Content>
           </Container>
 
-          <Trigger className={cx({ active })} onClick={this.toggle}>
+          <Trigger className={cx({ active: open })} onClick={this.toggle}>
             {this.props.showIcon ? <Icon /> : null}{' '}
             {this.translate('trigger.text')}
           </Trigger>

@@ -196,8 +196,6 @@ class SlackFeedback extends React.Component {
     }
 
     const payload = {
-      channel: this.props.channel,
-      username: this.props.user,
       attachments: [
         {
           fallback: `Feedback (${selectedType})`,

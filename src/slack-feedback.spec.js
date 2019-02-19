@@ -229,9 +229,6 @@ describe('SlackFeedback', () => {
       submit.simulate('click')
 
       const expectedPayload = {
-        channel: DEFAULT_PROPS.channel,
-        username: DEFAULT_PROPS.user,
-        icon_emoji: DEFAULT_PROPS.emoji,
         attachments: [
           {
             fallback: `Feedback (${component.state('selectedType')})`,
@@ -260,9 +257,6 @@ describe('SlackFeedback', () => {
       submit.simulate('click')
 
       const expectedPayload = {
-        channel: DEFAULT_PROPS.channel,
-        username: DEFAULT_PROPS.user,
-        icon_emoji: DEFAULT_PROPS.emoji,
         attachments: [
           {
             fallback: `Feedback (${component.state('selectedType')})`,

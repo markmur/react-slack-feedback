@@ -33,10 +33,8 @@ import SlackFeedback from 'react-slack-feedback'
 
 ReactDOM.render(
   <SlackFeedback
-    disabled // completely disable the component (default = false)
     channel="#general"
-    user="Username" // The logged in user (default = "Unknown User")
-    emoji=":bug:" // default = :speaking_head_in_silhouette:
+    user="Slack Feedback" // The logged in user (default = "Unknown User")
     onImageUpload={(image, success,error) => uploadImage(image).then(success).catch(error)}
     onSubmit={(payload, success, error) => sendToServer(payload, success, error)}
   />,
@@ -71,7 +69,6 @@ function uploadImage(image, success, error) {
 | channel             | `String`                                  |                       |          | The Slack channel to send messages. The default webhook channel will be used if none is provided.    |
 | defaultSelectedType | `String`                                  |                       |          |
 | disabled            | `Boolean`                                 | false                 |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
-| emoji               | `String`                                  | 🗣                     |          | The emoji that will show in place of the users avatar on Slack                                       |
 | errorTimeout        | `Number`                                  | 8000 (8 seconds)      |          |                                                                                                      |
 | feedbackTypes       | `Array<{ value: String, label: String }>` | See code              |          |                                                                                                      |
 | icon                | `Function`                                | `() => <SlackIcon />` |          |                                                                                                      |
@@ -91,10 +88,10 @@ function uploadImage(image, success, error) {
 
 ### Callback Functions
 
-| Function      | Arguments                                               | Description |
-| ------------- | ------------------------------------------------------- | ----------- |
-| onSubmit      | `(payload: Object, success: Function, error: Function)` |             |
-| onImageUpload | `(image: Object, success: Function, error: Function)`   |             |
+| Function      | Arguments                                               | Description                                                                                                                                           |
+| ------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onSubmit      | `(payload: Object, success: Function, error: Function)` | Called when the user hits send. Use the `success` callback to indicate that the request was successful. Use the `error` callback to indicate failure. |
+| onImageUpload | `(image: Object, success: Function, error: Function)`   | Called when an image has been uploaded.                                                                                                               |
 
 ---
 

@@ -490,7 +490,7 @@ SlackFeedback.defaultProps = {
   showIcon: true,
   theme: defaultTheme,
   translations: defaultTranslations,
-  user: 'Unknown User'
+  user: 'Anonymous'
 }
 
 SlackFeedback.defaultTheme = defaultTheme

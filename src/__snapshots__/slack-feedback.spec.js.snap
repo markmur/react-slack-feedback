@@ -173,19 +173,6 @@ exports[`SlackFeedback should match the snapshots 1`] = `
             type="file"
           />
         </styles__ImageUpload>
-        <styles__CheckboxContainer>
-          <styles__Checkbox
-            checked={true}
-            id="sendURL"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <styles__CheckboxLabel
-            htmlFor="sendURL"
-          >
-            Send url with feedback
-          </styles__CheckboxLabel>
-        </styles__CheckboxContainer>
         <styles__SubmitButton
           className=""
           disabled={true}
@@ -368,19 +355,6 @@ exports[`SlackFeedback should match the snapshots 3`] = `
             type="file"
           />
         </styles__ImageUpload>
-        <styles__CheckboxContainer>
-          <styles__Checkbox
-            checked={true}
-            id="sendURL"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <styles__CheckboxLabel
-            htmlFor="sendURL"
-          >
-            Send url with feedback
-          </styles__CheckboxLabel>
-        </styles__CheckboxContainer>
         <styles__SubmitButton
           className=""
           disabled={true}
@@ -574,19 +548,6 @@ exports[`SlackFeedback should match the snapshots 4`] = `
             type="file"
           />
         </styles__ImageUpload>
-        <styles__CheckboxContainer>
-          <styles__Checkbox
-            checked={true}
-            id="sendURL"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <styles__CheckboxLabel
-            htmlFor="sendURL"
-          >
-            Send url with feedback
-          </styles__CheckboxLabel>
-        </styles__CheckboxContainer>
         <styles__SubmitButton
           className=""
           disabled={true}

@@ -63,8 +63,7 @@ function uploadImage(file, success, error) {
 ReactDOM.render(
   <SlackFeedback
     theme={theme}
-    user="username"
-    emoji=":bug:"
+    user="Mark Murray"
     channel="#feedback"
     onSubmit={(payload, success, error) => sendToSlack(payload, success, error)}
     onImageUpload={(file, success, error) => uploadImage(file, success, error)}

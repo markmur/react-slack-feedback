@@ -8,9 +8,6 @@ import defaultTranslations from './translations'
 
 import { default as SlackIcon } from './slack-icon'
 import {
-  Checkbox,
-  CheckboxContainer,
-  CheckboxLabel,
   CloseButton,
   Container,
   Content,
@@ -40,7 +37,6 @@ class SlackFeedback extends React.Component {
 
     this.state = {
       open: false,
-      sendURL: true,
       sending: false,
       sent: false,
       error: false,
@@ -122,12 +118,6 @@ class SlackFeedback extends React.Component {
     document.removeEventListener('click', this.handleClickOutside)
   }
 
-  toggleSendURL = () => {
-    this.setState(({ sendURL }) => ({
-      sendURL: !sendURL
-    }))
-  }
-
   selectType = value => () =>
     this.setState({
       selectedType: value
@@ -193,14 +183,10 @@ class SlackFeedback extends React.Component {
   }
 
   send = () => {
-    const { selectedType, sendURL, image } = this.state
-    let text = this.state.message
+    const { selectedType, image } = this.state
     let level = 'warning'
 
     this.setState({ sending: true })
-
-    // Attach the curent URL
-    if (sendURL) text += `\n <${document.location.href}>`
 
     // Slack accepts 3 color levels: danger (red), good (green) and warning (orange)
     switch (selectedType) {
@@ -221,7 +207,6 @@ class SlackFeedback extends React.Component {
     const payload = {
       channel: this.props.channel,
       username: this.props.user,
-      icon_emoji: this.props.emoji,
       attachments: [
         {
           fallback: `Feedback (${selectedType})`,
@@ -229,7 +214,7 @@ class SlackFeedback extends React.Component {
           color: level,
           title: selectedType,
           title_link: document.location.href,
-          text,
+          text: this.state.message,
           footer: this.translate('footer.text')
         }
       ]
@@ -374,7 +359,6 @@ class SlackFeedback extends React.Component {
       sending,
       sent,
       error,
-      sendURL,
       selectedType,
       uploadingImage
     } = this.state
@@ -447,18 +431,6 @@ class SlackFeedback extends React.Component {
               {/* Only render the image upload if there's callback available  */}
               {this.props.onImageUpload ? this.renderImageUpload() : null}
 
-              <CheckboxContainer>
-                <Checkbox
-                  id="sendURL"
-                  type="checkbox"
-                  checked={sendURL}
-                  onChange={this.toggleSendURL}
-                />
-                <CheckboxLabel htmlFor="sendURL">
-                  {this.translate('checkbox.option')}
-                </CheckboxLabel>
-              </CheckboxContainer>
-
               <SubmitButton
                 disabled={sending || uploadingImage || !this.state.message}
                 className={cx({
@@ -486,7 +458,6 @@ SlackFeedback.propTypes = {
   channel: PropTypes.string,
   defaultSelectedType: PropTypes.string,
   disabled: PropTypes.bool,
-  emoji: PropTypes.string,
   errorTimeout: PropTypes.number,
   feedbackTypes: PropTypes.arrayOf(
     PropTypes.shape({
@@ -511,7 +482,6 @@ SlackFeedback.defaultProps = {
   channel: '',
   defaultSelectedType: null,
   disabled: false,
-  emoji: ':speaking_head_in_silhouette:',
   errorTimeout: 8 * 1000,
   feedbackTypes: [
     { value: BUG, label: defaultTranslations['feedback.type.bug'] },

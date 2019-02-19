@@ -11,7 +11,6 @@ const __ = key => (key in translations ? translations[key] : key)
 
 const DEFAULT_PROPS = {
   user: 'unit-tester',
-  emoji: ':party:',
   channel: '#tests',
   sentTimeout: 0
 }
@@ -24,7 +23,6 @@ describe('SlackFeedback', () => {
   let find
   let trigger
   let submit
-  let checkbox
   let textarea
   let close
   let onSubmit
@@ -54,7 +52,6 @@ describe('SlackFeedback', () => {
 
     trigger = find('Trigger')
     submit = find('SubmitButton')
-    checkbox = find('Checkbox')
     textarea = component.find('[name="message"]')
     close = component.find('.close')
   })
@@ -211,7 +208,6 @@ describe('SlackFeedback', () => {
 
     it('should return the correct payload', () => {
       const message = 'test'
-      component.setState({ sendURL: false })
       textarea.simulate('change', { target: { value: message } })
       expect(component.state('message')).toBe(message)
       submit.simulate('click')
@@ -238,7 +234,6 @@ describe('SlackFeedback', () => {
         expect.any(Function),
         expect.any(Function)
       )
-      component.setState({ sendURL: true })
     })
 
     it('should change sent state', () => {
@@ -315,18 +310,6 @@ describe('SlackFeedback', () => {
       expect(theme.primary).toEqual(customTheme.primary)
       expect(theme.input.color).toEqual(customTheme.input.color)
       expect(theme).toEqual(merge({}, theme, customTheme))
-    })
-  })
-
-  describe('sendURL', () => {
-    it('should be true by default', () => {
-      expect(component.state().sendURL).toBeTruthy()
-      expect(checkbox.props().checked).toBeTruthy()
-    })
-    it('should toggle the sendURL state when the checkbox or label are clicked', () => {
-      expect(checkbox.props().checked).toBeTruthy()
-      checkbox.props().onChange()
-      expect(component.state().sendURL).toBe(false)
     })
   })
 })

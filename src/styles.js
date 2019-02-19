@@ -291,35 +291,6 @@ const FormElement = styled.input`
   }
 `
 
-const Checkbox = styled.input`
-  ${formStyles};
-  appearance: checkbox;
-  position: static;
-  font-size: 1.1em;
-
-  &::before,
-  &::after {
-    content: none;
-  }
-`
-
-const CheckboxContainer = styled.div`
-  padding: 8px 0;
-`
-
-const CheckboxLabel = styled.label`
-  display: inline-block;
-  margin-left: 10px;
-  color: inherit;
-  font-size: 13px;
-  color: #858ba0;
-  cursor: pointer;
-
-  &:hover {
-    color: #858ba0;
-  }
-`
-
 const SubmitButton = styled.button`
   display: block;
   width: 100%;
@@ -413,9 +384,6 @@ const Select = styled.div`
 `
 
 export {
-  Checkbox,
-  CheckboxContainer,
-  CheckboxLabel,
   CloseButton,
   Container,
   Content,

@@ -7,6 +7,7 @@ const rimraf = require('rimraf')
 const multer = require('multer')
 const express = require('express')
 const bodyParser = require('body-parser')
+const fetch = require('isomorphic-fetch')
 
 const UPLOADS = 'uploads'
 const PORT = process.env.PORT || 8080
@@ -21,27 +22,18 @@ app.use(express.static(path.resolve(UPLOADS)))
 const upload = multer({ dest: UPLOADS })
 
 // Send payload to Slack
-// app.post('/api/slack', bodyParser.json(), (req, res) => {
-//   fetch(process.env.WEBHOOK_URL, {
-//     method: 'POST',
-//     body: JSON.stringify(req.body)
-//   }).then(response => {
-//     // NOTE not sending the full response back to the client because it contains
-//     // the slack webhook url
-//     return res.status(response.status).send({
-//       status: response.status,
-//       statusText: response.statusText
-//     })
-//   })
-// })
-
 app.post('/api/slack', bodyParser.json(), (req, res) => {
-  setTimeout(() => {
-    return res.status(200).send({
-      status: 200,
-      statusText: 'success'
+  fetch(process.env.WEBHOOK_URL, {
+    method: 'POST',
+    body: JSON.stringify(req.body)
+  }).then(response => {
+    // NOTE not sending the full response back to the client because it contains
+    // the slack webhook url
+    return res.status(response.status).send({
+      status: response.status,
+      statusText: response.statusText
     })
-  }, 3000)
+  })
 })
 
 // Save image locally, images will be deleted when the server connection is closed

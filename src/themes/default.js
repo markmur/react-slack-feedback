@@ -22,7 +22,7 @@ export default {
   },
   header: {
     color: 'white',
-    fontWeight: 500,
+    fontWeight: 400,
     backgroundColor: '#222c4f'
   },
   loader: {

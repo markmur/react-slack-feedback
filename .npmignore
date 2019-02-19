@@ -1,0 +1,13 @@
+src
+images
+demo
+rollup.config.js
+jest.setup.js
+dangerfile.js
+.travis.yml
+.babelrc
+.cache
+coverage
+*.tgz
+yarn-error.log
+.env

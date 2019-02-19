@@ -15,7 +15,8 @@
     "start:server": "nodemon demo/server --watch demo/server.js",
     "start": "yarn start:server & yarn start:client",
     "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "rimraf dist && yarn build"
   },
   "bundlesize": [
     {

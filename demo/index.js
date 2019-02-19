@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import fetch from 'isomorphic-fetch'
 import SlackFeedback from '../src/slack-feedback'
-import theme from '../src/themes/dark'
+import theme from '../src/themes/default'
 
 const root = document.querySelector('#root')
 

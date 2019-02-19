@@ -29,7 +29,7 @@ exports[`SlackFeedback should match the snapshots 1`] = `
       "header": Object {
         "backgroundColor": "#222c4f",
         "color": "white",
-        "fontWeight": 500,
+        "fontWeight": 400,
       },
       "image": Object {
         "border": "1px solid #d0d8e1",
@@ -225,7 +225,7 @@ exports[`SlackFeedback should match the snapshots 3`] = `
       "header": Object {
         "backgroundColor": "#222c4f",
         "color": "white",
-        "fontWeight": 500,
+        "fontWeight": 400,
       },
       "image": Object {
         "border": "1px solid #d0d8e1",
@@ -405,7 +405,7 @@ exports[`SlackFeedback should match the snapshots 4`] = `
       "header": Object {
         "backgroundColor": "#222c4f",
         "color": "white",
-        "fontWeight": 500,
+        "fontWeight": 400,
       },
       "image": Object {
         "border": "1px solid #d0d8e1",

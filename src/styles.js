@@ -193,7 +193,7 @@ const Tabs = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0.85em;
 
   > li {
     flex: 1 0 calc(100% / 3);

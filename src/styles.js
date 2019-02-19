@@ -246,6 +246,7 @@ const UploadButton = styled.label`
   text-align: center;
   font-size: ${theme('uploadButton.fontSize', '13px')};
   margin: auto;
+  margin-bottom: 1em;
   width: 100%;
   display: table;
   cursor: pointer;
@@ -375,7 +376,7 @@ const ImagePreview = styled.div`
   width: 100%;
   height: ${theme('image.height')};
   border-radius: ${theme('image.borderRadius', '4px')};
-  margin-bottom: 5px;
+  margin-bottom: 0.5em;
   border: ${theme('image.border')};
 `
 

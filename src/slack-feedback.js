@@ -51,16 +51,6 @@ class SlackFeedback extends React.Component {
     this.SlackFeedback = React.createRef()
   }
 
-  static getDerivedStateFromProps(state, props) {
-    if (props.defaultSelectedType !== state.selectedType) {
-      return {
-        selectedType: props.defaultSelectedType || props.feedbackTypes[0].value
-      }
-    }
-
-    return null
-  }
-
   translate = key => {
     const { translations } = this.props
 
@@ -94,6 +84,7 @@ class SlackFeedback extends React.Component {
   }
 
   handleClickOutside = event => {
+    console.log('handleClickOutisde', event)
     if (event.defaultPrevented) return
 
     if (

@@ -18,6 +18,8 @@ const DEFAULT_PROPS = {
 const render = props =>
   shallow(<SlackFeedback {...Object.assign({}, DEFAULT_PROPS, props)} />)
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
 describe('SlackFeedback', () => {
   let component
   let find
@@ -116,6 +118,12 @@ describe('SlackFeedback', () => {
       expect(component.state('open')).toBe(false)
     })
 
+    it('should fire close if toggle on state.open', () => {
+      component.setState({ open: true })
+      component.instance().toggle()
+      expect(onClose).toHaveBeenCalled()
+    })
+
     it('should open when the trigger is clicked and fire this.props.onOpen', () => {
       component.setState({ open: false })
       trigger.simulate('click')
@@ -127,6 +135,14 @@ describe('SlackFeedback', () => {
       component.setState({ open: true })
       close.simulate('click')
       expect(component.state('open')).toEqual(false)
+      expect(onClose).toHaveBeenCalled()
+    })
+  })
+
+  describe('handleClickOutside', () => {
+    it('should close if inside component', () => {
+      component.setState({ open: true })
+      close.simulate('click', {})
       expect(onClose).toHaveBeenCalled()
     })
   })
@@ -236,6 +252,38 @@ describe('SlackFeedback', () => {
       )
     })
 
+    it('shuold attach image if available', () => {
+      const message = 'test'
+      textarea.simulate('change', { target: { value: message } })
+      component.setState({ image: { url: 'fake-url' } })
+      expect(component.state('message')).toBe(message)
+      submit.simulate('click')
+
+      const expectedPayload = {
+        channel: DEFAULT_PROPS.channel,
+        username: DEFAULT_PROPS.user,
+        icon_emoji: DEFAULT_PROPS.emoji,
+        attachments: [
+          {
+            fallback: `Feedback (${component.state('selectedType')})`,
+            author_name: DEFAULT_PROPS.user,
+            color: 'danger',
+            title: component.state('selectedType'),
+            title_link: document.location.href,
+            text: message,
+            footer: __('footer.text'),
+            image_url: 'fake-url'
+          }
+        ]
+      }
+
+      expect(onSubmit).toHaveBeenCalledWith(
+        expectedPayload,
+        expect.any(Function),
+        expect.any(Function)
+      )
+    })
+
     it('should change sent state', () => {
       const message = 'test'
       onSubmit.mockImplementation((payload, success) => success())
@@ -245,6 +293,33 @@ describe('SlackFeedback', () => {
       expect(component.state().sent).toBeTruthy()
       expect(component.state().sending).toBeFalsy()
       expect(component.state().error).toBeFalsy()
+    })
+
+    it('should reset sent state on success', async () => {
+      const message = 'test'
+      component.setProps({ sentTimeout: 0 })
+      onSubmit.mockImplementation((payload, success) => success())
+      textarea.simulate('change', { target: { value: message } })
+      expect(component.state('message')).toBe(message)
+      submit.simulate('click')
+      expect(component.state().sent).toBeTruthy()
+      await sleep(1)
+      expect(component.state().sent).toBeFalsy()
+    })
+
+    it('should reset sent state on error', async () => {
+      const message = 'test'
+      component.setProps({ errorTimeout: 0 })
+      onSubmit.mockImplementation((payload, success, error) =>
+        error('test error')
+      )
+      textarea.simulate('change', { target: { value: message } })
+      expect(component.state('message')).toBe(message)
+      submit.simulate('click')
+      expect(component.state().sending).toBeFalsy()
+      expect(component.state().error).toBe('test error')
+      await sleep(1)
+      expect(component.state().error).toBeNull()
     })
 
     it('should change error state', () => {

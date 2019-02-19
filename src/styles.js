@@ -19,7 +19,7 @@ const formStyles = css`
 const fadeInUp = keyframes`
   from {
     opacity: 0;
-    transform: translate3d(0, 10%, 0);
+    transform: translate3d(0, 40px, 0);
   }
 
   to {
@@ -67,6 +67,8 @@ const SlackFeedback = styled.div`
   bottom: 12px;
   right: 0;
   margin: 1em;
+  text-align: left;
+  font-weight: ${theme('content.fontWeight', 400)};
 
   * {
     box-sizing: border-box;
@@ -105,9 +107,8 @@ const Container = styled.div`
   position: relative;
   z-index: 999999999;
   border-radius: 4px;
-  margin-bottom: 1.5em;
   width: ${theme('content.width', '360px')};
-  top: -2.5em;
+  bottom: ${theme('content.bottom', '65px')};
   right: 0;
   box-shadow: ${theme('content.boxShadow')};
   ${animationFadeOutDown};
@@ -137,9 +138,9 @@ const Header = styled.div`
   color: ${theme('header.color')};
   background: ${theme('colors.secondary')};
   padding: 0.75em 1em;
+  font-weight: ${theme('header.fontWeight', 'normal')};
   border-radius: 3px 3px 0 0;
-  font-size: 14px;
-  font-weight: 300;
+  font-size: ${theme('header.fontSize', '14px')};
   align-items: center;
 
   > img {
@@ -303,7 +304,7 @@ const Checkbox = styled.input`
 `
 
 const CheckboxContainer = styled.div`
-  padding: 0.5em 0 1em;
+  padding: 8px 0;
 `
 
 const CheckboxLabel = styled.label`
@@ -322,15 +323,15 @@ const CheckboxLabel = styled.label`
 const SubmitButton = styled.button`
   display: block;
   width: 100%;
-  padding: 1em 0.75em;
+  padding: ${theme('button.padding', '1em 0.75em')};
   text-align: center;
   background: ${theme('colors.primary')};
-  color: white;
-  font-weight: 400;
+  color: ${theme('button.color', 'white')};
+  font-weight: ${theme('button.fontWeight', 400)};
   outline: none;
   border: none;
-  font-size: 11px;
-  text-transform: uppercase;
+  font-size: ${theme('button.fontSize', '11px')};
+  text-transform: ${theme('button.textTransform', 'uppercase')};
   letter-spacing: 0.5px;
   border-radius: 4px;
   cursor: pointer;
@@ -396,6 +397,7 @@ const PreviewOverlay = styled.div`
 `
 
 const ImagePreview = styled.div`
+  display: flex;
   background-size: cover;
   background-position: center center;
   position: relative;

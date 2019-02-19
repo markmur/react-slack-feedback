@@ -6,6 +6,7 @@ exports[`SlackFeedback should match the snapshots 1`] = `
     Object {
       "button": Object {
         "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
+        "fontWeight": 500,
       },
       "colors": Object {
         "background": "#f4f4f7",
@@ -20,12 +21,15 @@ exports[`SlackFeedback should match the snapshots 1`] = `
         "borderRadius": "4px",
         "boxShadow": "0 6px 30px 2px rgba(34, 44, 79, 0.3)",
         "fontSize": "14px",
+        "fontWeight": 500,
         "padding": "0.6em",
+        "width": "380px",
       },
       "fontFamily": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
       "header": Object {
         "backgroundColor": "#222c4f",
         "color": "white",
+        "fontWeight": 500,
       },
       "image": Object {
         "border": "1px solid #d0d8e1",
@@ -34,6 +38,7 @@ exports[`SlackFeedback should match the snapshots 1`] = `
       },
       "input": Object {
         "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
         "borderRadius": "4px",
         "boxShadow": "0 0 8px rgba(0, 135, 255, 0.3)",
         "color": "#444444",
@@ -41,8 +46,8 @@ exports[`SlackFeedback should match the snapshots 1`] = `
         "padding": "0.5em",
       },
       "label": Object {
-        "color": "#0087ff",
-        "fontSize": "11px",
+        "color": "#222c4f",
+        "fontSize": "12px",
       },
       "loader": Object {
         "color": "#ffffff",
@@ -56,26 +61,29 @@ exports[`SlackFeedback should match the snapshots 1`] = `
         "backgroundColor": "rgba(255, 255, 255, 0.5)",
         "border": "1px solid #d0d8e1",
         "borderRadius": "4px",
+        "color": "#333333",
         "selectedBackgroundColor": "#0087ff",
         "selectedColor": "white",
       },
       "trigger": Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#222c4f",
         "border": "none",
-        "borderRadius": "30px",
+        "borderRadius": "6px",
         "boxShadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
-        "color": "#333333",
-        "fontSize": "13px",
-        "fontWeight": "normal",
+        "color": "#ffffff",
+        "fontSize": "14px",
+        "fontWeight": "400",
         "hoverBackgroundColor": "inherit",
         "hoverBoxShadow": "0 6px 16px 2px rgba(0, 0, 0, 0.2)",
-        "hoverColor": "inherit",
+        "hoverColor": "#ffffff",
         "padding": "12px 1.25em",
       },
       "uploadButton": Object {
         "backgroundColor": "white",
         "border": "1px solid #d0d8e1",
+        "color": "#333333",
         "hoverBackgroundColor": "rgba(255, 255, 255, 0.6)",
+        "hoverColor": "#333333",
       },
     }
   }
@@ -207,6 +215,7 @@ exports[`SlackFeedback should match the snapshots 3`] = `
     Object {
       "button": Object {
         "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
+        "fontWeight": 500,
       },
       "colors": Object {
         "background": "#f4f4f7",
@@ -221,12 +230,15 @@ exports[`SlackFeedback should match the snapshots 3`] = `
         "borderRadius": "4px",
         "boxShadow": "0 6px 30px 2px rgba(34, 44, 79, 0.3)",
         "fontSize": "14px",
+        "fontWeight": 500,
         "padding": "0.6em",
+        "width": "380px",
       },
       "fontFamily": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
       "header": Object {
         "backgroundColor": "#222c4f",
         "color": "white",
+        "fontWeight": 500,
       },
       "image": Object {
         "border": "1px solid #d0d8e1",
@@ -235,6 +247,7 @@ exports[`SlackFeedback should match the snapshots 3`] = `
       },
       "input": Object {
         "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
         "borderRadius": "4px",
         "boxShadow": "0 0 8px rgba(0, 135, 255, 0.3)",
         "color": "#444444",
@@ -242,8 +255,8 @@ exports[`SlackFeedback should match the snapshots 3`] = `
         "padding": "0.5em",
       },
       "label": Object {
-        "color": "#0087ff",
-        "fontSize": "11px",
+        "color": "#222c4f",
+        "fontSize": "12px",
       },
       "loader": Object {
         "color": "#ffffff",
@@ -257,26 +270,29 @@ exports[`SlackFeedback should match the snapshots 3`] = `
         "backgroundColor": "rgba(255, 255, 255, 0.5)",
         "border": "1px solid #d0d8e1",
         "borderRadius": "4px",
+        "color": "#333333",
         "selectedBackgroundColor": "#0087ff",
         "selectedColor": "white",
       },
       "trigger": Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#222c4f",
         "border": "none",
-        "borderRadius": "30px",
+        "borderRadius": "6px",
         "boxShadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
-        "color": "#333333",
-        "fontSize": "13px",
-        "fontWeight": "normal",
+        "color": "#ffffff",
+        "fontSize": "14px",
+        "fontWeight": "400",
         "hoverBackgroundColor": "inherit",
         "hoverBoxShadow": "0 6px 16px 2px rgba(0, 0, 0, 0.2)",
-        "hoverColor": "inherit",
+        "hoverColor": "#ffffff",
         "padding": "12px 1.25em",
       },
       "uploadButton": Object {
         "backgroundColor": "white",
         "border": "1px solid #d0d8e1",
+        "color": "#333333",
         "hoverBackgroundColor": "rgba(255, 255, 255, 0.6)",
+        "hoverColor": "#333333",
       },
     }
   }
@@ -392,6 +408,7 @@ exports[`SlackFeedback should match the snapshots 4`] = `
     Object {
       "button": Object {
         "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
+        "fontWeight": 500,
       },
       "colors": Object {
         "background": "#f4f4f7",
@@ -406,12 +423,15 @@ exports[`SlackFeedback should match the snapshots 4`] = `
         "borderRadius": "4px",
         "boxShadow": "0 6px 30px 2px rgba(34, 44, 79, 0.3)",
         "fontSize": "14px",
+        "fontWeight": 500,
         "padding": "0.6em",
+        "width": "380px",
       },
       "fontFamily": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
       "header": Object {
         "backgroundColor": "#222c4f",
         "color": "white",
+        "fontWeight": 500,
       },
       "image": Object {
         "border": "1px solid #d0d8e1",
@@ -420,6 +440,7 @@ exports[`SlackFeedback should match the snapshots 4`] = `
       },
       "input": Object {
         "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
         "borderRadius": "4px",
         "boxShadow": "0 0 8px rgba(0, 135, 255, 0.3)",
         "color": "#444444",
@@ -427,8 +448,8 @@ exports[`SlackFeedback should match the snapshots 4`] = `
         "padding": "0.5em",
       },
       "label": Object {
-        "color": "#0087ff",
-        "fontSize": "11px",
+        "color": "#222c4f",
+        "fontSize": "12px",
       },
       "loader": Object {
         "color": "#ffffff",
@@ -442,26 +463,29 @@ exports[`SlackFeedback should match the snapshots 4`] = `
         "backgroundColor": "rgba(255, 255, 255, 0.5)",
         "border": "1px solid #d0d8e1",
         "borderRadius": "4px",
+        "color": "#333333",
         "selectedBackgroundColor": "#0087ff",
         "selectedColor": "white",
       },
       "trigger": Object {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#222c4f",
         "border": "none",
-        "borderRadius": "30px",
+        "borderRadius": "6px",
         "boxShadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
-        "color": "#333333",
-        "fontSize": "13px",
-        "fontWeight": "normal",
+        "color": "#ffffff",
+        "fontSize": "14px",
+        "fontWeight": "400",
         "hoverBackgroundColor": "inherit",
         "hoverBoxShadow": "0 6px 16px 2px rgba(0, 0, 0, 0.2)",
-        "hoverColor": "inherit",
+        "hoverColor": "#ffffff",
         "padding": "12px 1.25em",
       },
       "uploadButton": Object {
         "backgroundColor": "white",
         "border": "1px solid #d0d8e1",
+        "color": "#333333",
         "hoverBackgroundColor": "rgba(255, 255, 255, 0.6)",
+        "hoverColor": "#333333",
       },
     }
   }

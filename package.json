@@ -13,7 +13,7 @@
     "lint": "xo",
     "start:client": "NODE_ENV=development parcel --no-cache demo/index.html",
     "start:server": "nodemon demo/server --watch demo/server.js",
-    "start": "concurrently --kill-others -n client,server 'yarn start:client' 'yarn start:server'",
+    "start": "concurrently --kill-others-on-fail -n client,server 'yarn start:client' 'yarn start:server'",
     "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",
     "test": "jest"
   },

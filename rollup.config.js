@@ -29,7 +29,7 @@ console.log('Bundling:', getDependencies('dependencies'))
 console.log('External Dependencies:', getDependencies('peerDependencies'))
 
 export default {
-  input: 'src/slack-feedback.js',
+  input: 'src/index.js',
   output: [
     {
       format: 'es',
@@ -39,7 +39,8 @@ export default {
     {
       format: 'cjs',
       file: pkg.main,
-      sourcemap: true
+      sourcemap: true,
+      exports: 'named'
     }
   ],
   plugins: [

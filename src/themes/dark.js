@@ -5,7 +5,7 @@ export default {
     background: 'black'
   },
   content: {
-    padding: '0 1em 1em',
+    padding: '0 0.75em 1em',
     width: '400px'
   },
   trigger: {
@@ -14,12 +14,12 @@ export default {
     backgroundColor: 'black',
     border: 'none',
     padding: '14px 1.25em',
-    borderRadius: '4px',
+    borderRadius: '6px',
     fontSize: '14px'
   },
   input: {
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    padding: '1em',
+    padding: '0.75em',
     color: 'white',
     fontSize: '14px',
     borderRadius: '4px',
@@ -36,9 +36,11 @@ export default {
   },
   uploadButton: {
     color: 'white',
+    hoverColor: 'white',
     border: 'none',
     hoverBorder: 'none',
-    backgroundColor: '#222'
+    backgroundColor: '#222',
+    hoverBackgroundColor: '#323232'
   },
   image: {
     border: 'none'

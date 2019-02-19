@@ -1,0 +1,16 @@
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - '10'
+before_script:
+  - yarn danger ci
+script:
+  - yarn build
+  - yarn test:ci
+  - yarn bundlesize
+  - yarn danger

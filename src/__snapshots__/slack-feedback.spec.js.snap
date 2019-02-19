@@ -1,0 +1,569 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SlackFeedback should match the snapshots 1`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "button": Object {
+        "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
+        "fontWeight": 500,
+      },
+      "colors": Object {
+        "background": "#f4f4f7",
+        "border": "#d0d8e1",
+        "error": "#ec3c3c",
+        "primary": "#0088ff",
+        "secondary": "#222c4f",
+        "success": "#3dc86f",
+        "text": "#333333",
+      },
+      "content": Object {
+        "borderRadius": "4px",
+        "boxShadow": "0 6px 30px 2px rgba(34, 44, 79, 0.3)",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "padding": "0.6em",
+        "width": "380px",
+      },
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
+      "header": Object {
+        "backgroundColor": "#222c4f",
+        "color": "white",
+        "fontWeight": 500,
+      },
+      "image": Object {
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "height": "140px",
+      },
+      "input": Object {
+        "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "boxShadow": "0 0 8px rgba(0, 135, 255, 0.3)",
+        "color": "#444444",
+        "fontSize": "14px",
+        "padding": "0.5em",
+      },
+      "label": Object {
+        "color": "#222c4f",
+        "fontSize": "12px",
+      },
+      "loader": Object {
+        "color": "#ffffff",
+        "size": "4em",
+        "width": "3px",
+      },
+      "overlay": Object {
+        "backgroundColor": "rgba(34, 44, 79, 0.4)",
+      },
+      "tab": Object {
+        "backgroundColor": "rgba(255, 255, 255, 0.5)",
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "color": "#333333",
+        "selectedBackgroundColor": "#0087ff",
+        "selectedColor": "white",
+      },
+      "trigger": Object {
+        "backgroundColor": "#222c4f",
+        "border": "none",
+        "borderRadius": "6px",
+        "boxShadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
+        "color": "#ffffff",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "hoverBackgroundColor": "inherit",
+        "hoverBoxShadow": "0 6px 16px 2px rgba(0, 0, 0, 0.2)",
+        "hoverColor": "#ffffff",
+        "padding": "12px 1.25em",
+      },
+      "uploadButton": Object {
+        "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
+        "color": "#333333",
+        "hoverBackgroundColor": "rgba(255, 255, 255, 0.6)",
+        "hoverColor": "#333333",
+      },
+    }
+  }
+>
+  <styles__SlackFeedback
+    className=""
+  >
+    <styles__Container
+      className="fadeInUp"
+    >
+      <styles__Header>
+        <icon />
+         
+        Send Feedback
+        <styles__CloseButton
+          className="close"
+          onClick={[Function]}
+        >
+          close
+        </styles__CloseButton>
+      </styles__Header>
+      <styles__Content>
+        <span
+          id="channel"
+        >
+          <styles__Label
+            htmlFor="channel"
+          >
+            Channel
+          </styles__Label>
+          <styles__FormElement
+            as="input"
+            disabled={true}
+            value="#tests"
+          />
+        </span>
+        <styles__Label>
+          Feedback Type
+        </styles__Label>
+        <styles__Tabs>
+          <li
+            className="selected"
+            key="bug"
+            onClick={[Function]}
+            title="Bug"
+          >
+            Bug
+          </li>
+          <li
+            className=""
+            key="improvement"
+            onClick={[Function]}
+            title="Improvement"
+          >
+            Improvement
+          </li>
+          <li
+            className=""
+            key="feature"
+            onClick={[Function]}
+            title="Feature"
+          >
+            Feature
+          </li>
+        </styles__Tabs>
+        <styles__Label>
+          Message
+        </styles__Label>
+        <styles__FormElement
+          as="textarea"
+          name="message"
+          onChange={[Function]}
+          placeholder="Your message..."
+          value=""
+        />
+        <styles__ImageUpload>
+          <styles__UploadButton
+            htmlFor="imageUpload"
+          >
+            Attach Image
+          </styles__UploadButton>
+          <styles__FormElement
+            accept="image/*"
+            as="input"
+            id="imageUpload"
+            onChange={[Function]}
+            type="file"
+          />
+        </styles__ImageUpload>
+        <styles__SubmitButton
+          className=""
+          disabled={true}
+          onClick={[Function]}
+        >
+          Send Feedback
+        </styles__SubmitButton>
+      </styles__Content>
+    </styles__Container>
+    <styles__Trigger
+      className=""
+      onClick={[Function]}
+    >
+      <icon />
+       
+      Send Feedback
+    </styles__Trigger>
+  </styles__SlackFeedback>
+</ThemeProvider>
+`;
+
+exports[`SlackFeedback should match the snapshots 2`] = `""`;
+
+exports[`SlackFeedback should match the snapshots 3`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "button": Object {
+        "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
+        "fontWeight": 500,
+      },
+      "colors": Object {
+        "background": "#f4f4f7",
+        "border": "#d0d8e1",
+        "error": "#ec3c3c",
+        "primary": "#0088ff",
+        "secondary": "#222c4f",
+        "success": "#3dc86f",
+        "text": "#333333",
+      },
+      "content": Object {
+        "borderRadius": "4px",
+        "boxShadow": "0 6px 30px 2px rgba(34, 44, 79, 0.3)",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "padding": "0.6em",
+        "width": "380px",
+      },
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
+      "header": Object {
+        "backgroundColor": "#222c4f",
+        "color": "white",
+        "fontWeight": 500,
+      },
+      "image": Object {
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "height": "140px",
+      },
+      "input": Object {
+        "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "boxShadow": "0 0 8px rgba(0, 135, 255, 0.3)",
+        "color": "#444444",
+        "fontSize": "14px",
+        "padding": "0.5em",
+      },
+      "label": Object {
+        "color": "#222c4f",
+        "fontSize": "12px",
+      },
+      "loader": Object {
+        "color": "#ffffff",
+        "size": "4em",
+        "width": "3px",
+      },
+      "overlay": Object {
+        "backgroundColor": "rgba(34, 44, 79, 0.4)",
+      },
+      "tab": Object {
+        "backgroundColor": "rgba(255, 255, 255, 0.5)",
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "color": "#333333",
+        "selectedBackgroundColor": "#0087ff",
+        "selectedColor": "white",
+      },
+      "trigger": Object {
+        "backgroundColor": "#222c4f",
+        "border": "none",
+        "borderRadius": "6px",
+        "boxShadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
+        "color": "#ffffff",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "hoverBackgroundColor": "inherit",
+        "hoverBoxShadow": "0 6px 16px 2px rgba(0, 0, 0, 0.2)",
+        "hoverColor": "#ffffff",
+        "padding": "12px 1.25em",
+      },
+      "uploadButton": Object {
+        "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
+        "color": "#333333",
+        "hoverBackgroundColor": "rgba(255, 255, 255, 0.6)",
+        "hoverColor": "#333333",
+      },
+    }
+  }
+>
+  <styles__SlackFeedback
+    className=""
+  >
+    <styles__Container
+      className="fadeInUp"
+    >
+      <styles__Header>
+        <icon />
+         
+        Send Feedback
+        <styles__CloseButton
+          className="close"
+          onClick={[Function]}
+        >
+          close
+        </styles__CloseButton>
+      </styles__Header>
+      <styles__Content>
+        <styles__Label>
+          Feedback Type
+        </styles__Label>
+        <styles__Tabs>
+          <li
+            className="selected"
+            key="bug"
+            onClick={[Function]}
+            title="Bug"
+          >
+            Bug
+          </li>
+          <li
+            className=""
+            key="improvement"
+            onClick={[Function]}
+            title="Improvement"
+          >
+            Improvement
+          </li>
+          <li
+            className=""
+            key="feature"
+            onClick={[Function]}
+            title="Feature"
+          >
+            Feature
+          </li>
+        </styles__Tabs>
+        <styles__Label>
+          Message
+        </styles__Label>
+        <styles__FormElement
+          as="textarea"
+          name="message"
+          onChange={[Function]}
+          placeholder="Your message..."
+          value=""
+        />
+        <styles__ImageUpload>
+          <styles__UploadButton
+            htmlFor="imageUpload"
+          >
+            Attach Image
+          </styles__UploadButton>
+          <styles__FormElement
+            accept="image/*"
+            as="input"
+            id="imageUpload"
+            onChange={[Function]}
+            type="file"
+          />
+        </styles__ImageUpload>
+        <styles__SubmitButton
+          className=""
+          disabled={true}
+          onClick={[Function]}
+        >
+          Send Feedback
+        </styles__SubmitButton>
+      </styles__Content>
+    </styles__Container>
+    <styles__Trigger
+      className=""
+      onClick={[Function]}
+    >
+      <icon />
+       
+      Send Feedback
+    </styles__Trigger>
+  </styles__SlackFeedback>
+</ThemeProvider>
+`;
+
+exports[`SlackFeedback should match the snapshots 4`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "button": Object {
+        "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
+        "fontWeight": 500,
+      },
+      "colors": Object {
+        "background": "#f4f4f7",
+        "border": "#d0d8e1",
+        "error": "#ec3c3c",
+        "primary": "#0088ff",
+        "secondary": "#222c4f",
+        "success": "#3dc86f",
+        "text": "#333333",
+      },
+      "content": Object {
+        "borderRadius": "4px",
+        "boxShadow": "0 6px 30px 2px rgba(34, 44, 79, 0.3)",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "padding": "0.6em",
+        "width": "380px",
+      },
+      "fontFamily": "-apple-system, BlinkMacSystemFont, Arial, Arial Unicode, \\"Helvetica Neue\\", Helvetica, \\"Hiragino Sans GB\\", \\"Microsoft YaHei\\", SimSun, sans-serif",
+      "header": Object {
+        "backgroundColor": "#222c4f",
+        "color": "white",
+        "fontWeight": 500,
+      },
+      "image": Object {
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "height": "140px",
+      },
+      "input": Object {
+        "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "boxShadow": "0 0 8px rgba(0, 135, 255, 0.3)",
+        "color": "#444444",
+        "fontSize": "14px",
+        "padding": "0.5em",
+      },
+      "label": Object {
+        "color": "#222c4f",
+        "fontSize": "12px",
+      },
+      "loader": Object {
+        "color": "#ffffff",
+        "size": "4em",
+        "width": "3px",
+      },
+      "overlay": Object {
+        "backgroundColor": "rgba(34, 44, 79, 0.4)",
+      },
+      "tab": Object {
+        "backgroundColor": "rgba(255, 255, 255, 0.5)",
+        "border": "1px solid #d0d8e1",
+        "borderRadius": "4px",
+        "color": "#333333",
+        "selectedBackgroundColor": "#0087ff",
+        "selectedColor": "white",
+      },
+      "trigger": Object {
+        "backgroundColor": "#222c4f",
+        "border": "none",
+        "borderRadius": "6px",
+        "boxShadow": "0 3px 12px 1px rgba(34, 44, 79, 0.1)",
+        "color": "#ffffff",
+        "fontSize": "14px",
+        "fontWeight": "400",
+        "hoverBackgroundColor": "inherit",
+        "hoverBoxShadow": "0 6px 16px 2px rgba(0, 0, 0, 0.2)",
+        "hoverColor": "#ffffff",
+        "padding": "12px 1.25em",
+      },
+      "uploadButton": Object {
+        "backgroundColor": "white",
+        "border": "1px solid #d0d8e1",
+        "color": "#333333",
+        "hoverBackgroundColor": "rgba(255, 255, 255, 0.6)",
+        "hoverColor": "#333333",
+      },
+    }
+  }
+>
+  <styles__SlackFeedback
+    className=""
+  >
+    <styles__Container
+      className="fadeInUp"
+    >
+      <styles__Header>
+         
+        Send Feedback
+        <styles__CloseButton
+          className="close"
+          onClick={[Function]}
+        >
+          close
+        </styles__CloseButton>
+      </styles__Header>
+      <styles__Content>
+        <span
+          id="channel"
+        >
+          <styles__Label
+            htmlFor="channel"
+          >
+            Channel
+          </styles__Label>
+          <styles__FormElement
+            as="input"
+            disabled={true}
+            value="#tests"
+          />
+        </span>
+        <styles__Label>
+          Feedback Type
+        </styles__Label>
+        <styles__Tabs>
+          <li
+            className="selected"
+            key="bug"
+            onClick={[Function]}
+            title="Bug"
+          >
+            Bug
+          </li>
+          <li
+            className=""
+            key="improvement"
+            onClick={[Function]}
+            title="Improvement"
+          >
+            Improvement
+          </li>
+          <li
+            className=""
+            key="feature"
+            onClick={[Function]}
+            title="Feature"
+          >
+            Feature
+          </li>
+        </styles__Tabs>
+        <styles__Label>
+          Message
+        </styles__Label>
+        <styles__FormElement
+          as="textarea"
+          name="message"
+          onChange={[Function]}
+          placeholder="Your message..."
+          value=""
+        />
+        <styles__ImageUpload>
+          <styles__UploadButton
+            htmlFor="imageUpload"
+          >
+            Attach Image
+          </styles__UploadButton>
+          <styles__FormElement
+            accept="image/*"
+            as="input"
+            id="imageUpload"
+            onChange={[Function]}
+            type="file"
+          />
+        </styles__ImageUpload>
+        <styles__SubmitButton
+          className=""
+          disabled={true}
+          onClick={[Function]}
+        >
+          Send Feedback
+        </styles__SubmitButton>
+      </styles__Content>
+    </styles__Container>
+    <styles__Trigger
+      className=""
+      onClick={[Function]}
+    >
+       
+      Send Feedback
+    </styles__Trigger>
+  </styles__SlackFeedback>
+</ThemeProvider>
+`;

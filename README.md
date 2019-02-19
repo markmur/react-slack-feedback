@@ -36,7 +36,7 @@ ReactDOM.render(
     channel="#general"
     user="Slack Feedback" // The logged in user (default = "Unknown User")
     onImageUpload={(image, success,error) => uploadImage(image).then(success).catch(error)}
-    onSubmit={(payload, success, error) => sendToServer(payload, success, error)}
+    onSubmit={(payload, success, error) => sendToServer(payload).then(success).catch(error)}
   />,
   document.getElementById('root')
 )

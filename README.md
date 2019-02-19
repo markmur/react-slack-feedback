@@ -65,7 +65,6 @@ function uploadImage(image, success, error) {
 
 | Prop                | Type                                      | Default               | Required | Description                                                                                          |
 | ------------------- | ----------------------------------------- | --------------------- | :------: | ---------------------------------------------------------------------------------------------------- |
-| buttonText          | `String`                                  | "Slack Feedback"      |          | The text for the trigger button                                                                      |
 | channel             | `String`                                  |                       |          | The Slack channel to send messages. The default webhook channel will be used if none is provided.    |
 | defaultSelectedType | `String`                                  |                       |          |
 | disabled            | `Boolean`                                 | false                 |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |

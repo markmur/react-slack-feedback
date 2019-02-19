@@ -29,11 +29,12 @@ or individual components (if you don't want it on every page).
 > the request for you.
 
 ```js
-import SlackFeedback from 'react-slack-feedback'
+import SlackFeedback, { themes } from 'react-slack-feedback'
 
 ReactDOM.render(
   <SlackFeedback
     channel="#general"
+    theme={themes.dark} // (optional) See src/themes/default for default theme
     user="Slack Feedback" // The logged in user (default = "Unknown User")
     onImageUpload={(image, success,error) => uploadImage(image).then(success).catch(error)}
     onSubmit={(payload, success, error) => sendToServer(payload).then(success).catch(error)}
@@ -65,7 +66,7 @@ function uploadImage(image, success, error) {
 
 | Prop                | Type                                      | Default               | Required | Description                                                                                          |
 | ------------------- | ----------------------------------------- | --------------------- | :------: | ---------------------------------------------------------------------------------------------------- |
-| channel             | `String`                                  |                       |          | The Slack channel to send messages. The default webhook channel will be used if none is provided.    |
+| channel             | `String`                                  |                       |          | For visual purposes - changing this value will *not* change the slack channel.    |
 | defaultSelectedType | `String`                                  |                       |          |
 | disabled            | `Boolean`                                 | false                 |          | Disable the component entirely. Returns null. Can be used to disable the component on specific pages |
 | errorTimeout        | `Number`                                  | 8000 (8 seconds)      |          |                                                                                                      |

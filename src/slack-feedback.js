@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 import cx from 'classnames'
-import { merge } from './utils'
+import merge from 'deepmerge'
 
 import defaultTranslations from './translations'
 
@@ -36,7 +36,7 @@ class SlackFeedback extends React.Component {
     super(props)
 
     this.state = {
-      open: false,
+      open: props.open,
       sending: false,
       sent: false,
       error: false,
@@ -84,7 +84,6 @@ class SlackFeedback extends React.Component {
   }
 
   handleClickOutside = event => {
-    console.log('handleClickOutisde', event)
     if (event.defaultPrevented) return
 
     if (
@@ -458,6 +457,7 @@ SlackFeedback.propTypes = {
   onClose: PropTypes.func,
   onImageUpload: PropTypes.func.isRequired,
   onOpen: PropTypes.func,
+  open: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   sentTimeout: PropTypes.number,
   showChannel: PropTypes.bool,
@@ -483,6 +483,7 @@ SlackFeedback.defaultProps = {
   icon: () => <SlackIcon />,
   onClose: () => {},
   onOpen: () => {},
+  open: false,
   sentTimeout: 5 * 1000,
   showChannel: true,
   showIcon: true,

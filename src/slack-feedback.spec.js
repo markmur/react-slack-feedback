@@ -1,11 +1,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import merge from 'deepmerge'
 
 import { default as SlackIcon } from './slack-icon'
 import defaultTheme from './themes/default'
 import SlackFeedback from './slack-feedback'
 import translations from './translations'
-import { merge } from './utils'
 
 const __ = key => (key in translations ? translations[key] : key)
 

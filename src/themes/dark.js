@@ -19,7 +19,7 @@ export default {
   },
   input: {
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    padding: '0.75em',
+    padding: '1em',
     color: 'white',
     fontSize: '14px',
     borderRadius: '4px',
@@ -32,6 +32,7 @@ export default {
     color: 'rgba(255, 255, 255, 0.8)',
     border: 'none',
     borderRadius: '4px',
+    padding: '1em',
     backgroundColor: 'rgba(255, 255, 255, 0.15)'
   },
   uploadButton: {

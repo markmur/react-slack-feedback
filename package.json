@@ -1,6 +1,6 @@
 {
   "name": "react-slack-feedback",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "React component for gathering user feedback to send to slack.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -87,7 +87,6 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.12.4",
     "express": "^4.14.0",
-    "foreman": "^2.0.0",
     "fs-extra": "^7.0.1",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^24.1.0",

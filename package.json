@@ -1,6 +1,6 @@
 {
   "name": "react-slack-feedback",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "React component for gathering user feedback to send to slack.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

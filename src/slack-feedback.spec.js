@@ -90,6 +90,18 @@ describe('SlackFeedback', () => {
     it('should return an empty string if not found', () => {
       expect(component.instance().translate('not.available')).toEqual('')
     })
+
+    it('should return the correct value from a translation prop', () => {
+      component.setProps({ translations: { 'trigger.text': 'Feedback' } })
+      expect(component.instance().translate('trigger.text')).toEqual('Feedback')
+    })
+
+    it('should return default translations if translation prop is provided', () => {
+      component.setProps({ translations: { 'trigger.text': 'Feedback' } })
+      expect(component.instance().translate('submit.text')).toEqual(
+        'Send Feedback'
+      )
+    })
   })
 
   describe('presentational', () => {

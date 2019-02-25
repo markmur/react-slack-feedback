@@ -201,7 +201,7 @@ const Tabs = styled.ul`
     background: ${theme('tab.backgroundColor')};
     color: ${theme('tab.color')};
     text-align: center;
-    padding: 0.75em;
+    padding: ${theme('tab.padding', '0.75em')};
     font-size: 13px;
     cursor: pointer;
     white-space: nowrap;

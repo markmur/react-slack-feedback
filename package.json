@@ -75,7 +75,6 @@
     "codecov": "^3.0.0",
     "cors": "^2.8.5",
     "cssnano": "^3.7.3",
-    "danger": "^3.2.0",
     "dotenv": "^6.2.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",

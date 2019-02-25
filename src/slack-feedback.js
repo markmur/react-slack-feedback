@@ -56,7 +56,7 @@ class SlackFeedback extends React.Component {
 
     return typeof translations === 'object' && key in translations
       ? translations[key]
-      : ''
+      : defaultTranslations[key] || ''
   }
 
   handleChange = key => event =>

@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": " NODE_ENV=production rollup --config rollup.config.js",
+    "build:demo": "NODE_ENV=production parcel build demo/index.html --out-dir=docs",
     "bundlesize": "bundlesize",
     "lint-staged": "lint-staged",
     "lint": "xo",

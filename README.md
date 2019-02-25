@@ -1,5 +1,7 @@
 # React Slack Feedback
 
+[View live demo](https://markmur.github.io/react-slack-feedback/)
+
 React component for gathering user feedback to send to slack.
 
 ![image](http://res.cloudinary.com/di0xuztdq/image/upload/v1471245001/uehkqqfarpue7auonqol.gif)

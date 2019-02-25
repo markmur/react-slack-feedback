@@ -34,6 +34,10 @@ const parseJSON = res => res.json()
 const API_URL = 'http://localhost:8080/api'
 
 const sendToSlack = (payload, success, error) => {
+  if (process.env.USE_SERVER) {
+    return success()
+  }
+
   return fetch(`${API_URL}/slack`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -52,6 +56,10 @@ const sendToSlack = (payload, success, error) => {
 }
 
 function uploadImage(file, success, error) {
+  if (process.env.USE_SERVER) {
+    return success(file.preview)
+  }
+
   const form = new FormData()
   form.append('image', file)
 
@@ -121,14 +129,20 @@ const App = () => {
         
 <SlackFeedback
   open
-  theme={theme}
   channel="#feedback"
-  onSubmit={(payload, success, error) =>
-    sendToSlack(payload, success, error)
-  }
-  onImageUpload={(file, success, error) =>
-    uploadImage(file, success, error)
-  }
+  disabled={false}
+  errorTimeout={8 * 1000}
+  icon={() => <SlackIcon />}
+  onClose={() => {}}
+  onOpen={() => {}}
+  sentTimeout={5 * 1000}
+  showChannel={true}
+  showIcon={true}
+  theme={defaultTheme}
+  translations={defaultTranslations}
+  user="Anonymous"
+  onSubmit={(payload, success, error) => {}}
+  onImageUpload={(file, success, error) => {}}
 />`}
       </SyntaxHighlighter>
 

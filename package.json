@@ -8,11 +8,11 @@
   "license": "MIT",
   "scripts": {
     "build": " NODE_ENV=production rollup --config rollup.config.js",
-    "build:demo": "NODE_ENV=production parcel build demo/index.html --out-dir=docs",
+    "build:demo": "USE_SERVER=false NODE_ENV=production parcel build demo/index.html --out-dir=docs --public-url='.'",
     "bundlesize": "bundlesize",
     "lint-staged": "lint-staged",
     "lint": "xo",
-    "start:client": "NODE_ENV=development parcel --no-cache demo/index.html",
+    "start:client": "USE_SERVER=true NODE_ENV=development parcel --no-cache demo/index.html",
     "start:server": "nodemon demo/server --watch demo/server.js",
     "start": "yarn start:server & yarn start:client",
     "test:ci": "jest && codecov -t 418f17d1-6515-4c5c-9707-3d49c409cf20",

@@ -374,8 +374,13 @@ class SlackFeedback extends React.Component {
         >
           <Container className={cx('fadeInUp', { active: open })}>
             <Header>
-              {this.props.showIcon ? <Icon /> : null}{' '}
-              {this.translate('header.title')}
+              {this.props.renderHeaderContent ? (
+                this.props.renderHeaderContent(this.translate('header.title'))
+              ) : (
+                <React.Fragment>
+                  {this.props.showIcon ? <Icon /> : null} {this.translate('header.title')}
+                </React.Fragment>
+              )}
               <CloseButton className="close" onClick={this.close}>
                 {this.translate('close')}
               </CloseButton>
@@ -433,8 +438,13 @@ class SlackFeedback extends React.Component {
           </Container>
 
           <Trigger className={cx({ active: open })} onClick={this.toggle}>
-            {this.props.showIcon ? <Icon /> : null}{' '}
-            {this.translate('trigger.text')}
+            {this.props.renderTriggerContent ? (
+              this.props.renderTriggerContent(this.translate('trigger.text'))
+            ) : (
+              <React.Fragment>
+                {this.props.showIcon ? <Icon /> : null} {this.translate('trigger.text')}
+              </React.Fragment>
+            )}
           </Trigger>
         </StyledSlackFeedback>
       </ThemeProvider>
@@ -454,6 +464,8 @@ SlackFeedback.propTypes = {
     })
   ),
   icon: PropTypes.func,
+  renderTriggerContent: PropTypes.func,
+  renderHeaderContent: PropTypes.func,
   onClose: PropTypes.func,
   onImageUpload: PropTypes.func.isRequired,
   onOpen: PropTypes.func,
@@ -481,6 +493,8 @@ SlackFeedback.defaultProps = {
     { value: FEATURE, label: defaultTranslations['feedback.type.feature'] }
   ],
   icon: () => <SlackIcon />,
+  renderTrigger: undefined,
+  renderHeaderContent: undefined,
   onClose: () => {},
   onOpen: () => {},
   open: false,

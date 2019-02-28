@@ -377,9 +377,10 @@ class SlackFeedback extends React.Component {
               {this.props.renderHeaderContent ? (
                 this.props.renderHeaderContent(this.translate('header.title'))
               ) : (
-                <React.Fragment>
-                  {this.props.showIcon ? <Icon /> : null} {this.translate('header.title')}
-                </React.Fragment>
+                <>
+                  {this.props.showIcon ? <Icon /> : null}{' '}
+                  {this.translate('header.title')}
+                </>
               )}
               <CloseButton className="close" onClick={this.close}>
                 {this.translate('close')}
@@ -441,9 +442,10 @@ class SlackFeedback extends React.Component {
             {this.props.renderTriggerContent ? (
               this.props.renderTriggerContent(this.translate('trigger.text'))
             ) : (
-              <React.Fragment>
-                {this.props.showIcon ? <Icon /> : null} {this.translate('trigger.text')}
-              </React.Fragment>
+              <>
+                {this.props.showIcon ? <Icon /> : null}{' '}
+                {this.translate('trigger.text')}
+              </>
             )}
           </Trigger>
         </StyledSlackFeedback>
@@ -493,7 +495,7 @@ SlackFeedback.defaultProps = {
     { value: FEATURE, label: defaultTranslations['feedback.type.feature'] }
   ],
   icon: () => <SlackIcon />,
-  renderTrigger: undefined,
+  renderTriggerContent: undefined,
   renderHeaderContent: undefined,
   onClose: () => {},
   onOpen: () => {},

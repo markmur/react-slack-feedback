@@ -32,7 +32,8 @@ export default {
   },
   button: {
     fontWeight: 500,
-    boxShadow: `0 2px 8px 2px ${rgba('#0087ff', 0.2)}`
+    boxShadow: `0 2px 8px 2px ${rgba('#0087ff', 0.2)}`,
+    opacity: 0.8
   },
   trigger: {
     color: '#ffffff',

@@ -12,6 +12,9 @@ export default {
     error: '#ec3c3c',
     text: '#333333'
   },
+  container: {
+    position: 'right'
+  },
   content: {
     width: '380px',
     padding: '0.6em',

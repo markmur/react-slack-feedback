@@ -7,6 +7,7 @@ exports[`SlackFeedback should match the snapshots 1`] = `
       "button": Object {
         "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
         "fontWeight": 500,
+        "opacity": 0.8,
       },
       "colors": Object {
         "background": "#f4f4f7",
@@ -203,6 +204,7 @@ exports[`SlackFeedback should match the snapshots 3`] = `
       "button": Object {
         "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
         "fontWeight": 500,
+        "opacity": 0.8,
       },
       "colors": Object {
         "background": "#f4f4f7",
@@ -383,6 +385,7 @@ exports[`SlackFeedback should match the snapshots 4`] = `
       "button": Object {
         "boxShadow": "0 2px 8px 2px rgba(0, 135, 255, 0.2)",
         "fontWeight": 500,
+        "opacity": 0.8,
       },
       "colors": Object {
         "background": "#f4f4f7",

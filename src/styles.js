@@ -312,7 +312,7 @@ const SubmitButton = styled.button`
   &[disabled],
   &.disabled {
     pointer-events: none;
-    opacity: 0.8;
+    opacity: ${theme('button.opacity')};
   }
 
   &.sent {

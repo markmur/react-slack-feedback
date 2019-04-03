@@ -288,7 +288,7 @@ class SlackFeedback extends React.Component {
       return this.renderImagePreview()
     }
 
-    return (
+    return showImageUpload && (
       <ImageUpload>
         <UploadButton htmlFor="imageUpload">
           {this.translate('upload.text')}
@@ -382,6 +382,14 @@ class SlackFeedback extends React.Component {
             </Header>
 
             <Content>
+            {showInputUser && (
+                <span id="user">
+                  <Label htmlFor="user">
+                    {this.translate('label.user')}
+                  </Label>
+                  <FormElement disabled as="input" value={this.props.user} />
+                </span>
+              )}
               {showChannel && (
                 <span id="channel">
                   <Label htmlFor="channel">
@@ -461,6 +469,8 @@ SlackFeedback.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   sentTimeout: PropTypes.number,
   showChannel: PropTypes.bool,
+  showImageUpload: PropTypes.bool,
+  showInputUser: PropTypes.bool,
   showIcon: PropTypes.bool,
   theme: PropTypes.object,
   translations: PropTypes.object,
@@ -487,6 +497,8 @@ SlackFeedback.defaultProps = {
   sentTimeout: 5 * 1000,
   showChannel: true,
   showIcon: true,
+  showImageUpload: true,
+  showInputUser: false,
   theme: defaultTheme,
   translations: defaultTranslations,
   user: 'Anonymous'

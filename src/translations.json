@@ -14,6 +14,7 @@
   "header.title": "Send Feedback",
   "image.remove": "Remove",
   "label.channel": "Channel",
+  "label.user": "User",
   "label.message": "Message",
   "label.type": "Feedback Type",
   "placeholder": "Your message...",

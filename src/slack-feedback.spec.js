@@ -116,6 +116,23 @@ describe('SlackFeedback', () => {
       // Reset the value
       component.setProps({ showChannel: true })
     })
+
+    it('should not show the user name if showInputUser is false', () => {
+      component.setProps({ showInputUser: false })
+      expect(component.find('#user')).toHaveLength(0)
+
+      // Reset the value
+      component.setProps({ showInputUser: true })
+    })
+
+    it('should not show the user name if showImageUpload is false', () => {
+      component.setProps({ showImageUpload: false })
+      expect(component.find('#imageUpload')).toHaveLength(0)
+
+      // Reset the value
+      component.setProps({ showImageUpload: true })
+    })
+
     it('should display nothing if disabled', () => {
       component.setProps({ disabled: true })
       expect(component.html()).toBe(null)

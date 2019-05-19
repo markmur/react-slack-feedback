@@ -17,11 +17,7 @@ Customizable React component for gathering user feedback to send to slack.
 Install with `yarn` or `npm`:
 
 ```bash
-# npm
-npm install react-slack-feedback
-
-# yarn
-yarn add react-slack-feedback
+yarn add react-slack-feedback styled-components
 ```
 
 To use the component, import it and render in your app's global component,

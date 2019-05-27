@@ -104,6 +104,8 @@ function uploadImage(image, success, error) {
 
 ---
 
+## Contributing
+
 ### Running Locally
 
 To run this module locally:
@@ -120,18 +122,16 @@ git clone https://github.com/markmur/react-slack-feedback.git
 yarn
 ```
 
-3.  Create a ENV file with your `WEBHOOK_URL`
-
-`.env`
+3.  Run the demo:
 
 ```.env
-WEBHOOK_URL='YOUR_SLACK_WEBHOOK_URL'
-```
-
-4.  Run the demo:
-
-```bash
-yarn start
+WEBHOOK_URL='YOUR_SLACK_WEBHOOK_URL' yarn start
 ```
 
 This will bundle the client with `parcel` and startup a simple `express` server.
+
+The server will be listening on http://localhost:8080
+
+The client will be listening on http://localhost:1234
+
+Open http://localhost:1234 to view the demo

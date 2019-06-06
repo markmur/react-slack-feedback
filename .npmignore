@@ -11,3 +11,4 @@ coverage
 *.tgz
 yarn-error.log
 .env
+docs/

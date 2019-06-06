@@ -166,7 +166,7 @@ const Trigger = styled.div`
   font-weight: ${theme('trigger.fontWeight', 'normal')};
   background: ${theme('trigger.backgroundColor')};
   color: ${theme('trigger.color')};
-  border: 1px solid ${theme('trigger.border')};
+  border: ${theme('trigger.border')};
   white-space: nowrap;
   padding: ${theme('trigger.padding')};
   border-radius: ${theme('trigger.borderRadius')};
@@ -177,7 +177,7 @@ const Trigger = styled.div`
 
   &:hover {
     box-shadow: ${theme('trigger.hoverBoxShadow')};
-    background-color: ${theme('trigger.hoverBackgroundColor', 'inherit')}
+    background-color: ${theme('trigger.hoverBackgroundColor', 'inherit')};
     transform: translateY(-1px);
     color: ${theme('trigger.hoverColor')};
     border-color: ${theme('colors.border')};

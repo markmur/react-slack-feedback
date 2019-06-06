@@ -166,7 +166,7 @@ const Trigger = styled.div`
   font-weight: ${theme('trigger.fontWeight', 'normal')};
   background: ${theme('trigger.backgroundColor')};
   color: ${theme('trigger.color')};
-  border: 1px solid ${theme('trigger.border')};
+  border: ${theme('trigger.border')};
   white-space: nowrap;
   padding: ${theme('trigger.padding')};
   border-radius: ${theme('trigger.borderRadius')};

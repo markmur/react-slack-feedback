@@ -37,8 +37,7 @@ export default {
   },
   trigger: {
     color: '#ffffff',
-    hoverColor: '#ffffff',
-    backgroundColor: '#222c4f',
+    hoverColor: '#ffff',
     border: 'none',
     padding: '12px 1.25em',
     borderRadius: '6px',
@@ -46,7 +45,8 @@ export default {
     fontWeight: '400',
     boxShadow: '0 3px 12px 1px rgba(34, 44, 79, 0.1)',
     hoverBoxShadow: '0 6px 16px 2px rgba(0, 0, 0, 0.2)',
-    hoverBackgroundColor: 'inherit'
+    backgroundColor: '#222c4f',
+    hoverBackgroundColor: '#303d69'
   },
   input: {
     backgroundColor: 'white',

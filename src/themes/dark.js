@@ -12,6 +12,7 @@ export default {
     color: 'white',
     hoverColor: 'white',
     backgroundColor: 'black',
+    hoverBackgroundColor: '#111',
     border: 'none',
     padding: '14px 1.25em',
     borderRadius: '6px',

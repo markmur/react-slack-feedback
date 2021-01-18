@@ -2,12 +2,20 @@ language: node_js
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
 notifications:
   email: false
 node_js:
-  - '10'
+- '10'
 script:
-  - yarn build
-  - yarn test:ci
-  - yarn bundlesize
+- yarn build
+- yarn test:ci
+- yarn bundlesize
+deploy:
+  provider: npm
+  email: mark.murray.ie@gmail.com
+  api_key: ofJ4LD/8v9YrUcnOX8qBRP/524jhet73WPM2XHtprtMhfOHWdRDRfWIv2GHtwnDUWpEooG6FfD186COagh44c420emMcOqqvo4eiEwG7zrfZC5M+GCMX6iM4UvHlaONpbec0B3Gr5V8PJ2FiKgEFsiOntVXyRyj3QkC4UdC/euVTtS/VYWVJpttofS7748bHzT66rXuyivpuIkOQveKw4MPscgzEvfGI/1eH6NJS8JuTS1m2LfPumGLDrQutl+iyKXOFNGnjPpOT5GgwOfjtQJdluis1yUXhNOhfSFxeRJ8TMXeCeTv+cZXyhU43cishvEviGG05XaH09fwO+xPDQJu/jEc03m5Je0p8aXg5Atk551LYXj0YG5jmlIUGCSMsjX5cCzqaRT/mIUDWUBIq8871fWYvj8JsWxtJV+xTbSlyGaR0YvMmdWZGYb+2hx5mJBqRzLUsXYmOHCu0wijn6Bi+4Zm/6/X9JqxI470/QAyidH7NsRp8x2kfZhFZB4CfXjH8LDAz8cZM3bvnCHVnmsBHjBdSilxLtbM25ROVVJTkEpJBNiCR00nludyK1dG+lMublcVVU5iOOw40R2yBii80Ln89bAlyH3nMTZY8vLq78D8Gkk5ohnR1TVP3pBIjUC624wnKzrpUniTZm77Y4CcX8KTj/LbUCOhyh34UHMM=
+  on:
+    branch: master
+    repo: markmur/react-slack-feedback
+  skip_cleanup: 'true'
